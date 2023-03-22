@@ -403,7 +403,8 @@ def createvni(request):
 def importvnifromfile(request):
     try:
         body = json.loads(request.body)
-        if "virtualmachine" not in body or "virtualnetworkfunction" not in body or "link" not in body or "virtualnetwork" not in body:
+        if "virtualmachine" not in body or "virtualnetworkfunction" not in body  or "virtualnetwork" not in body:
+            # or "link" not in body has been removed
             return JsonResponse({
                 "success": False,
                 "message": "Invalid request body"

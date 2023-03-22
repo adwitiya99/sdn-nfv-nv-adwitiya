@@ -199,7 +199,7 @@ def import_vni(neo4j_controller, name_generator, virtualmachine_data, virtualnet
         neo4j_controller.create_link(new_vni.id, cvnf.id )
 
     # unique id should be checked
-    for lnk in links_data["links"]:
-        neo4j_controller.create_link(lnk["source_id"], lnk["dest_id"],)
+    # for lnk in links_data["links"]:
+    #     neo4j_controller.create_link(lnk["source_id"], lnk["dest_id"],)
 
     return new_vni
