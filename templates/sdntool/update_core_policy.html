@@ -1,0 +1,83 @@
+{% extends "sdntool/base.html" %}
+{% load static %}
+
+{% block head %}
+    <menu></menu>
+{% endblock %}
+
+{% block content %}
+    <div class="gap-3 mb-2" style="display: flex; flex-direction: row; align-items: center">
+        <p style="margin: 0px!important; font-weight: bold">{{ policy.name }}</p>
+        <div style="display: flex; flex-direction: row; align-items: center">
+            {% for element in policy.get_involved_elements_list %}
+                <div class="px-2 py-1 border border-2 border-warning rounded-3 mr-2">{{ element }}</div>
+            {% endfor %}
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="update()">Update Policy</button>
+    </div>
+    <div id="blocklyDiv" style="height: 75vh; width: 85vw;"></div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static "js/blockly.min.js" %}"></script>
+    <script src="{% static "js/blockly.toolbox.js" %}"></script>
+    <script src="{% static "js/custom_blocks/check_evidence.js" %}"></script>
+    <script src="{% static "js/custom_blocks/check_log.js" %}"></script>
+    <script src="{% static "js/custom_blocks/data_type.js" %}"></script>
+    <script src="{% static "js/custom_blocks/elements.js" %}"></script>
+    <script src="{% static "js/custom_blocks/entrypoint.js" %}"></script>
+    <script src="{% static "js/custom_blocks/expect.js" %}"></script>
+    <script src="{% static "js/custom_blocks/utility.js" %}"></script>
+
+    <script>
+        const policy_id = {{ policy.id }}
+        const workspace  = Blockly.inject('blocklyDiv', { toolbox: toolbox });
+        Blockly.serialization.workspaces.load({{ policy.get_blockly_json|safe }}, workspace);
+
+        function update() {
+            const blockly_json = Blockly.serialization.workspaces.save(Blockly.getMainWorkspace());
+            $.confirm({
+                title: 'Update Policy Diagram',
+                content: "Are you sure you want to update the policy diagram?",
+                buttons: {
+                    confirm: function () {
+                        $.ajax({
+                            url: "/config/policy/{{ policy.id }}/update/",
+                            type: "POST",
+                            contentType: 'application/json',
+                            data: JSON.stringify({
+                                "blockly_json": blockly_json,
+                                "generated_code": "to be implemented"
+                            }),
+                            success: function (data) {
+                                if(data.success){
+                                    $.alert({
+                                        title: 'Success!',
+                                        type: 'green',
+                                        content: 'Policy diagram updated successfully!',
+                                    });
+                                }else{
+                                    $.alert({
+                                        title: 'Error!',
+                                        type: 'red',
+                                        content: 'Policy diagram update failed!',
+                                    });
+                                }
+                            },
+                            error: function (data) {
+                                console.log("Blockly error ")
+                                $.alert({
+                                    title: 'Error!',
+                                    type: 'red',
+                                    content: 'Policy diagram update failed!',
+                                })
+                            }
+                        })
+                    },
+                    cancel: function () {
+                    }
+                }
+            });
+        }
+    </script>
+{% endblock %}

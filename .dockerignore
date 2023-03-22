@@ -1,0 +1,13 @@
+venv
+
+# ignore all __pycache__ folders
+__pycache__
+.idea
+migrations
+celery.log
+
+sdnproject/.env
+.env
+celery.log
+venv
+.idea

@@ -1,0 +1,64 @@
+{% extends "sdntool/base.html" %}
+{% block content %}
+
+    <style>
+        label {
+            font-weight: bold;
+        }
+
+        label > sup {
+
+            color: red;
+        }
+    </style>
+    <div class="row">
+        <form action="{% url 'usercreatecontroller' %}" method="post">
+            {% csrf_token %}
+
+            <label>Username <sup>*</sup></label>
+            <input type="text" class="form-control" name="username" placeholder="Enter Username"> <br/>
+            <label>User Type <sup>*</sup></label>
+            <select name="userrole" class="form-control">
+                <option value="admin">Admin</option>
+                <option value="manager">Manager</option>
+                <option value="operator">Operator</option>
+            </select> <br/>
+            <label>Temporary Password <sup>*</sup></label>
+            <input type="password" name="password" class="form-control"
+                   placeholder="Enter temporary password for the user"> <br/>
+            <input type="submit" value="Create" class="btn btn-danger">
+        </form>
+    </div>
+
+    <div class="row mt-5">
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>User</th>
+            <th>Role</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.userrole }}</td>
+
+            <td>
+                {% if user.idusermanagement != 1 %}
+                <a href="{% url 'userdelete' id=user.idusermanagement %}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+
+            {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </div>
+
+
+{% endblock %}

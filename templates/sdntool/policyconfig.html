@@ -1,0 +1,288 @@
+{% extends "sdntool/base.html" %}
+{% block head %}
+    <menu></menu>
+{% endblock %}
+{% block content %}
+    {% if messages %}
+      <div class="row">
+      <div class="col">
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    {% endif %}
+
+    <button type="button" class="btn btn-success w-auto" data-bs-toggle="modal" data-bs-target="#addNewPolicy" id="add_policy_btn">Create Policy</button>
+    {#  Table  #}
+    <div class="table-responsive mt-4" id="dataTableContainer">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Description</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Updated On</th>
+                    <th class="text-center">parameters</th>
+                    <th class="text-center">Action</th>
+                    <th class="text-center">Update</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Description</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Updated On</th>
+                    <th class="text-center">parameters</th>
+                    <th class="text-center">Action</th>
+                    <th class="text-center">Update</th>
+                </tr>
+            </tfoot>
+            <tbody>
+            {% if policies %}
+                {% for core_policy in policies %}
+                    <tr>
+                        <td>{{ core_policy.name }}</td>
+                        <td>{{ core_policy.description }}</td>
+                        {% if core_policy.is_active %}
+                            <td>ACTIVE</td>
+                        {% else %}
+                            <td>INACTIVE</td>
+                        {% endif %}
+                        <td>{{ core_policy.last_updated }}</td>
+                        <td>{{ core_policy.get_involved_elements }}</td>
+                        <td>
+                            {% if core_policy.is_active %}
+                                <a href="#" onclick="deactivatePolicy({{ core_policy.id }})"  class="btn btn-danger">Deactivate</a>
+                            {% else %}
+                                <a href="#" onclick="activatePolicy({{ core_policy.id }})" class="btn btn-success">Activate</a>
+                            {% endif %}
+                        </td>
+                        <td><a href="{% url "editpolicypage" id=core_policy.id %}" class="btn btn-primary">Update</a> </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    {#  Modal to add new policy  #}
+    <!-- Modal -->
+    <div class="modal fade" id="addNewPolicy" tabindex="-1" aria-labelledby="addNewPolicyLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div>
+              <div class="modal-header">
+                <h5 class="modal-title" id="addNewPolicyLabel">Add New Policy</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label">Policy Name</label>
+                      <input type="text" class="form-control" id="policy_name" placeholder="backup-property">
+                  </div>
+                  <div class="mb-3">
+                      <label for="exampleFormControlTextarea1" class="form-label">policy Description</label>
+                      <textarea class="form-control" id="policy_description" rows="3"></textarea>
+                  </div>
+                  <button class="btn btn-success" id="add_field" type="button" onclick="addField()">Add elements</button>
+
+                  <div id="dynamic_form_content" class="mt-2">
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary"  onclick="submitNewPolicy()">Save changes</button>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    let fields_info = [];
+    let field_html = ``;
+    let cnt = 0;
+    function addField() {
+        field_html = `
+            <div class="row g-1">
+                <div class="col">
+                    <input type="text" class="form-control" id="v${cnt}" placeholder="Variable">
+                </div>
+                <div class="col">
+                    <select class="form-select" id="t${cnt}" required name="selected_policy">
+                        <option selected disabled>Select Element</option>
+                        <option value="host">HOST</option>
+                        <option value="switch">SWITCH</option>
+                        <option value="controller">CONTROLLER</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" id="d${cnt}" placeholder="Description">
+                </div>
+            </div>
+        `;
+        $("#dynamic_form_content").append(field_html);
+        cnt += 1;
+    }
+    function setFieldInfo() {
+        fields_info = [];
+        for (let i = 0; i < cnt; i++) {
+            fields_info.push(
+                {
+                    "variable": $(`#v${i}`).val(),
+                    "type": $(`#t${i}`).val(),
+                    "description": $(`#d${i}`).val()
+                });
+        }
+    }
+
+
+    function submitNewPolicy() {
+        setFieldInfo();
+        let policy_name = $("#policy_name").val();
+        let policy_description = $("#policy_description").val();
+        $.confirm({
+            "title": "Confirm",
+            "content": "Are you sure you want to add this policy?",
+            "buttons": {
+                "confirm": function() {
+                    $.ajax({
+                        url: "/config/policy/add/",
+                        type: "POST",
+                        data: JSON.stringify({
+                            "name": policy_name,
+                            "description": policy_description,
+                            "fields_info": fields_info
+                        }),
+                        success: function(data) {
+                            if (data.success) {
+                                $.alert({
+                                    title: data.message,
+                                    buttons: {
+                                        confirm: {
+                                            text: 'Reload Current Page',
+                                            btnClass: 'btn-blue',
+                                            action: function () {
+                                                location.reload();
+                                            }
+                                        },
+                                        confirm1 : {
+                                            text: 'Edit now',
+                                            action: function () {
+                                                window.location.href = "/config/policy/"+data.data.id.toString()+"/"
+                                            }
+                                        }
+                                    }
+                                });
+                            } else {
+                                $.alert("Something went wrong");
+                            }
+                        },
+                        error: function(xhr) {
+                            console.log(xhr);
+                            $.alert({
+                                title: 'Error',
+                                content: 'Something went wrong'
+                            });
+                        }
+                    })
+                },
+                "cancel": function() {}
+            }
+        })
+    }
+
+
+    function activatePolicy(id) {
+        $.confirm({
+            title: 'Activate Policy',
+            content: 'Are you sure you want to activate this policy?',
+            buttons: {
+                confirm: function() {
+                    $.ajax({
+                        url: `/config/policy/${id}/activate/`,
+                        type: "POST",
+                        success: function(response) {
+                            if (response.success) {
+                                $.alert({
+                                    title: response.message,
+                                    content: 'Page is reloading in  seconds'
+                                });
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 3000);
+                            } else {
+                                $.alert("Something went wrong");
+                            }
+                        },
+                        error: function(xhr) {
+                            console.log(xhr);
+                            $.alert({
+                                title: 'Error',
+                                content: 'Something went wrong'
+                            });
+                        }
+                    });
+                },
+                cancel: function() {}
+            }
+        });
+    }
+
+    function deactivatePolicy(id) {
+        $.confirm({
+            title: 'Deactivate Policy',
+            content: 'Are you sure you want to deactivate this policy?',
+            buttons: {
+                confirm: function() {
+                    $.ajax({
+                        url: `/config/policy/${id}/deactivate/`,
+                        type: "POST",
+                        success: function(response) {
+                            if (response.success) {
+                                $.alert({
+                                    title: response.message,
+                                    type: 'green',
+                                    content: 'Page is reloading in 3 seconds'
+                                });
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 3000);
+                            } else {
+                                $.alert({
+                                    title: 'Error',
+                                    type: 'red',
+                                    content: 'Something went wrong'
+                                });
+                            }
+                        },
+                        error: function(xhr) {
+                            console.log(xhr);
+                            $.alert({
+                                title: 'Error',
+                                type: 'red',
+                                content: 'Something went wrong'
+                            });
+                        }
+                    });
+                },
+                cancel: function() {}
+            }
+        });
+    }
+
+
+    $(document).ready(function() {
+        $("#dataTable").DataTable({
+            "pageLength": 10
+        });
+    });
+</script>
+{% endblock %}

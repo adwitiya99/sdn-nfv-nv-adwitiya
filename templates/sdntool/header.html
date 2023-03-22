@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    {% if not title %}
+        <title>SDN</title>
+    {% else %}
+        <title> SDN | {{ title }}</title>
+    {% endif %}
+
+    <link href="{% static 'css/styles.css' %}?{% now 'U' %}" rel="stylesheet"/>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/jadav_logo.png' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-confirm.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap5.min.css' %}">
+
+    <style>
+        .table-responsive{
+            height: 75vh;
+        }
+
+    </style>
+</head>
+<body>
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3" href="{% url 'home' %}"><img src="{% static 'images/jadav_logo.png' %}"
+                                                              style="width:60px; height: auto; margin: 3px; padding: 5px"></a>
+    <!-- Sidebar Toggle-->
+    <button class="btn btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+            class="fas fa-bars"></i></button>
+    <!-- Navbar Search-->
+
+    <!-- Navbar-->
+    <ul class="navbar-nav ms-auto">
+
+        <li class="nav-item">
+            <a class="nav-link" href="#" style="color:#EDA20E">
+                Hello, {{ request.session.login.username }}
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}" data-toggle="tooltip" data-placement="bottom" title="Log Out"><i
+                    class="fas fa-sign-out-alt"></i></a>
+        </li>
+    </ul>
+</nav>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <a class="nav-link" href="{% url 'home' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Dashboard
+                    </a>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                       data-bs-target="#pagesCollapseAuth" aria-expanded="false"
+                       aria-controls="pagesCollapseAuth">
+                        Select network
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
+                         data-bs-parent="#sidenavAccordionPages">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a href="{% url 'sdn' %}" class="nav-link">
+                                <span class="menu-collapsed">SDN</span>
+                            </a>
+                            <a href="{% url 'nv' %}" class="nav-link">
+                                <span class="menu-collapsed">NV</span>
+                            </a>
+                            <a href="{% url 'nfv' %}" class="nav-link">
+                                <span class="menu-collapsed">NFV</span>
+                            </a>
+
+                        </nav>
+                    </div>
+                    {% if request.session.login.userrole != 'operator' %}
+                        <a class="nav-link collapsed" href="{% url "managenetwork" %}">
+                            Network Topology
+                        </a>
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                           data-bs-target="#pagesCollapseHost" aria-expanded="false"
+                           aria-controls="pagesCollapseHost">
+                            Evidence Data
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseHost" aria-labelledby="headingOne"
+                             data-bs-parent="#sidenavAccordionPages">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a href="{% url 'managedata' %}" class="nav-link">
+                                    <span class="menu-collapsed">Manage Data</span>
+                                </a>
+                                <a href="{% url 'addata' %}" class="nav-link">
+                                    <span class="menu-collapsed">Add Data</span>
+                                </a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="{% url 'managepolicy' %}" >
+                            Manage Policy
+                        </a>
+                    {% endif %}
+
+                    <a class="nav-link" href="{% url 'verifypolicy' %}" aria-expanded="false">
+                        Verify Policy
+                    </a>
+
+                    <a class="nav-link" href="{% url 'reportmanagement' %}" aria-expanded="false">
+                        Report Management
+                    </a>
+                    {% if request.session.login.userrole != 'operator' %}
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                           data-bs-target="#pagesCollapseIntent" aria-expanded="false"
+                           aria-controls="pagesCollapseIntent">
+                            Tool Configuration
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="pagesCollapseIntent" aria-labelledby="headingOne"
+                             data-bs-parent="#sidenavAccordionMcast">
+                            <nav class="sb-sidenav-menu-nested nav">
+
+
+                                <a href="{% url 'networkconfig' %}" class="nav-link">
+                                    <span class="menu-collapsed">Network Configuration</span>
+                                </a>
+                                <a href="{% url 'policyconfig' %}" class="nav-link">
+                                    <span class="menu-collapsed">Policy Configuration</span>
+                                </a>
+                                {% comment %} {% endif %} {% endcomment %}
+                                <a href="{% url 'userconfig' %}" class="nav-link">
+                                    <span class="menu-collapsed">User Management</span>
+                                </a>
+                                <a href="{% url 'reportconfig' %}" class="nav-link">
+                                    <span class="menu-collapsed">Report Configuration</span>
+                                </a>
+                                <a href="{% url 'evidenceconfig' %}" class="nav-link">
+                                    <span class="menu-collapsed">Evidence Configuration</span>
+                                </a>
+
+                            </nav>
+                        </div>
+                    {% endif %}
+
+
+                </div>
+            </div>
+
+        </nav>
+
+    </div>

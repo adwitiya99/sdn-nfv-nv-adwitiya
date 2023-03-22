@@ -1,0 +1,87 @@
+{% extends "sdntool/base.html" %}
+
+{% block content %}
+    {% if messages %}
+      <div class="row">
+        <div class="col">
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+    {#  Form  for choosing network #}
+    <form method="get">
+        <div class="row gap-2">
+            <select class="form-select w-auto inline-group" name="selected_network">
+                <option disabled {% if not selected_network %} selected {% endif %} >Select a network</option>
+                {% for x in all_networks %}
+                    <option value="{{ x.name }}" {% if selected_network == x.name %} selected  {% endif %} > {{ x.name }}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-success w-auto" id="confirmnetwork" type="submit">Confirm Network</button>
+        </div>
+    </form>
+
+    {#  Table  #}
+    <div class="table-responsive mt-4 d-none" id="evidence_table">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Evidence Type</th>
+                    <th>Involved Elements</th>
+                    <th>Last Update</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Type</th>
+                    <th>Evidence Type</th>
+                    <th>Involved Elements</th>
+                    <th>Last Update</th>
+                    <th>Action</th>
+                </tr>
+            </tfoot>
+            <tbody>
+            {% for data in evidence_data %}
+                <tr>
+                    <td>{% if data.is_log %}
+                        Log
+                        {% else %}
+                        Config
+                    {% endif %} </td>
+                    <td>{{ data.evidence_type }}</td>
+                    <td>{{ data.elements_involved }}</td>
+                    <td>{{ data.last_updated }}</td>
+                    <td class="text-center">
+                        <a class="btn btn-primary btn-sm" target="_blank" href="{% url "addata" %}?auto_fill=1&network={{ data.network_name }}&data_type={% if data.is_log %}log{% else %}config{% endif %}&evidence_type={{ data.evidence_type }}&controller={{ data.selected_controller_name }}&switch={{ data.selected_switch_name }}&host={{ data.selected_host_name }}">Update</a>
+                        <a class="btn btn-danger btn-sm {% if data.is_log %} d-none {% endif %}" title="{% if data.is_log %} You can't delete log {% endif %}" href="{% url "managedata" %}?selected_network={{ selected_network }}&action=delete&record_id={{ data.id }}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(document).ready(function() {
+            const params = (new URL(document.location)).searchParams;
+            network_name = params.get('selected_network');
+            if(network_name && network_name.startsWith("NT")) {
+                $("#evidence_table").removeClass("d-none");
+            }
+
+            $("#dataTable").DataTable({
+                "pageLength": 10
+            });
+        });
+    </script>
+{% endblock %}

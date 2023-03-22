@@ -1,0 +1,10 @@
+django
+mysqlclient
+pytz
+dnspython
+dateparser
+neo4j
+mongoengine
+Redis
+celery
+python-dotenv

@@ -1,0 +1,129 @@
+{% extends "sdntool/base.html" %}
+{% load custom_tags %}
+{% block head %}
+    <menu></menu>
+{% endblock %}
+{% block content %}
+    {% if messages %}
+      <div class="row">
+      <div class="col">
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    {% endif %}
+    {#  Form  for choosing network #}
+    <form method="get">
+        <div class="row gap-2">
+            <select class="form-select w-auto inline-group" name="selected_network">
+                <option disabled {% if not selected_network %} selected {% endif %} >Select a network</option>
+                {% for x in all_networks %}
+                    <option value="{{ x.name }}" {% if selected_network == x.name %} selected  {% endif %} > {{ x.name }}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-success w-auto" type="submit">Confirm Network</button>
+        </div>
+    </form>
+
+    {#  Table  #}
+    <div class="table-responsive mt-4 d-none" id="dataTableContainer">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th class="text-center">Report ID</th>
+                    <th class="text-center">Policy Checks Requested</th>
+                    <th class="text-center">Runtime Status</th>
+                    <th class="text-center">Pass Status</th>
+                    <th class="text-center">Submitted</th>
+                    <th class="text-center">Completed</th>
+                    <th class="text-center">Report</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th class="text-center">Report ID</th>
+                    <th class="text-center">Policy Checks Requested</th>
+                    <th class="text-center">Runtime Status</th>
+                    <th class="text-center">Pass Status</th>
+                    <th class="text-center">Submitted</th>
+                    <th class="text-center">Completed</th>
+                    <th class="text-center">Report</th>
+                </tr>
+            </tfoot>
+            <tbody>
+            {% if policy_verification_reports %}
+                {% for report in policy_verification_reports %}
+                    <tr>
+                        <td>{{ report.id }}</td>
+                        <td>
+                            <ul>
+                            {% for policy_detail in report.submitted_policy_details|toListFromJSON %}
+                                <li>{{ policy_detail.description }}</li>
+                            {% endfor %}
+                            </ul>
+                        </td>
+                        <td class="text-center">
+                        {% if report.status == "submitted" %}
+                            <b class="text-primary">SUBMITTED</b>
+                            {% elif report.status == "running" %}
+                            <b class="text-warning">RUNNING</b>
+                            {% elif report.status == "completed" %}
+                            <b class="text-success">COMPLETED</b>
+                            {% elif report.status == "failed" %}
+                            <b class="text-danger">FAILED</b>
+                            {% else %}
+                            <b class="text-danger">UNKNOWN</b>
+                        {% endif %} </td>
+                        <td class="text-center">
+                            {% if report.status == "completed" %}
+                                {% if report.passed %}
+                                    <b class="text-success">PASSED</b>
+                                {% else %}
+                                    <b class="text-danger">FAILED</b>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                        <td class="text-center">{{ report.submitted_on }}</td>
+                        <td class="text-center">{% if report.completed_on %}
+                            {{ report.completed_on }}
+                        {% endif %} </td>
+                        <td class="text-center">
+                            {% if report.status == "completed" %}
+                                <a target="_blank" href="{% url "policyverificationreport" report_id=report.id  %}">View</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        const all_networks = {{ all_networks_safe|safe }};
+        let network_name = "";
+
+        $(document).ready(function() {
+            const params = (new URL(document.location)).searchParams;
+            network_name = params.get('selected_network');
+            if(network_name && network_name.startsWith("NT")) {
+                $("#dataTableContainer").removeClass("d-none");
+            }
+
+            $("#dataTable").DataTable({
+                "pageLength": 10,
+                "order": [
+                    [0, "desc"]
+                ]
+            });
+        });
+    </script>
+{% endblock %}

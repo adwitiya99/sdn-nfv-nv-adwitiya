@@ -1,0 +1,443 @@
+{% extends "sdntool/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container-fluid" style="margin-bottom: 10%">
+   <style>
+        #viz{
+
+  width: 95%;
+  height: 600px;
+   padding: 3%;
+  /*border: 1px solid lightgray;*/
+  background-color: #ffffff;
+        color:black;
+}
+
+    </style>
+
+<div class="row">
+
+
+<div class="col-md-8">
+<h2>Create Virtual Network Infrastructure</h2>
+<div style="display:flex">
+{# <button class="btn btn-success  mr-2 w-auto" id="createvni">Create Virtual Network Infrastructure</button>#}
+   <button class="btn btn-warning mr-2 w-auto" id="importvni" data-bs-toggle="modal" data-bs-target="#importNetworkModal">Import Virtual Network Infrastructure</button>
+        <select class="form-select w-auto inline-group" id="selected_vni" onchange="loadNetworkGraph()">
+            {% for x in networks %}
+                <option value="{{ x.name}}"> {{ x.name }}</option>
+            {% endfor %}
+        </select>
+</div>
+
+ <div id="network" class="row mt-4 p-1 position-relative">
+        <div id="viz"></div>
+        {#  Menu  #}
+        <div class="position-absolute w-25 border border-2 border-secondary p-2 rounded bg-light" style="right: 10px; top: 10px; display: none;" id="node-details-window">
+            <p class="mb-0"><span class="fw-bold">Type & ID : </span></span><span id="selected_node_type"></span>&nbsp;<span id="selected_node_id"></span></p>
+            <ul id="selected_node_properties"></ul>
+            <hr>
+            <div class="d-flex flex-column gap-2">
+                <button class="btn btn-success" id="add_controller">Add Controller</button>
+                <button class="btn btn-success" id="add_switch">Add Switch</button>
+                <button class="btn btn-success" id="add_router">Add Router</button>
+                <button class="btn btn-success" id="add_host">Add Host</button>
+                <button class="btn btn-danger" id="delete_node">Delete Node</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+ <div class="col-md-4">
+    <div class="card">
+        <div class="card-header">
+          <h4>Card Title</h4>
+        </div>
+        <div class="card-body">
+          <p>Card content goes here</p>
+        </div>
+      </div>
+
+    </div>
+
+</div>
+
+</div>
+
+   <div class="modal fade" id="importNetworkModal" tabindex="-1" aria-labelledby="importNetworkModalLabel" aria-hidden="true" style="z-index: 9999">
+      <div class="modal-dialog modal-dialog-centered w-50">
+          <div class="modal-content">
+              <form id="import-network-form">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="importNetworkModalLabel">Import Network from ONOS</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="mb-3">
+                          <label for="virtualmachine_configuration_file" class="form-label">Virtual Machine Configuration Files</label>
+                          <input type="file" accept=".json" class="form-control" id="virtualmachine_configuration_file" placeholder="Upload file" required onchange="loadContentFromfile('virtualmachine')">
+                      </div>
+                      <div class="mb-3">
+                          <label for="virtualnetwork_configuration_file" class="form-label">Virtual Network Configuration Files</label>
+                          <input type="file" accept=".json" class="form-control" id="virtualnetwork_configuration_file" placeholder="Upload file" required onchange="loadContentFromfile('virtualnetwork')">
+                      </div>
+                      <div class="mb-3">
+                          <label for="virtualnetworkfunction_configuration_file" class="form-label">Virtual Network Function Configuration Files</label>
+                          <input type="file" accept=".json" class="form-control" id="virtualnetworkfunction_configuration_file" placeholder="Upload file" required onchange="loadContentFromfile('virtualnetworkfunction')">
+                      </div>
+
+                       <div class="mb-3">
+                          <label for="link_configuration_file" class="form-label">Link Configuration Files</label>
+                          <input type="file" accept=".json" class="form-control" id="link_configuration_file" placeholder="Upload file" required onchange="loadContentFromfile('link')">
+                      </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" onclick="">Import & Create Virtual Network Infrastructure</button>
+                  </div>
+              </form>
+          </div>
+
+
+
+
+      </div>
+    </div>
+
+
+{% endblock %}
+{% block javascript %}
+<script>
+  const nodes = new vis.DataSet();
+  const edges = new vis.DataSet();
+ const required_properties = {{ required_properties | safe }};
+ let import_configs = {
+            virtualmachine: {},
+            virtualnetwork: {},
+            virtualnetworkfunction: {},
+            link:{}
+
+        };
+
+  $(document).ready(function(){
+            // Ajax setup for csrf
+            $.ajaxSetup({
+               headers: {
+                  'X-CSRFTOKEN': readCookie("csrftoken")
+               }
+            });
+                   $('#import-network-form').on('submit', (e)=>handle_import_form_submission(e))
+             initVisJS()
+            loadNetworkGraph(1);
+        });
+
+
+ function initVisJS(){
+            let viz_container = document.getElementById("viz");
+            let data = {
+                nodes: nodes,
+                edges: edges,
+            };
+            let options = {
+                nodes: {
+                    size: 25,
+                    font: {
+                        size: 15,
+                        color: "#000",
+                    },
+                    borderWidth: 1,
+                },
+                edges: {
+                    width: 1,
+                    arrows: {
+                        to: { enabled: true, scaleFactor: 0.4, type: "arrow" }
+                    }
+                },
+                groups: {
+                    VNI: {
+                        shape: "image",
+                        image: "{% static "images/vni.png" %}",
+                    },
+                    VM:{
+
+                        shape: "image",
+                        image: "{% static "images/VM.png" %}",
+
+                    },
+                     VNF:{
+
+                        shape: "image",
+                        image: "{% static "images/VNF.png" %}",
+
+                    },
+                    VN:{
+
+                        shape: "image",
+                        image:"{% static "images/VN.png" %}",
+
+                    }
+                    },
+
+            }
+            network = new vis.Network(viz_container, data, options);
+            network.on('selectNode', function (properties) {
+                if (properties.nodes.length === 1) {
+                  if (network.isCluster(properties.nodes[0]) === true) {
+                    network.openCluster(properties.nodes[0]);
+                  }
+                }
+
+                const ids = properties.nodes;
+                if (ids.length > 0) {
+                    handle_node_click(ids[0]);
+                }
+            });
+        }
+
+ function loadNetworkGraph(){
+            const network_id = get_selected_network_id();
+            if(network_id === null || network_id === undefined) return;
+            $.ajax({
+                url: "/graph/vnivisjs/" + network_id + "/",
+                type: "GET",
+                success: function(data){
+                    console.log(data.data)
+                    nodes.clear();
+                    edges.clear();
+
+                    nodes.add({id:'0', name:network_id, group: "VNI", label:network_id})
+                    data.data.nodes.map((nd, index) =>{
+                    if((nd["n"].name).replace(/\d+/g, "") === "VM")  {
+                       nodes.add({id:nd["n"].id, name:nd["n"].name, group:(nd["n"].name).replace(/\d+/g, ""), label:nd["n"].name })
+                    }
+                    else if((nd["n"].name).replace(/\d+/g, "") === "VN"){
+
+                      nodes.add({id:nd["n"].vn_id, name:nd["n"].name, group:(nd["n"].name).replace(/\d+/g, ""), label:nd["n"].name })
+                    }
+                    else{
+                       nodes.add({id:nd["n"].vnfID, name:nd["n"].name, group:(nd["n"].name).replace(/\d+/g, ""), label:nd["n"].name })
+
+                    }
+
+                   if((nd["n"].name).replace(/\d+/g, "") === "VM") {
+                       edges.add({from: '0', to: nd["n"].id, weight: 1})
+                   }else if((nd["n"].name).replace(/\d+/g, "") === "VN"){
+
+                       edges.add({from: '0', to: nd["n"].vn_id, weight: 1})
+
+                   }  else{
+                       edges.add({from: '0', to: nd["n"].vnfID, weight: 1})
+
+                   }
+                   console.log(nd["n"].id)
+                    })
+
+
+
+                    console.log(edges)
+                    {#console.log(data.data.nodes[0]["n"])#}
+                    network.cluster(clusterOptionsByData);
+                }
+            });
+        }
+
+$("#createvni").on("click", function (e){
+            $.confirm({
+                title: 'Create Virtual Network Infrastructure',
+                content: generateForm(required_properties["vni"]),
+                buttons: {
+                    formSubmit: {
+                        text: 'Submit',
+                        btnClass: 'btn-blue',
+                        action: function () {
+                            const parsed_data = processDataFromForm(this.$content, required_properties["vni"]);
+                            $.ajax({
+                                type: 'POST',
+                                url:  "{% url 'createvni' %}",
+                                data: parsed_data,
+                            })
+                            .done( function (response) {
+                                if(response.success){
+                                 $.alert({
+                                      title:"Success",
+                                      type:"green",
+                                      content: response.message
+                                  });
+                                 add_option_to_vni_selection(response.data.id, response.data.name);
+                                 $("#selected_vni").val(response.data.id).trigger("change");
+                                }else {
+                                    $.alert({
+                                      title:"Error",
+                                      type:"red",
+                                      content: response.message
+                                  });
+                                }
+                            })
+                            .fail( function (jqXHR, status, error) {
+                                $.alert('Some unexpected events');
+                            })
+
+                            }
+                    },
+                    cancel: function () {
+                     //close
+                    },
+                },
+                onContentReady: function () {
+                    // bind to events
+                    var jc = this;
+                    this.$content.find('form').on('submit', function (e) {
+                        e.preventDefault();
+                        jc.$$formSubmit.trigger('click'); // reference the button and click it
+                    });
+                }
+            });
+        })
+
+  function generateForm(properties){
+            let form = `<form action="" class="formName">`;
+            for (const property_index in properties) {
+                form += `
+                    <div class="form-group mt-2">
+                        <label>${snakeToSentenceCase(properties[property_index])}</label>
+                        <input id="generated_${properties[property_index]}" type="text" placeholder="Enter ${snakeToSentenceCase(properties[property_index])}" class="label form-control" name="${properties[property_index]}" required />
+                    </div>`
+            }
+            form += `</form>`;
+            return form;
+        }
+
+ function processDataFromForm(form_reference, properties){
+            let data = {};
+            for (const property_index in properties) {
+                data[properties[property_index]] = form_reference.find(`#generated_${properties[property_index]}`).val();
+            }
+            return data;
+        }
+
+function get_selected_network_id(){
+            let selected_network = document.getElementById("selected_vni");
+            return selected_network.options[selected_network.selectedIndex].value;
+        }
+  function add_option_to_vni_selection(vni_id, vni_name){
+            let select = document.getElementById("selected_vni");
+            let option = document.createElement("option");
+            option.text = vni_name;
+            option.value = vni_id;
+            select.add(option);
+        }
+
+
+function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+  function handle_import_form_submission(e){
+            e.preventDefault();
+            if(import_configs.virtualmachine === {} ||  import_configs.virtualnetworkfunction === {} || import_configs.link === {} || import_configs.virtualnetwork === {}){
+                alert("Please import the network configuration file according to labels first");
+                return;
+            }
+            $.ajax({
+                url: "{% url "importvnifromfile" %}",
+                type: "POST",
+                data: JSON.stringify(import_configs),
+                success: function(data){
+                    if(data.success){
+                        let _data = data.data;
+                         add_option_to_vni_selection(_data.id, _data.name);
+                        $("#importNetworkModal").hide();
+                        $.alert({
+                            title: "Success",
+                            content: "Network "+_data.name+" imported successfully\nPage will be refreshed within 3 seconds",
+                            type: "green"
+                        });
+                        setTimeout(function(){
+                            location.reload();
+                        }, 3000);
+                    }else{
+                        console.log(data.message);
+                    }
+                }
+            });
+        }
+       function loadContentFromfile(type){
+            if(type === "virtualmachine"){
+                readJSONFromFile($("#virtualmachine_configuration_file")[0].files[0], (data)=>{
+                    import_configs.virtualmachine = JSON.parse(data);
+                    if(import_configs.virtualmachine === null) {
+                        $.alert({
+                            title: "Error",
+                            content: "Invalid host configuration file",
+                            type: "red",
+                        });
+                        import_configs.virtualmachine = null;
+                    }
+                });
+            }
+            if(type === "virtualnetworkfunction"){
+                readJSONFromFile($("#virtualnetworkfunction_configuration_file")[0].files[0], (data)=>{
+                    import_configs.virtualnetworkfunction = JSON.parse(data);
+                    if(import_configs.virtualnetworkfunction === null ) {
+                        $.alert({
+                            title: "Error",
+                            content: "Invalid switch configuration file",
+                            type: "red",
+                        });
+                        import_configs.virtualnetworkfunction = null;
+                    }
+                });
+            }if(type === "link"){
+                readJSONFromFile($("#link_configuration_file")[0].files[0], (data)=>{
+                    import_configs.link = JSON.parse(data);
+                    if(import_configs.link === null) {
+                        $.alert({
+                            title: "Error",
+                            content: "Invalid link configuration file",
+                            type: "red",
+                        });
+                        import_configs.link = null;
+                    }
+                });
+            } if(type === "virtualnetwork"){
+               readJSONFromFile($("#virtualnetwork_configuration_file")[0].files[0], (data)=>{
+                    import_configs.virtualnetwork = JSON.parse(data);
+                    if(import_configs.virtualnetwork === null) {
+                        $.alert({
+                            title: "Error",
+                            content: "Invalid virtual network configuration file",
+                            type: "red",
+                        });
+                        import_configs.virtualnetwork= null;
+                    }
+                });
+
+           }
+
+
+        }
+
+        function readJSONFromFile(fileReference, callback){
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                callback(e.target.result);
+            };
+            reader.onerror = (e) => {
+                $.alert("Error reading file");
+            };
+            reader.readAsText(fileReference);
+        }
+
+
+
+</script>
+
+{% endblock %}

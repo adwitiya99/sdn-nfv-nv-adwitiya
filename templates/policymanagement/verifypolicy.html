@@ -1,0 +1,126 @@
+{% extends "sdntool/base.html" %}
+{% block head %}
+    <menu></menu>
+{% endblock %}
+{% block content %}
+    {% if messages %}
+      <div class="row">
+      <div class="col">
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    {% endif %}
+    {#  Form  for choosing network #}
+    <form method="get">
+        <div class="row gap-2">
+            <select class="form-select w-auto inline-group" name="selected_network">
+                <option disabled {% if not selected_network %} selected {% endif %} >Select a network</option>
+                {% for x in all_networks %}
+                    <option value="{{ x.name }}" {% if selected_network == x.name %} selected  {% endif %} > {{ x.name }}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-success w-auto" type="submit">Confirm Network</button>
+            <button class="btn btn-outline-success w-auto ms-auto d-none" id="verify_all_button" type="button" onclick='openVerifyForm("{{ selected_network }}", "all")'>Verify All Policies</button>
+        </div>
+    </form>
+
+    {#  Table  #}
+    <div class="table-responsive mt-4 d-none" id="dataTableContainer">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th class="text-center">Policy ID</th>
+                    <th class="text-center">Policy Type</th>
+                    <th class="text-center">Policy Description</th>
+                    <th class="text-center">Updated On</th>
+                    <th class="text-center">Verify</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th class="text-center">Policy ID</th>
+                    <th class="text-center">Policy Type</th>
+                    <th class="text-center">Policy Description</th>
+                    <th class="text-center">Updated On</th>
+                    <th class="text-center">Verify</th>
+                </tr>
+            </tfoot>
+            <tbody>
+            {% if registered_policies %}
+                {% for registered_policy in registered_policies %}
+                    <tr>
+                        <td>{{ registered_policy.id }}</td>
+                        <td>{{ registered_policy.core_policy_label }}</td>
+                        <td>{{ registered_policy.policy_description }}</td>
+                        <td>{{ registered_policy.last_updated }}</td>
+                        <td><button class="btn btn-outline-success btn-sm" onclick='openVerifyForm("{{ selected_network }}", "{{ registered_policy.id }}")'>Verify Now</button> </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    {#    http://127.0.0.1:8000/policy/verify/?selected_network=NT48&action=verify&record_id=14 #}
+    <div class="modal fade" id="verify_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Check from Last date</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form method="get">
+                  <div class="modal-body">
+                    <input type="hidden" class="form-control" name="selected_network" id="sel_network">
+                    <input type="hidden" class="form-control" name="action" value="verify">
+                    <input type="hidden" class="form-control" name="record_id" id="rec_id">
+                    <input type="date" class="form-control" name="from_date" id="from_date">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+              </form>
+            </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        const all_networks = {{ all_networks_safe|safe }};
+        let network_name = "";
+
+        function openVerifyForm(selected_network, registered_policy_id) {
+            console.log(selected_network, registered_policy_id);
+            let verifyModal = new bootstrap.Modal(document.getElementById('verify_modal'), {
+              keyboard: true
+            })
+            $("#sel_network").val(selected_network);
+            $("#rec_id").val(registered_policy_id);
+            let curr_date = new Date().toISOString().split('T')[0];
+            $("#from_date").attr("max", curr_date);
+            verifyModal.show();
+        }
+
+        $(document).ready(function() {
+            const params = (new URL(document.location)).searchParams;
+            network_name = params.get('selected_network');
+            if(network_name && network_name.startsWith("NT")) {
+                $("#dataTableContainer").removeClass("d-none");
+                $("#verify_all_button").removeClass("d-none");
+            }
+
+
+            $("#dataTable").DataTable({
+                "pageLength": 10
+            });
+        });
+    </script>
+{% endblock %}

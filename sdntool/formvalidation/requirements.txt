@@ -1,0 +1,4 @@
+dateparser
+dnspython
+pytz
+django>=1.8

@@ -1,0 +1,804 @@
+{% extends "sdntool/base.html" %}
+{% load static %}
+{% block content %}
+
+    <style>
+        #viz{
+            width: 100vw;
+            height: 90vh;
+        }
+    </style>
+    <div class="row gap-2">
+        <button class="btn btn-success w-auto" id="createnetwork">Create Network</button>
+        <button class="btn btn-primary w-auto" id="importnetwork" data-bs-toggle="modal" data-bs-target="#importNetworkModal">Import Network</button>
+        <select class="form-select w-auto inline-group" id="selected_network" onchange="loadNetworkGraph()">
+            {% for x in networks %}
+                <option value="{{ x.id }}"> {{ x.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div id="network" class="row mt-4 p-1 position-relative">
+        <div id="viz"></div>
+        {#  Menu  #}
+        <div class="position-absolute w-25 border border-2 border-secondary p-2 rounded bg-light" style="right: 10px; top: 10px; display: none;" id="node-details-window">
+            <p class="mb-0"><span class="fw-bold">Type & ID : </span></span><span id="selected_node_type"></span>&nbsp;<span id="selected_node_id"></span></p>
+            <ul id="selected_node_properties"></ul>
+            <hr>
+            <div class="d-flex flex-column gap-2">
+                <button class="btn btn-success" id="add_controller">Add Controller</button>
+                <button class="btn btn-success" id="add_switch">Add Switch</button>
+                <button class="btn btn-success" id="add_router">Add Router</button>
+                <button class="btn btn-success" id="add_host">Add Host</button>
+                <button class="btn btn-danger" id="delete_node">Delete Node</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal for import network -->
+    <div class="modal fade" id="importNetworkModal" tabindex="-1" aria-labelledby="importNetworkModalLabel" aria-hidden="true" style="z-index: 9999">
+      <div class="modal-dialog modal-dialog-centered w-50">
+          <div class="modal-content">
+              <form id="import-network-form">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="importNetworkModalLabel">Import Network from ONOS</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="mb-3">
+                          <label for="controller_configuration_file" class="form-label">Controller Configuration Files</label>
+                          <input type="file" accept=".json" class="form-control" id="controller_configuration_file" placeholder="Upload file" required onchange='loadContentFromfile("controller")'>
+                      </div>
+                      <div class="mb-3">
+                          <label for="switch_configuration_file" class="form-label">Switch Configuration Files</label>
+                          <input type="file" accept=".json" class="form-control" id="switch_configuration_file" placeholder="Upload file" required onchange="loadContentFromfile('switch')">
+                      </div>
+                      <div class="mb-3">
+                          <label for="host_configuration_file" class="form-label">Host Configuration Files</label>
+                          <input type="file" accept=".json" class="form-control" id="host_configuration_file" placeholder="Upload file" required onchange="loadContentFromfile('host')">
+                      </div>
+                      <div class="mb-3">
+                          <label for="link_configuration_file" class="form-label">Link Configuration Files</label>
+                          <input type="file" accept=".json" class="form-control" id="link_configuration_file" placeholder="Upload file" required onchange="loadContentFromfile('link')">
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" onclick="">Import & Create Network</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        // Graph related operations and functions
+        const nodes = new vis.DataSet();
+        const edges = new vis.DataSet();
+        let network = null;
+        let selected_node_details = null;
+        let import_configs = {
+            controller: {},
+            switch: {},
+            host: {},
+            link: {}
+        };
+
+        const required_properties = {{ required_properties | safe }};
+
+        $(document).ready(function(){
+            // Ajax setup for csrf
+            $.ajaxSetup({
+               headers: {
+                  'X-CSRFTOKEN': readCookie("csrftoken")
+               }
+            });
+            $('#import-network-form').on('submit', (e)=>handle_import_form_submission(e))
+            initVisJS();
+            loadNetworkGraph(1);
+        });
+
+        function initVisJS(){
+            let viz_container = document.getElementById("viz");
+            let data = {
+                nodes: nodes,
+                edges: edges,
+            };
+            let options = {
+                nodes: {
+                    size: 25,
+                    font: {
+                        size: 15,
+                        color: "#000",
+                    },
+                    borderWidth: 1,
+                },
+                edges: {
+                    width: 1,
+                    arrows: {
+                        to: { enabled: true, scaleFactor: 0.4, type: "arrow" }
+                    }
+                },
+                groups: {
+                    Network: {
+                        shape: "image",
+                        image: "{% static "images/network.png" %}",
+                    },
+                    Controller: {
+                        shape: "image",
+                        image: "{% static "images/controller.png" %}",
+                    },
+                    Router: {
+                        shape: "image",
+                        image: "{% static "images/router.png" %}",
+                    },
+                    Switch: {
+                        shape: "image",
+                        image: "{% static "images/switch.png" %}",
+                    },
+                    Host: {
+                        shape: "image",
+                        image: "{% static "images/host.png" %}",
+                    },
+                },
+                layout: {
+                    hierarchical: {
+                        enabled: true,
+                        direction: "DU",
+                        sortMethod: "directed",
+                    },
+                },
+            }
+            network = new vis.Network(viz_container, data, options);
+            network.on('selectNode', function (properties) {
+                if (properties.nodes.length === 1) {
+                  if (network.isCluster(properties.nodes[0]) === true) {
+                    network.openCluster(properties.nodes[0]);
+                  }
+                }
+
+                const ids = properties.nodes;
+                if (ids.length > 0) {
+                    handle_node_click(ids[0]);
+                }
+            });
+        }
+
+        const clusterOptionsByData = {
+            joinCondition: function (childOptions) {
+                return childOptions.group === "Controller";
+            },
+            clusterNodeProperties: {
+                borderWidth: 3,
+                shape: "image",
+                image: "{% static "images/cluster.png" %}",
+            },
+        };
+
+        function loadNetworkGraph(){
+            const network_id = get_selected_network_id();
+            if(network_id === null || network_id === undefined) return;
+            $.ajax({
+                url: "/graph/visjs/" + network_id + "/",
+                type: "GET",
+                success: function(data){
+                    nodes.clear();
+                    edges.clear();
+                    nodes.add(data.data[0]);
+                    edges.add(data.data[1]);
+                    network.cluster(clusterOptionsByData);
+                }
+            });
+        }
+
+
+        function get_selected_network_id(){
+            let selected_network = document.getElementById("selected_network");
+            return selected_network.options[selected_network.selectedIndex].value;
+        }
+
+        function add_option_to_network_selection(network_id, network_name){
+            let select = document.getElementById("selected_network");
+            let option = document.createElement("option");
+            option.text = network_name;
+            option.value = network_id;
+            select.add(option);
+        }
+
+        function handle_node_click(node_id){
+            selected_node_details = nodes.get(node_id);
+            $("#node-details-window").show();
+            $("#selected_node_type").text(selected_node_details.group);
+            $("#selected_node_id").text(selected_node_details.id);
+            {#$("#selected_node_name").text(selected_node_details.label);#}
+            show_action_buttons_based_on_node_type(selected_node_details.group);
+            fetch_node_properties(selected_node_details.id);
+        }
+
+        function show_action_buttons_based_on_node_type(node_type){
+            $("#add_controller").hide();
+            $("#add_switch").hide();
+            $("#add_router").hide();
+            $("#add_host").hide();
+            $("#delete_node").hide();
+            if(node_type === "Network"){
+                $("#add_controller").show();
+                $("#delete_node").show();
+            }
+            else if(node_type === "Controller"){
+                $("#add_switch").show();
+                $("#add_router").show();
+                 $("#delete_node").show();
+            }
+            else if(node_type === "Switch"){
+                $("#add_switch").show();
+                $("#add_router").show();
+                $("#add_host").show();
+                $("#delete_node").show();
+            }
+            else if(node_type === "Router"){
+                $("#add_switch").show();
+                $("#add_router").show();
+                $("#add_host").show();
+                $("#delete_node").show();
+            }
+            else if(node_type === "Host"){
+                $("#delete_node").show();
+            }
+        }
+
+        function fetch_node_properties(node_id){
+            $("#selected_node_properties").empty();
+            $.ajax({
+                url: "/graph/node/properties/" + node_id + "/",
+                type: "GET",
+                success: function(data){
+                    if(data.success){
+                        let properties = data.data;
+                        for(let key in properties){
+                            $("#selected_node_properties").append("<li><span class='fst-italic'>" + snakeToSentenceCase(key) + "</span>&nbsp;:&nbsp;" + properties[key] + "</li>");
+                        }
+                    }else{
+                        console.log(data.message);
+                    }
+                }
+            });
+        }
+
+        function handle_import_form_submission(e){
+            e.preventDefault();
+            if(import_configs.controller === {} || import_configs.switch === {} || import_configs.host === {} || import_configs.link === {}){
+                alert("Please import the network configuration file according to labels first");
+                return;
+            }
+            $.ajax({
+                url: "{% url "importnetwork" %}",
+                type: "POST",
+                data: JSON.stringify(import_configs),
+                success: function(data){
+                    if(data.success){
+                        let _data = data.data;
+                        add_option_to_network_selection(_data.id, _data.name);
+                        $("#importNetworkModal").hide();
+                        $.alert({
+                            title: "Success",
+                            content: "Network "+_data.name+" imported successfully\nPage will be refreshed within 3 seconds",
+                            type: "green"
+                        });
+                        setTimeout(function(){
+                            location.reload();
+                        }, 3000);
+                    }else{
+                        console.log(data.message);
+                    }
+                }
+            });
+        }
+
+        function loadContentFromfile(type){
+            if(type === "host"){
+                readJSONFromFile($("#host_configuration_file")[0].files[0], (data)=>{
+                    import_configs.host = JSON.parse(data);
+                    if(import_configs.host === null || import_configs.host.hosts === undefined) {
+                        $.alert({
+                            title: "Error",
+                            content: "Invalid host configuration file",
+                            type: "red",
+                        });
+                        import_configs.host = null;
+                    }
+                });
+            }
+            if(type === "switch"){
+                readJSONFromFile($("#switch_configuration_file")[0].files[0], (data)=>{
+                    import_configs.switch = JSON.parse(data);
+                    if(import_configs.switch === null || import_configs.switch.devices === undefined) {
+                        $.alert({
+                            title: "Error",
+                            content: "Invalid switch configuration file",
+                            type: "red",
+                        });
+                        import_configs.switch = null;
+                    }
+                });
+            }
+            if(type === "controller"){
+                readJSONFromFile($("#controller_configuration_file")[0].files[0], (data)=>{
+                    import_configs.controller = JSON.parse(data);
+                    if(import_configs.controller === null || import_configs.controller.controller === undefined) {
+                        $.alert({
+                            title: "Error",
+                            content: "Invalid controller configuration file",
+                            type: "red",
+                        });
+                        import_configs.controller = null;
+                    }
+                });
+            }
+            if(type === "link"){
+                readJSONFromFile($("#link_configuration_file")[0].files[0], (data)=>{
+                    import_configs.link = JSON.parse(data);
+                    if(import_configs.link === null || import_configs.link.links === undefined) {
+                        $.alert({
+                            title: "Error",
+                            content: "Invalid link configuration file",
+                            type: "red",
+                        });
+                        import_configs.link = null;
+                    }
+                });
+            }
+        }
+
+        function readJSONFromFile(fileReference, callback){
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                callback(e.target.result);
+            };
+            reader.onerror = (e) => {
+                $.alert("Error reading file");
+            };
+            reader.readAsText(fileReference);
+        }
+
+        // Create network popup
+        $("#createnetwork").on("click", function (e){
+            $.confirm({
+                title: 'Create Network',
+                content: generateForm(required_properties["network"]),
+                buttons: {
+                    formSubmit: {
+                        text: 'Submit',
+                        btnClass: 'btn-blue',
+                        action: function () {
+                            const parsed_data = processDataFromForm(this.$content, required_properties["network"]);
+                            $.ajax({
+                                type: 'POST',
+                                url:  "{% url 'createnetwork' %}",
+                                data: parsed_data,
+                            })
+                            .done( function (response) {
+                                if(response.success){
+                                 $.alert({
+                                      title:"Success",
+                                      type:"green",
+                                      content: response.message
+                                  });
+                                 add_option_to_network_selection(response.data.id, response.data.name);
+                                 $("#selected_network").val(response.data.id).trigger("change");
+                                }else {
+                                    $.alert({
+                                      title:"Error",
+                                      type:"red",
+                                      content: response.message
+                                  });
+                                }
+                            })
+                            .fail( function (jqXHR, status, error) {
+                                $.alert('Some unexpected events');
+                            })
+
+                            }
+                    },
+                    cancel: function () {
+                     //close
+                    },
+                },
+                onContentReady: function () {
+                    // bind to events
+                    var jc = this;
+                    this.$content.find('form').on('submit', function (e) {
+                        e.preventDefault();
+                        jc.$$formSubmit.trigger('click'); // reference the button and click it
+                    });
+                }
+            });
+        })
+
+        // Add Controller popup
+        $("#add_controller").on("click", function (e){
+            $.confirm({
+                title: 'Create Controller',
+                content: generateForm(required_properties["controller"]),
+                buttons: {
+                    formSubmit: {
+                        text: 'Submit',
+                        btnClass: 'btn-blue',
+                        action: function () {
+                            var props = processDataFromForm(this.$content, required_properties["controller"]);
+                            $.ajax({
+                                type: 'POST',
+                                url:  "{% url 'createcontroller' %}",
+                                data: {
+                                    ...props,
+                                    parent_id: selected_node_details.id
+                                },
+                            })
+                            .done( function (response) {
+                                if(response.success){
+                                 $.alert({
+                                      title:"Success",
+                                      type:"green",
+                                      content: response.message
+                                  });
+                                  const recieved_data = response.data;
+                                  nodes.add({
+                                    id: recieved_data.id,
+                                    label: recieved_data.name,
+                                    group: "Controller"
+                                  });
+                                  edges.add({
+                                    from: selected_node_details.id,
+                                    to: recieved_data.id
+                                  });
+                                }else {
+                                    $.alert({
+                                      title:"Error",
+                                      type:"red",
+                                      content: response.message
+                                  });
+                                }
+                             })
+                             .fail( function (jqXHR, status, error) {
+                                // Triggered if response status code is NOT 200 (OK)
+                                $.alert('Some unexpected events');
+                             })
+                        }
+                    },
+                    cancel: function () {
+                     //close
+                    },
+                },
+                onContentReady: function () {
+                    // bind to events
+                    var jc = this;
+                    this.$content.find('form').on('submit', function (e) {
+                        // if the user submits the form by pressing enter in the field.
+                        e.preventDefault();
+                        jc.$$formSubmit.trigger('click'); // reference the button and click it
+                    });
+                }
+            });
+        });
+
+        // Add Switch popup
+        $("#add_switch").on("click", function (e){
+            $.confirm({
+                title: 'Create Switch',
+                content: generateForm(required_properties["switch"]),
+                buttons: {
+                    formSubmit: {
+                        text: 'Submit',
+                        btnClass: 'btn-blue',
+                        action: function () {
+                            var props = processDataFromForm(this.$content, required_properties["switch"]);
+                            $.ajax({
+                                type: 'POST',
+                                url:  "{% url 'createswitch' %}",
+                                data: {
+                                    ...props,
+                                    parent_id: selected_node_details.id
+                                },
+                            })
+                            .done( function (response) {
+                                if(response.success){
+                                 $.alert({
+                                      title:"Success",
+                                      type:"green",
+                                      content: response.message
+                                  });
+                                  const recieved_data = response.data;
+                                  nodes.add({
+                                    id: recieved_data.id,
+                                    label: recieved_data.name,
+                                    group: "Switch"
+                                  });
+                                  edges.add({
+                                    from: selected_node_details.id,
+                                    to: recieved_data.id
+                                  });
+                                }else {
+                                    $.alert({
+                                      title:"Error",
+                                      type:"red",
+                                      content: response.message
+                                  });
+                                }
+                             })
+                             .fail( function (jqXHR, status, error) {
+                                // Triggered if response status code is NOT 200 (OK)
+                                $.alert('Some unexpected events');
+                             })
+                        }
+                    },
+                    cancel: function () {
+                     //close
+                    },
+                },
+                onContentReady: function () {
+                    // bind to events
+                    var jc = this;
+                    this.$content.find('form').on('submit', function (e) {
+                        // if the user submits the form by pressing enter in the field.
+                        e.preventDefault();
+                        jc.$$formSubmit.trigger('click'); // reference the button and click it
+                    });
+                }
+            });
+        });
+
+
+        // Add Router popup
+        $("#add_router").on("click", function (e){
+            $.confirm({
+                title: 'Create Router',
+                content: generateForm(required_properties["router"]),
+                buttons: {
+                    formSubmit: {
+                        text: 'Submit',
+                        btnClass: 'btn-blue',
+                        action: function () {
+                            var props = processDataFromForm(this.$content, required_properties["router"]);
+                            $.ajax({
+                                type: 'POST',
+                                url:  "{% url 'createsrouter' %}",
+                                data: {
+                                    ...props,
+                                    parent_id: selected_node_details.id
+                                },
+                            })
+                            .done( function (response) {
+                                if(response.success){
+                                 $.alert({
+                                      title:"Success",
+                                      type:"green",
+                                      content: response.message
+                                  });
+                                  const recieved_data = response.data;
+                                  nodes.add({
+                                    id: recieved_data.id,
+                                    label: recieved_data.name,
+                                    group: "Router"
+                                  });
+                                  edges.add({
+                                    from: selected_node_details.id,
+                                    to: recieved_data.id
+                                  });
+                                }else {
+                                    $.alert({
+                                      title:"Error",
+                                      type:"red",
+                                      content: response.message
+                                  });
+                                }
+                             })
+                             .fail( function (jqXHR, status, error) {
+                                // Triggered if response status code is NOT 200 (OK)
+                                $.alert('Some unexpected events');
+                             })
+                        }
+                    },
+                    cancel: function () {
+                     //close
+                    },
+                },
+                onContentReady: function () {
+                    // bind to events
+                    var jc = this;
+                    this.$content.find('form').on('submit', function (e) {
+                        // if the user submits the form by pressing enter in the field.
+                        e.preventDefault();
+                        jc.$$formSubmit.trigger('click'); // reference the button and click it
+                    });
+                }
+            });
+        });
+
+        // Add Host popup
+        $("#add_host").on("click", function (e){
+            $.confirm({
+                title: 'Create Host',
+                content: generateForm(required_properties["host"]),
+                buttons: {
+                    formSubmit: {
+                        text: 'Submit',
+                        btnClass: 'btn-blue',
+                        action: function () {
+                            var props = processDataFromForm(this.$content, required_properties["host"]);
+                            $.ajax({
+                                type: 'POST',
+                                url:  "{% url 'createhost' %}",
+                                data: {
+                                    ...props,
+                                    parent_id: selected_node_details.id
+                                },
+                            })
+                            .done( function (response) {
+                                if(response.success){
+                                 $.alert({
+                                      title:"Success",
+                                      type:"green",
+                                      content: response.message
+                                  });
+                                  const recieved_data = response.data;
+                                  nodes.add({
+                                    id: recieved_data.id,
+                                    label: recieved_data.name,
+                                    group: "Host"
+                                  });
+                                  edges.add({
+                                    from: selected_node_details.id,
+                                    to: recieved_data.id
+                                  });
+                                }else {
+                                    $.alert({
+                                      title:"Error",
+                                      type:"red",
+                                      content: response.message
+                                  });
+                                }
+                             })
+                             .fail( function (jqXHR, status, error) {
+                                // Triggered if response status code is NOT 200 (OK)
+                                $.alert('Some unexpected events');
+                             })
+                        }
+                    },
+                    cancel: function () {
+                     //close
+                    },
+                },
+                onContentReady: function () {
+                    // bind to events
+                    var jc = this;
+                    this.$content.find('form').on('submit', function (e) {
+                        // if the user submits the form by pressing enter in the field.
+                        e.preventDefault();
+                        jc.$$formSubmit.trigger('click'); // reference the button and click it
+                    });
+                }
+            });
+        });
+
+        // Delete node
+        $("#delete_node").on("click", function (e){
+            $.confirm({
+                title: 'Delete Node',
+                content: 'Are you sure you want to delete this node?',
+                buttons: {
+                    confirm: function () {
+                        $.ajax({
+                            type: 'GET',
+                            url:  "/graph/node/delete/"+selected_node_details.id.toString()+"/",
+                            data: {
+                                id: selected_node_details.id
+                            },
+                        })
+                        .done( function (response) {
+                            if(response.success){
+                                 $.alert({
+                                      title:"Success",
+                                      type:"green",
+                                      content: response.message +"\nPage will be refreshed soon."
+                                  });
+                                 // If it's about network deletion , then it will refresh
+                                if(selected_node_details.group.toLocaleLowerCase() === "network"){
+                                    setTimeout(()=>{
+                                        location.reload();
+                                    }, 1500)
+                                }
+                                $("#node-details-window").hide();
+                                deleteNodeRecursively(selected_node_details.id);
+                            }else {
+                                $.alert({
+                                  title:"Error",
+                                  type:"red",
+                                  content: response.message
+                              });
+                            }
+                         })
+                         .fail( function (jqXHR, status, error) {
+                            // Triggered if response status code is NOT 200 (OK)
+                            $.alert('Some unexpected events');
+                         })
+                    },
+                    cancel: function () {
+                     //close
+                    },
+                }
+            });
+        });
+
+        function deleteNodeRecursively(id){
+            /*
+            * Algo
+            * - Fetch all nodes
+            * - Fetch all edges
+            * - Delete self node
+            * - Delete all edges
+            * - Do recursion on other nodes
+            * */
+            const connected_nodes = network.getConnectedNodes(id, "from")
+            const connected_edges = network.getConnectedEdges(id, "from")
+
+            edges.remove(connected_edges);
+
+            connected_nodes.forEach((e)=>{
+                deleteNodeRecursively(e);
+            })
+
+            nodes.remove(id);
+        }
+
+        // UTILS
+        function snakeToSentenceCase(str) {
+            return str.replace (/^[-_]*(.)/, (_, c) => c.toUpperCase())
+                        .replace (/[-_]+(.)/g, (_, c) => ' ' + c.toUpperCase())
+        }
+
+        /**
+         * @param {[]String} properties
+         * */
+        function generateForm(properties){
+            let form = `<form action="" class="formName">`;
+            for (const property_index in properties) {
+                form += `
+                    <div class="form-group mt-2">
+                        <label>${snakeToSentenceCase(properties[property_index])}</label>
+                        <input id="generated_${properties[property_index]}" type="text" placeholder="Enter ${snakeToSentenceCase(properties[property_index])}" class="label form-control" name="${properties[property_index]}" required />
+                    </div>`
+            }
+            form += `</form>`;
+            return form;
+        }
+
+        /**
+         * This will accept the form and will return the data in the form of object respect to required properties
+         * Each property cann beb found by searching  #generated_${property} 's value in form
+         * */
+        function processDataFromForm(form_reference, properties){
+            let data = {};
+            for (const property_index in properties) {
+                data[properties[property_index]] = form_reference.find(`#generated_${properties[property_index]}`).val();
+            }
+            return data;
+        }
+
+        /**
+         * Read cookies
+         * */
+        function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+    </script>
+{% endblock %}

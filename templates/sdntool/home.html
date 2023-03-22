@@ -1,0 +1,75 @@
+{% extends "sdntool/base.html" %}
+{% block head %}
+    <menu></menu>
+{% endblock %}
+{% block content %}
+    <div class="row">
+    <div class="col-3">
+        <table class="table border-1 border rounded me-2">
+            <thead>
+                <th class="text-center">Available Networks</th>
+            </thead>
+            <tbody>
+                {% for network in networks %}
+                    <tr>
+                        <td class="text-center">{{ network.name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+        <div class="col-8">
+            <table class="table border-1 border rounded">
+                <thead>
+                    <tr>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Network</th>
+                        <th class="text-center">Submitted On</th>
+                        <th class="text-center">Runtime Status</th>
+                        <th class="text-center">Check Status</th>
+                        <th class="text-center">Report</th>
+                    </tr>
+                </thead>
+                <tbody>
+               {% if policy_verification_reports %}
+                    {% for report in policy_verification_reports %}
+                        <tr>
+                            <td>{{ report.id }}</td>
+                            <td class="text-center">{{ report.network_name }}</td>
+                            <td>{{ report.submitted_on }}</td>
+                            <td class="text-center">
+                            {% if report.status == "submitted" %}
+                                <b class="text-primary">SUBMITTED</b>
+                                {% elif report.status == "running" %}
+                                <b class="text-warning">RUNNING</b>
+                                {% elif report.status == "completed" %}
+                                <b class="text-success">COMPLETED</b>
+                                {% elif report.status == "failed" %}
+                                <b class="text-danger">FAILED</b>
+                                {% else %}
+                                <b class="text-danger">UNKNOWN</b>
+                            {% endif %} </td>
+                            <td class="text-center">
+                                {% if report.status == "completed" %}
+                                    {% if report.passed %}
+                                        <b class="text-success">PASSED</b>
+                                    {% else %}
+                                        <b class="text-danger">FAILED</b>
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                {% if report.status == "completed" %}
+                                    <a target="_blank" href="{% url "policyverificationreport" report_id=report.id  %}">View</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+{% endblock %}

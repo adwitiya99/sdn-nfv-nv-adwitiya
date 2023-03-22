@@ -1,0 +1,216 @@
+{% extends "sdntool/base.html" %}
+{% block head %}
+    <menu></menu>
+{% endblock %}
+{% block content %}
+    {% if messages %}
+      <div class="row">
+      <div class="col">
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    {% endif %}
+    {#  Form  for choosing network #}
+    <form method="get">
+        <div class="row gap-2">
+            <select class="form-select w-auto inline-group" name="selected_network">
+                <option disabled {% if not selected_network %} selected {% endif %} >Select a network</option>
+                {% for x in all_networks %}
+                    <option value="{{ x.name }}" {% if selected_network == x.name %} selected  {% endif %} > {{ x.name }}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-success w-auto" type="submit">Confirm Network</button>
+            <button type="button" class="btn btn-primary w-auto d-none" data-bs-toggle="modal" data-bs-target="#addNewPolicy" id="create_policy">Create Policy</button>
+        </div>
+    </form>
+
+    {#  Table  #}
+    <div class="table-responsive mt-4 d-none" id="dataTableContainer">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th class="text-center">Policy ID</th>
+                    <th class="text-center">Policy Type</th>
+                    <th class="text-center">Policy Description</th>
+                    <th class="text-center">Updated On</th>
+                    <th class="text-center">Delete</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th class="text-center">Policy ID</th>
+                    <th class="text-center">Policy Type</th>
+                    <th class="text-center">Policy Description</th>
+                    <th class="text-center">Updated On</th>
+                    <th class="text-center">Delete</th>
+                </tr>
+            </tfoot>
+            <tbody>
+            {% if registered_policies %}
+                {% for registered_policy in registered_policies %}
+                    <tr>
+                        <td>{{ registered_policy.id }}</td>
+                        <td>{{ registered_policy.core_policy_label }}</td>
+                        <td>{{ registered_policy.policy_description }}</td>
+                        <td>{{ registered_policy.last_updated }}</td>
+                        <td><a href="{% url "managepolicy" %}?selected_network={{ selected_network }}&action=delete&record_no={{ registered_policy.id }}" class="btn btn-danger">Delete</a> </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    {#  Modal to add new policy  #}
+    <!-- Modal -->
+    <div class="modal fade" id="addNewPolicy" tabindex="-1" aria-labelledby="addNewPolicyLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form method="post">
+            {% csrf_token %}
+              <div class="modal-header">
+                <h5 class="modal-title" id="addNewPolicyLabel">Add New Policy</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <select class="form-select" id="selected_policy" onchange="refresh_modal_layout()" required name="selected_policy">
+                      <option selected disabled>Select Policy</option>
+                      {% for policy_type in policy_types %}
+                        <option value="{{ policy_type.type }}">{{ policy_type.label }}</option>
+                      {% endfor %}
+                  </select>
+                  <div id="dynamic_form_content" class="mt-2">
+
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        const policy_data_types = {{ policy_data_types|safe }};
+        const all_networks = {{ all_networks_safe|safe }};
+        let hosts_data = [];
+        let controllers_data = [];
+        let switches_data = [];
+        let network_name = "";
+
+        function refresh_modal_layout(){
+            const selected_policy_type = $('#selected_policy').val();
+            let policy_data = null;
+            for (let i = 0; i < policy_data_types.length; i++) {
+                if(policy_data_types[i].type === selected_policy_type){
+                    policy_data = policy_data_types[i];
+                    break;
+                }
+            }
+            if(policy_data == null) return;
+            const formContent = $('#dynamic_form_content');
+            formContent.empty();
+            const fields = policy_data.fields;
+            let htmlData = "";
+            let dataFetchingNeeded = []; // [[element_type, select_element_id]]
+            for (let i = 0; i < fields.length; i++) {
+                let tmpHtml = "";
+                tmpHtml = tmpHtml + `
+                <div class="mb-3">
+                  <label for="dynamic_form_${i.toString()}_${policy_data.type}" class="form-label">${policy_data.fields[i].label}</label>`;
+                if(policy_data.fields[i].input_type === "load_from_db"){
+                    tmpHtml = tmpHtml + `
+                    <select class="form-select" id="dynamic_form_${i.toString()}_${policy_data.type}" name="${policy_data.fields[i].key}" required>
+                        <option selected disabled value="">${policy_data.fields[i].placeholder}</option>
+                    </select>`;
+                  }else{
+                    tmpHtml = tmpHtml + `<input type="text" class="form-control" id="dynamic_form_${i.toString()}_${policy_data.key}" name="${policy_data.key}" required>`;
+                  }
+                tmpHtml = tmpHtml + `</div>`;
+                htmlData += tmpHtml;
+                dataFetchingNeeded.push([policy_data.fields[i].element_type, `dynamic_form_${i.toString()}_${policy_data.type}`]);
+            }
+            formContent.html(htmlData);
+            for(let i = 0; i < dataFetchingNeeded.length; i++) {
+                load_data_from_db(dataFetchingNeeded[i][0], dataFetchingNeeded[i][1]);
+            }
+        }
+
+        async function load_data_from_db(element_type, select_element_id){
+            console.log(element_type, select_element_id);
+            let hosts_required = element_type.indexOf("host") !== -1;
+            let controllers_required = element_type.indexOf("controller") !== -1;
+            let switches_required = element_type.indexOf("switch") !== -1;
+            let network_id = null;
+            for (let i = 0; i < all_networks.length; i++) {
+                if(all_networks[i].name === network_name){
+                    network_id = all_networks[i].id;
+                    break;
+                }
+            }
+            if(network_id == null) return;
+
+            if(hosts_required && hosts_data.length === 0){
+                const response = await $.ajax(`/nodes/${network_id}/host/`);
+                if(response.success){
+                    hosts_data = response.data;
+                }
+            }
+
+            if(controllers_required && controllers_data.length === 0){
+                const response = await $.ajax(`/nodes/${network_id}/controller/`);
+                if(response.success){
+                    controllers_data = response.data;
+                }
+            }
+
+            if(switches_required && switches_data.length === 0){
+                const response = await $.ajax(`/nodes/${network_id}/switch/`);
+                if(response.success){
+                    switches_data = response.data;
+                }
+            }
+
+            let current_html = `<option selected disabled value="">Select component</option>`;
+            if(hosts_required){
+                for(let idx= 0; idx < hosts_data.length; idx++) {
+                  current_html += `<option value="${hosts_data[idx].name}">${hosts_data[idx].name}</option>`;
+                }
+            }
+            if(controllers_required){
+               for(let idx= 0; idx < controllers_data.length; idx++) {
+                  current_html += `<option value="${controllers_data[idx].name}">${controllers_data[idx].name}</option>`;
+                }
+            }
+            if(switches_required){
+                for(let idx= 0; idx < switches_data.length; idx++) {
+                  current_html += `<option value="${switches_data[idx].name}">${switches_data[idx].name}</option>`;
+                }
+            }
+            $(`#${select_element_id}`).html(current_html);
+        }
+
+
+        $(document).ready(function() {
+            const params = (new URL(document.location)).searchParams;
+            network_name = params.get('selected_network');
+            if(network_name && network_name.startsWith("NT")) {
+                $("#create_policy").removeClass("d-none");
+                $("#dataTableContainer").removeClass("d-none");
+            }
+
+            $("#dataTable").DataTable({
+                "pageLength": 10
+            });
+        });
+    </script>
+{% endblock %}

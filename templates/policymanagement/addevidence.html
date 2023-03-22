@@ -1,0 +1,282 @@
+{% extends "sdntool/base.html" %}
+{% block content %}
+    {% if messages %}
+      <div class="row text-center">
+      <div class="col">
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    {% endif %}
+    <div class="d-flex justify-content-center">
+        <form method="post" class="w-50" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="mb-3">
+                <label for="network" class="form-label">Choose Network</label>
+                <select class="form-select" name="network" id="network" onchange='$("#data_type_container").show()'>
+                    <option disabled selected>Select Network</option>
+                    {% for network in all_networks %}
+                        <option value="{{ network.name }}">{{ network.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3" id="data_type_container">
+                <label for="data_type" class="form-label">Data Type</label>
+                <select class="form-select" name="data_type" id="data_type" onchange='populate_evidence_type()'>
+                    <option disabled selected>Select Data Type</option>
+                    <option value="log">Log </option>
+                    <option value="config">Config </option>
+                </select>
+            </div>
+
+            <div class="mb-3" id="evidence_type_container">
+                <label for="evidence_type" class="form-label">Evidence Type</label>
+                <select class="form-select" name="evidence_type" id="evidence_types" onchange="select_evidence_type()">
+                    <option disabled selected>Select Evidence</option>
+                </select>
+            </div>
+
+            <div class="mb-3" id="evidence_file_container">
+                <label for="evidence_file" class="form-label">Upload file</label>
+                <input type="file" class="form-control" name="evidence_file" required>
+            </div>
+
+            <div class="mb-3" id="select_controller_container">
+                <label for="controller" class="form-label">Select Controller</label>
+                <select class="form-select" name="controller" id="selected_controller">
+                    <option disabled selected>Select Controller</option>
+                </select>
+            </div>
+            <div class="mb-3" id="select_switch_container">
+                <label for="switch" class="form-label">Select Switch</label>
+                <select class="form-select" name="switch" id="selected_switch">
+                    <option disabled selected>Select Switch</option>
+                </select>
+            </div>
+            <div class="mb-3" id="select_host_container">
+                <label for="host" class="form-label">Select Host</label>
+                <select class="form-select" name="host" id="selected_host">
+                    <option disabled selected>Select Host</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100" id="submit_btn">Upload Evidence Data</button>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        const evidence_data_types = {{ evidence_data_types|safe }};
+        let evidence_data = {
+            "network": {{ all_networks_safe|safe }},
+            "controller": [],
+            "switch": [],
+            "host": [],
+        }
+        let searchParameters = {}
+        let fetching_data = false;
+
+        function populate_evidence_type() {
+            let evidence_type_html = "<option disabled selected>Select Evidence Type</option>";
+            let is_log = true;
+            if ($("#data_type").val() === 'config') is_log = false;
+            for (const idx in evidence_data_types) {
+                const ele = evidence_data_types[idx];
+                if(is_log === ele.is_log){
+                    evidence_type_html += `<option value="${ele.type}">${ele.type}</option>`;
+                }
+            }
+            $("#evidence_types").html(evidence_type_html);
+            $("#evidence_type_container").show();
+        }
+
+        function select_evidence_type(){
+            let entry = null;
+            for (const idx in evidence_data_types) {
+                const ele = evidence_data_types[idx];
+                if(ele.type === $("#evidence_types").val()){
+                    entry = ele;
+                    break;
+                }
+            }
+            if(entry === null) return;
+            $("#select_controller_container").hide();
+            $("#select_switch_container").hide();
+            $("#select_host_container").hide();
+            allow_multiple_file_uploads(entry.multiple_file_upload_allowed);
+            if(entry.element === "controller"){
+                $("#select_controller_container").show();
+                fetch_controllers_under_network();
+            }
+            if(entry.element  === "switch"){
+                $("#select_switch_container").show();
+                fetch_switches_under_network();
+            }
+            if(entry.element  === "host"){
+                $("#select_host_container").show();
+                fetch_hosts_under_network();
+            }
+            $("#evidence_file_container").show();
+            $("#submit_btn").show();
+        }
+
+        function allow_multiple_file_uploads(choice){
+            if(choice) {
+                $("input[name=evidence_file]").attr("multiple", "multiple");
+            }else{
+                $("input[name=evidence_file]").removeAttr("multiple");
+            }
+        }
+
+        function from_network_name_to_id(network_name){
+            for (const idx in evidence_data.network) {
+                const ele = evidence_data.network[idx];
+                if(ele.name === network_name){
+                    return ele.id;
+                }
+            }
+            return null;
+        }
+
+        function fetch_controllers_under_network(){
+            let network_id = from_network_name_to_id($("select[name=network]").val());
+            if(network_id === null){
+                alert("Please select a network");
+                return;
+            }
+            fetching_data = true;
+            $.ajax({
+                url: "/nodes/"+network_id.toString()+"/controller/",
+                type: "GET",
+                success: function (response) {
+                    if(response.success){
+                        let controller_html = "<option disabled selected>Select Controller</option>";
+                        for (const idx in response.data) {
+                            const ele = response.data[idx];
+                            controller_html += `<option value="${ele.name}">${ele.name}</option>`;
+                        }
+                        $("#selected_controller").html(controller_html);
+                    }else {
+                          alert(response.message);
+                    }
+                    fetching_data = false;
+                },
+                error: function (error) {
+                    alert("Error fetching controllers");
+                }
+            });
+        }
+
+        function fetch_switches_under_network(){
+            let network_id = from_network_name_to_id($("select[name=network]").val());
+            if(network_id === null){
+                alert("Please select a network");
+                return;
+            }
+            fetching_data = true;
+            $.ajax({
+                url: "/nodes/"+network_id.toString()+"/switch/",
+                type: "GET",
+                success: function (response) {
+                    if(response.success){
+                        let switch_html = "<option disabled selected>Select Switch</option>";
+                        for (const idx in response.data) {
+                            const ele = response.data[idx];
+                            switch_html += `<option value="${ele.name}">${ele.name}</option>`;
+                        }
+                        $("#selected_switch").html(switch_html);
+                    }else {
+                          alert(response.message);
+                    }
+                    fetching_data = false;
+                },
+                error: function (error) {
+                    alert("Error fetching switches");
+                }
+            });
+        }
+
+        function fetch_hosts_under_network(){
+            let network_id = from_network_name_to_id($("select[name=network]").val());
+            if(network_id === null){
+                alert("Please select a network");
+                return;
+            }
+            fetching_data = true;
+            $.ajax({
+                url: "/nodes/"+network_id.toString()+"/host/",
+                type: "GET",
+                success: function (response) {
+                    if(response.success){
+                        let host_html = "<option disabled selected>Select Host</option>";
+                        for (const idx in response.data) {
+                            const ele = response.data[idx];
+                            host_html += `<option value="${ele.name}">${ele.name}</option>`;
+                        }
+                        $("#selected_host").html(host_html);
+                    }else {
+                          alert(response.message);
+                    }
+                    fetching_data = false;
+                },
+                error: function (error) {
+                    alert("Error fetching hosts");
+                }
+            });
+        }
+
+
+        function autoFillForm(){
+            $("#network").val(searchParameters["network"]).trigger("change");
+            $("#data_type").val(searchParameters["data_type"]).trigger("change");
+            $("#evidence_types").val(searchParameters["evidence_type"]).trigger("change");
+
+            {# Wait for few milliseconds #}
+            setTimeout(function(){
+                while (true) {
+                    if(fetching_data === false){
+                        if(searchParameters["controller"] !== undefined){
+                            $("#selected_controller").val(searchParameters["controller"]).trigger("change");
+                        }
+                        if(searchParameters["switch"] !== undefined){
+                            $("#selected_switch").val(searchParameters["switch"]).trigger("change");
+                        }
+                        if(searchParameters["host"] !== undefined){
+                            $("#selected_host").val(searchParameters["host"]).trigger("change");
+                        }
+                        break;
+                    }
+                }
+            }, 100);
+            if (searchParameters["controller"] !== "None") {
+                $("#selected_controller").val(searchParameters["controller"]).trigger("change");
+            }
+            if (searchParameters["switch"] !== "None") {
+                $("#selected_switch").val(searchParameters["switch"]).trigger("change");
+            }
+            if (searchParameters["host"] !== "None") {
+                $("#selected_host").val(searchParameters["host"]).trigger("change");
+            }
+        }
+
+        $(document).ready(function() {
+            $("#data_type_container").hide();
+            $("#evidence_type_container").hide();
+            $("#evidence_file_container").hide();
+            $("#select_controller_container").hide();
+            $("#select_switch_container").hide();
+            $("#select_host_container").hide();
+            $("#submit_btn").hide();
+
+            const search = location.search.substring(1);
+            searchParameters = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
+            if(searchParameters["auto_fill"] === "1") autoFillForm();
+        });
+    </script>
+{% endblock %}

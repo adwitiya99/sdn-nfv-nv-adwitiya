@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="{% static 'css/styles.css' %}?{% now 'U' %}" rel="stylesheet"/>
+</head>
+
+<style>
+    body {
+        background-image: url("{% static 'images/background.jpg' %}");
+        background-repeat: no-repeat;
+        background-size: cover;
+
+    }
+</style>
+<body >
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card border-0 shadow rounded-3 my-5">
+          <div class="card-body p-4 p-sm-5">
+            <h5 class="card-title text-center mb-5 fw-light fs-5"><img src="{% static 'images/jadav_logo.png' %}" style="width: 100px; height:auto" class="img-circle">
+
+            <br>
+                <p style="font-weight:bold"> SMVSDN Tool</p>
+
+            </h5>
+
+{% if messages %}
+              <div class="alert alert-danger" role="alert">
+ <ul class="messages"  style="list-style: none">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+</div>
+
+
+{% endif %}
+            <form method="post" action="{% url 'logincontroller' %}">
+                {% csrf_token %}
+              <div class="form-floating mb-3">
+                <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Username">
+                <label for="floatingInput">Username</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+              </div>
+
+<!--              <div class="form-check mb-3">-->
+<!--                <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">-->
+<!--                <label class="form-check-label" for="rememberPasswordCheck">-->
+<!--                  Remember password-->
+<!--                </label>-->
+<!--              </div>-->
+              <div class="d-grid">
+                <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Sign
+                  in</button>
+              </div>
+
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="{% static 'js/jquery.js' %}?{% now 'U' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}?{% now 'U' %}" crossorigin="anonymous"></script>
+</body>
+</html>

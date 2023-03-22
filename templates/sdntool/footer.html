@@ -1,0 +1,30 @@
+{% load static %}
+    <style>
+        .DataTables_Table_0_filterSelect{
+            margin-bottom : 8px !important;
+            width :30%;
+            align-items:flex-end;
+        }
+    </style>
+</div>
+</div>
+<footer class="py-2 mt-auto" style="position: fixed;bottom: 0;left: 0;right: 0;height:50px;background:#000000;padding-top: 35px;z-index: 3500;">
+    <div class="container-fluid px-4">
+        <div class="d-flex align-items-center justify-content-between small">
+            <div class="text-muted text-right"><h6>Copyright &copy; CDC, Jadavpur University.</h6></div>
+        </div>
+    </div>
+</footer>
+
+<script src="{% static 'js/all.min.js' %}" crossorigin="anonymous"></script>
+<script src="{% static 'js/jquery.js' %}?{% now 'U' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}?{% now 'U' %}" crossorigin="anonymous"></script>
+<script src="{% static 'js/scripts.js' %}?{% now 'U' %}"></script>
+<script type="text/javascript" src="{% static 'js/vis-network.min.js' %}?{% now 'U' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js' %}?{% now 'U' %}"></script>
+<script type="text/javascript" src="{% static 'js/dataTables.bootstrap5.min.js' %}?{% now 'U' %}"></script>
+<script type="text/javascript" src="{% static 'js/filterDropDown.min.js' %}?{% now 'U' %}"></script>
+
+<script src="{% static 'js/jquery-confirm.min.js' %}"></script>
+</body>
+</html>
