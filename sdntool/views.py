@@ -17,8 +17,10 @@ from sdntool.Neo4jcontroller import Neo4JController
 from sdntool.Neo4jmodels import required_properties
 from sdntool.login_validator import login_check
 from sdntool.generator import NameGenerator
-from sdntool.utils import import_network, import_vni, extract_required_properties_based_on_requirement, generate_random_id_for_node
+from sdntool.utils import import_network, import_vni, extract_required_properties_based_on_requirement, \
+    generate_random_id_for_node
 from django.views.decorators.csrf import csrf_exempt
+
 
 # Create your views here.
 
@@ -374,6 +376,7 @@ def shownfv(request):
     return render(request, 'sdntool/nfv.html',
                   {'networks': vni_json, 'required_properties': SafeString(required_properties)})
 
+
 @require_POST
 @login_check
 def createvni(request):
@@ -403,14 +406,15 @@ def createvni(request):
 def importvnifromfile(request):
     try:
         body = json.loads(request.body)
-        if "virtualmachine" not in body or "virtualnetworkfunction" not in body  or "virtualnetwork" not in body:
+        if "virtualmachine" not in body or "virtualnetworkfunction" not in body or "virtualnetwork" not in body:
             # or "link" not in body has been removed
             return JsonResponse({
                 "success": False,
                 "message": "Invalid request body"
             })
         # print(body["virtualnetwork"])
-        network = import_vni(Neo4JController, NameGenerator, body["virtualmachine"], body["virtualnetwork"], body["virtualnetworkfunction"], body["link"])
+        network = import_vni(Neo4JController, NameGenerator, body["virtualmachine"], body["virtualnetwork"],
+                             body["virtualnetworkfunction"], body["link"])
         return JsonResponse({
             "success": True,
             "message": "Network imported successfully",
@@ -439,6 +443,42 @@ def get_graph_vnivisjs(request, parent_name):
             "data": ""
         }, safe=False)
 
+
+@login_check
+@require_POST
+def createvnilink(request):
+    try:
+        if request.POST["category"] == "vm_to_vn":
+            Neo4JController.createvnilink_vm_to_vn(request.POST["vni"], request.POST["vm"],
+                                                   request.POST["vn"])
+            return JsonResponse({
+                "success": True,
+                "message": "Link created successfully",
+                "data": "Link created successfully",
+            })
+
+        else:
+
+            print(request.POST["vni"])
+            print(request.POST["vn"])
+            print(request.POST.getlist("vnf[]"))
+            Neo4JController.createvnilink_vn_to_vnf(request.POST["vni"], request.POST["vn"],
+                                                   request.POST.getlist("vnf[]"))
+            return JsonResponse({
+                "success": True,
+                "message": "Link created successfully",
+                "data": "Link created successfully",
+            })
+
+
+
+
+    except Exception as e:
+        return JsonResponse({
+            "success": False,
+            "message": e,
+            "data": {}
+        })
 
 
 # ========================================================================

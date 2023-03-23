@@ -46,6 +46,7 @@ urlpatterns = [
     path('importvnifromfile/', views.importvnifromfile, name='importvnifromfile'),
 
     path('graph/vnivisjs/<str:parent_name>/', views.get_graph_vnivisjs, name='getgraphvnivisjs'),
+    path('createvnilink/', views.createvnilink, name='createvnilink'),
     ]
 
 

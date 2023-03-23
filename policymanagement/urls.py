@@ -10,4 +10,5 @@ urlpatterns = [
 
     path('report/', views.reportmanagement, name='reportmanagement'),
     path('report/<int:report_id>/', views.verificationreportdetails, name='policyverificationreport'),
+
 ]

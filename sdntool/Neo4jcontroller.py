@@ -4,6 +4,7 @@ from sdntool.Neo4jmodels import Network, NetworkController, NetworkSwitch, Netwo
 from sdntool.utils import format_data_hierarchical_json, format_data_to_vis_js_format
 import json
 
+
 class Neo4JController:
     # some boilerplate functions
     session = None
@@ -440,22 +441,23 @@ class Neo4JController:
 
         res = Neo4JController.read_transaction(_get_property_of_node, node_id, property_name)
         return res[0] if res is not None else None
-# if __name__ == "__main__":
-# Neo4JController.setup("bolt://localhost:7687", "neo4j", "cdcju")
-# z = Neo4JController.create_network("Network 2")
-# print(z.id)
-# print([network.to_json() for network in Neo4JController.get_networks()])
-# for i in range(5):
-#     y = Neo4JController.create_switch(z.id, "Switch {}".format(i))
-#     for j in range(5):
-#         m = Neo4JController.create_controller(y.id, "Controller {}".format(j))
-#         for k in range(5):
-#             n = Neo4JController.create_switch(m.id, "Switch {}".format(k))
-#             for l in range(5):
-#                 Neo4JController.create_host(n.id, "Host {}".format(l))
-# print([controller.to_json() for controller in Neo4JController.get_controllers(13)])
-# Neo4JController.delete_node(156, delete_all_nodes_relationship=True)
-# print(json.dumps(Neo4JController.get_graph(131)))
+
+    # if __name__ == "__main__":
+    # Neo4JController.setup("bolt://localhost:7687", "neo4j", "cdcju")
+    # z = Neo4JController.create_network("Network 2")
+    # print(z.id)
+    # print([network.to_json() for network in Neo4JController.get_networks()])
+    # for i in range(5):
+    #     y = Neo4JController.create_switch(z.id, "Switch {}".format(i))
+    #     for j in range(5):
+    #         m = Neo4JController.create_controller(y.id, "Controller {}".format(j))
+    #         for k in range(5):
+    #             n = Neo4JController.create_switch(m.id, "Switch {}".format(k))
+    #             for l in range(5):
+    #                 Neo4JController.create_host(n.id, "Host {}".format(l))
+    # print([controller.to_json() for controller in Neo4JController.get_controllers(13)])
+    # Neo4JController.delete_node(156, delete_all_nodes_relationship=True)
+    # print(json.dumps(Neo4JController.get_graph(131)))
     @staticmethod
     def create_vni(name, properties={}):
         def _create_vni(tx, _name):
@@ -474,16 +476,15 @@ class Neo4JController:
 
         return [Network.from_neo4j_response(response) for response in Neo4JController.read_transaction(_get_vni)]
 
-
     # Virtual Machine related functions
     @staticmethod
     def create_virtualmachine(parent_name, name, properties={}):
-        def _create_virtualmachine(tx, _name , _parent_name):
+        def _create_virtualmachine(tx, _name, _parent_name):
             result = tx.run(f"""
             CREATE(h:{parent_name}:Virtualmachine{{name: $name}})
             {Neo4JController.generate_query_for_properties('h', properties)} 
             RETURN ID(h), h.name
-            """, parent_name=_parent_name, name=_name,  **properties)
+            """, parent_name=_parent_name, name=_name, **properties)
             return result.single()
 
         return Vnivm.from_neo4j_response(Neo4JController.write_transaction(_create_virtualmachine, name, parent_name))
@@ -500,8 +501,6 @@ class Neo4JController:
 
         return [Vnivm.from_neo4j_response(response) for response in
                 Neo4JController.read_transaction(_get_virtualmachine, parent_id)]
-
-
 
     # Virtual Network related functions
     @staticmethod
@@ -529,22 +528,20 @@ class Neo4JController:
         return [Vnivn.from_neo4j_response(response) for response in
                 Neo4JController.read_transaction(_get_virtualnetwork, parent_id)]
 
-
-
-
     # Virtual Network Function related functions
     @staticmethod
     def create_virtualnetworkfunction(parent_name, name, properties={}, link_properties={}):
-        def _create_virtualnetworkfunction(tx,_name, _parent_name):
+        def _create_virtualnetworkfunction(tx, _name, _parent_name):
             result = tx.run(f"""
             CREATE(h:{parent_name}:Virtualnetworkfunction{{name: $name}})
             {Neo4JController.generate_query_for_properties('h', properties)} 
             
             RETURN ID(h), h.name
-            """, parent_name=_parent_name, name=_name,  **properties)
+            """, parent_name=_parent_name, name=_name, **properties)
             return result.single()
 
-        return Vnivnf.from_neo4j_response(Neo4JController.write_transaction(_create_virtualnetworkfunction, name, parent_name))
+        return Vnivnf.from_neo4j_response(
+            Neo4JController.write_transaction(_create_virtualnetworkfunction, name, parent_name))
 
     @staticmethod
     def get_virtualnetworkfunction(parent_id):
@@ -563,7 +560,6 @@ class Neo4JController:
     This function will try to invert path between two switches, if the direction of switch from down to up is not possible
     """
 
-
     @staticmethod
     def get_graph_vni(parent_name, format="HierarchicalFormat"):
         # NOTE : This function query depends on `apoc` plugin for neo4j, So enable it before using this function
@@ -578,3 +574,49 @@ class Neo4JController:
 
         response = Neo4JController.read_transaction(_get_network_tree, parent_name)
         return json.dumps(response)
+
+    @staticmethod
+    def createvnilink_vm_to_vn(vni, vm, vn, properties={}):
+        def _createvnilink_vm_to_vn(tx, _vni, _vm, _vn):
+            result = tx.run(f"""
+            
+            MATCH (a:{vni}), (b:{vni})
+WHERE a.id = $vm AND b.vn_id = $vn
+MERGE (a)-[r:LINK]->(b)
+            
+             {Neo4JController.generate_query_for_properties('r', properties)}
+                            """, vni=_vni, vm=_vm, vn=_vn, **properties).data()
+            return {"nodes": result}
+
+        try:
+            response = Neo4JController.write_transaction(_createvnilink_vm_to_vn, vni, vm, vn)
+            return True
+        except Exception as e:
+            print(e)
+            return False
+
+
+    @staticmethod
+    def createvnilink_vn_to_vnf(vni, vn, vnf, properties={}):
+
+
+        def _createvnilink_vn_to_vnf(tx, _vni, _vn, _vnf):
+            result = tx.run(f"""
+    
+                MATCH (a:{vni}), (b:{vni})
+                WHERE a.vn_id = $vn AND b.vnfID = $vnf
+                MERGE (a)-[r:LINK]->(b)
+    
+                 {Neo4JController.generate_query_for_properties('r', properties)}
+                                """, vni=_vni, vn=_vn, vnf=_vnf, **properties).data()
+            return {"nodes": result}
+
+        try:
+            for x in vnf:
+                response = Neo4JController.write_transaction(_createvnilink_vn_to_vnf, vni, vn, x)
+            return True
+        except Exception as e:
+            print(e)
+            return False
+
+
