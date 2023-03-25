@@ -203,3 +203,31 @@ def import_vni(neo4j_controller, name_generator, virtualmachine_data, virtualnet
     #     neo4j_controller.create_link(lnk["source_id"], lnk["dest_id"],)
 
     return new_vni
+
+
+def import_nvi(neo4j_controller, name_generator, virtualmachine_data, virtualnetwork_nv_data, router_nv_data, ):
+
+    new_nvi_name = name_generator.get_next_nvi_name();
+    new_nvi = neo4j_controller.create_nvi(new_nvi_name)
+
+    for vm in virtualmachine_data["vms"]:
+        new_virtualmachine = name_generator.get_next_virtualmachine_name()
+        cvm= neo4j_controller.create_virtualmachine(new_nvi_name, new_virtualmachine, vm)
+        # previous work must be done successfully.
+        neo4j_controller.create_link(new_nvi.id, cvm.id)
+
+    for vn in virtualnetwork_nv_data["vns"]:
+        new_virtualnetwork = name_generator.get_next_virtualnetwork_name()
+        cvn= neo4j_controller.create_virtualnetwork(new_nvi_name, new_virtualnetwork, vn)
+        neo4j_controller.create_link(new_nvi.id, cvn.id)
+
+    for rtr in router_nv_data["vrouter"]:
+        new_router = name_generator.get_next_router_nv_name()
+        crtr = neo4j_controller.create_virtualnetworkfunction(new_nvi_name, new_router , rtr)
+        neo4j_controller.create_link(new_nvi.id, crtr.id )
+
+    # unique id should be checked
+    # for lnk in links_data["links"]:
+    #     neo4j_controller.create_link(lnk["source_id"], lnk["dest_id"],)
+
+    return new_nvi

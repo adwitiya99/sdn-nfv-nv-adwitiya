@@ -1,0 +1,2430 @@
+09:18:48,243 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+09:23:01,403 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+09:24:45,481 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+09:25:47,431 django.utils.autoreload INFO /app/sdntool/urls.py changed, reloading.
+09:28:33,809 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+09:36:42,914 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:09:51,592 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:12:02,157 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:14:20,704 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:14:59,389 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:15:26,933 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:15:52,971 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:15:59,613 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:17:52,106 django.request WARNING Not Found: /viewlog
+10:18:08,19 django.request WARNING Not Found: /viewlog/
+10:18:16,751 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    data = {"appllog", ApplicationLogger.get_data()}
+TypeError: get_data() missing 1 required positional argument: 'self'
+10:18:51,785 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:18:56,143 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    data = {"appllog", ApplicationLogger.get_data()}
+  File "/app/logmanager/manager.py", line 153, in get_data
+    return ApplicationLog.find(query)
+AttributeError: type object 'ApplicationLog' has no attribute 'find'
+10:21:54,309 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:22:53,311 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:23:23,260 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:23:42,17 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:23:51,325 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    data = {"appllog", ApplicationLogger.get_data()}
+  File "/app/logmanager/manager.py", line 154, in get_data
+    return LogManager.get_data(query)
+  File "/app/logmanager/manager.py", line 98, in get_data
+    ApplicationLog.objects.find(query)
+AttributeError: 'QuerySet' object has no attribute 'find'
+10:25:06,81 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:25:08,108 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    data = {"appllog", ApplicationLogger.get_data()}
+  File "/app/logmanager/manager.py", line 154, in get_data
+    return LogManager.get_data(query)
+  File "/app/logmanager/manager.py", line 98, in get_data
+    ApplicationLog.find(query)
+AttributeError: type object 'ApplicationLog' has no attribute 'find'
+10:27:15,255 django.utils.autoreload INFO /app/logmanager/models.py changed, reloading.
+10:27:58,875 django.utils.autoreload INFO /app/logmanager/models.py changed, reloading.
+10:31:01,762 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:31:53,384 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+KeyError: 'appllog'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 702, in viewlog
+    return render(request, 'sdntool/logview.html', data)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/usr/local/lib/python3.8/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "/usr/local/lib/python3.8/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 558, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 3: 'appllog', expected 'endblock'. Did you forget to register or load this tag?
+10:32:33,97 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 702, in viewlog
+    return render(request, 'sdntool/logview.html', data)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+10:33:49,759 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:33:58,300 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 702, in viewlog
+    return render(request, 'sdntool/logview.html', data)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+10:34:58,885 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:35:37,396 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    data = {"appllog", ApplicationLogger.get_data()}
+  File "/app/logmanager/manager.py", line 154, in get_data
+    return LogManager.get_data(query)
+  File "/app/logmanager/manager.py", line 98, in get_data
+    ApplicationLog.objects().to_mongo()
+AttributeError: 'QuerySet' object has no attribute 'to_mongo'
+10:36:02,582 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:36:18,156 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:36:33,781 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', data)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+10:37:14,962 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', data)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+10:37:17,847 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', data)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+10:38:00,234 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:38:48,60 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:38:50,991 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    data = {"appllog", ApplicationLogger.get_data()}
+  File "/app/logmanager/manager.py", line 154, in get_data
+    return LogManager.get_data(query)
+  File "/app/logmanager/manager.py", line 98, in get_data
+    ApplicationLog.objects.find()
+AttributeError: 'QuerySet' object has no attribute 'find'
+10:39:16,336 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:40:17,104 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:41:55,230 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:42:56,92 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:44:02,942 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:44:58,301 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:45:09,756 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', data)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+10:45:57,470 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:46:06,629 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', data)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+10:46:07,590 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', data)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+10:46:08,236 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', data)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+10:46:25,117 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:46:27,854 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', data)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+10:46:50,600 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:46:52,311 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', data)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+10:46:53,149 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', data)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+10:46:53,667 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', data)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+10:46:54,76 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', data)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+10:47:00,18 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:47:10,762 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:49:15,901 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:49:39,820 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:50:56,27 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:51:24,382 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:51:26,925 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', data)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+10:52:45,784 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:53:23,760 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', data)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+10:53:25,708 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', data)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+10:53:32,537 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:54:59,57 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:55:05,356 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    data = {"appllog", ApplicationLogger.get_data().to_dict()}
+AttributeError: 'QuerySet' object has no attribute 'to_dict'
+10:55:38,563 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:55:48,75 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    data = {"appllog", ApplicationLogger.get_data().to_mongo().to_dict()}
+AttributeError: 'QuerySet' object has no attribute 'to_mongo'
+10:56:56,175 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:57:02,521 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs= {"appllog", ApplicationLogger.get_data().to_mongo().to_dict()}
+AttributeError: 'QuerySet' object has no attribute 'to_mongo'
+10:57:23,542 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:58:09,431 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:58:12,435 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs= {"appllog", ApplicationLogger.get_data().to_mongo().to_dict()}
+AttributeError: 'list' object has no attribute 'to_mongo'
+10:58:13,384 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs= {"appllog", ApplicationLogger.get_data().to_mongo().to_dict()}
+AttributeError: 'list' object has no attribute 'to_mongo'
+10:58:13,743 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs= {"appllog", ApplicationLogger.get_data().to_mongo().to_dict()}
+AttributeError: 'list' object has no attribute 'to_mongo'
+10:58:14,71 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs= {"appllog", ApplicationLogger.get_data().to_mongo().to_dict()}
+AttributeError: 'list' object has no attribute 'to_mongo'
+10:58:14,582 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs= {"appllog", ApplicationLogger.get_data().to_mongo().to_dict()}
+AttributeError: 'list' object has no attribute 'to_mongo'
+10:58:40,514 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:58:42,650 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs= {"appllog", ApplicationLogger.get_data().to_mongo().to_dict()}
+AttributeError: 'list' object has no attribute 'to_mongo'
+10:59:01,418 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:59:15,518 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+10:59:19,187 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs= {"appllog", ApplicationLogger.get_data()}
+TypeError: unhashable type: 'list'
+11:00:17,641 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+11:00:20,90 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs= {"appllog", ApplicationLogger.get_data()}
+  File "/app/logmanager/manager.py", line 159, in get_data
+    logs_dict_list.append(log_dict)
+AttributeError: 'dict' object has no attribute 'append'
+11:00:56,426 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+11:00:59,444 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs= {"appllog", ApplicationLogger.get_data()}
+TypeError: unhashable type: 'dict'
+11:01:51,641 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+11:01:53,902 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs= {"appllog", ApplicationLogger.get_data()}
+TypeError: unhashable type: 'list'
+11:01:54,678 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs= {"appllog", ApplicationLogger.get_data()}
+TypeError: unhashable type: 'list'
+11:01:55,276 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs= {"appllog", ApplicationLogger.get_data()}
+TypeError: unhashable type: 'list'
+11:01:55,661 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs= {"appllog", ApplicationLogger.get_data()}
+TypeError: unhashable type: 'list'
+11:01:56,61 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs= {"appllog", ApplicationLogger.get_data()}
+TypeError: unhashable type: 'list'
+11:02:15,640 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+11:02:26,492 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:02:51,470 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:02:53,286 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 702, in viewlog
+    print(logs.to_dict())
+AttributeError: 'set' object has no attribute 'to_dict'
+11:03:40,235 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:03:46,992 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:03:49,348 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 702, in viewlog
+    print(logs.to_json())
+AttributeError: 'set' object has no attribute 'to_json'
+11:03:51,10 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 702, in viewlog
+    print(logs.to_json())
+AttributeError: 'set' object has no attribute 'to_json'
+11:03:51,719 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 702, in viewlog
+    print(logs.to_json())
+AttributeError: 'set' object has no attribute 'to_json'
+11:03:52,145 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 702, in viewlog
+    print(logs.to_json())
+AttributeError: 'set' object has no attribute 'to_json'
+11:04:14,344 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+11:04:51,647 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+11:04:57,178 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 702, in viewlog
+    print(logs.to_json())
+AttributeError: 'set' object has no attribute 'to_json'
+11:04:57,949 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 702, in viewlog
+    print(logs.to_json())
+AttributeError: 'set' object has no attribute 'to_json'
+11:05:24,779 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:05:36,978 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+11:05:44,686 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs = {"appllog", ApplicationLogger.get_data()}
+  File "/app/logmanager/manager.py", line 156, in get_data
+    return logs.to_dict()
+AttributeError: 'QuerySet' object has no attribute 'to_dict'
+11:05:45,859 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs = {"appllog", ApplicationLogger.get_data()}
+  File "/app/logmanager/manager.py", line 156, in get_data
+    return logs.to_dict()
+AttributeError: 'QuerySet' object has no attribute 'to_dict'
+11:05:56,152 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+11:06:12,316 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:06:14,690 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', logs)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+11:07:59,428 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:08:03,466 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', logs)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+11:08:04,948 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', logs)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+11:08:05,408 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', logs)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+11:08:41,288 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:08:57,252 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:08:59,830 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    return render(request, 'sdntool/logview.html', logs)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+11:09:28,696 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:09:31,192 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 702, in viewlog
+    print(ApplicationLogger.get_data().to_list())
+AttributeError: 'str' object has no attribute 'to_list'
+11:10:01,154 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:14:16,585 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+11:14:20,559 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs = {"appllog", ApplicationLogger.get_data()}
+  File "/app/logmanager/manager.py", line 156, in get_data
+    return logs.to_dict()
+AttributeError: 'QuerySet' object has no attribute 'to_dict'
+11:14:51,7 django.utils.autoreload INFO /app/logmanager/manager.py changed, reloading.
+11:15:31,859 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:15:38,88 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    log_dict = log.to_dict()
+AttributeError: 'ApplicationLog' object has no attribute 'to_dict'
+11:16:26,164 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:17:50,190 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:18:26,659 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:21:26,229 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:21:33,68 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 700, in viewlog
+    logs = ApplicationLogger.get_data().timestamp
+AttributeError: 'QuerySet' object has no attribute 'timestamp'
+11:22:05,912 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:23:59,83 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:25:55,49 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:25:57,460 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 704, in viewlog
+    log_dict.update({"lavel": x.lavel})
+AttributeError: 'ApplicationLog' object has no attribute 'lavel'
+11:26:08,932 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:26:11,481 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 709, in viewlog
+    context = {"appllog", log_dict}
+TypeError: unhashable type: 'dict'
+11:26:52,833 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:26:56,352 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 709, in viewlog
+    context = {"appllog", log_dict}
+TypeError: unhashable type: 'dict'
+11:27:36,663 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:27:41,499 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:27:44,260 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 706, in viewlog
+    context = {"appllog", log_dict}
+TypeError: unhashable type: 'dict'
+11:28:16,255 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:28:21,25 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 706, in viewlog
+    context = {"appllog", log_dict}
+TypeError: unhashable type: 'list'
+11:28:22,927 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 706, in viewlog
+    context = {"appllog", log_dict}
+TypeError: unhashable type: 'list'
+11:28:23,531 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 706, in viewlog
+    context = {"appllog", log_dict}
+TypeError: unhashable type: 'list'
+11:28:23,971 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 706, in viewlog
+    context = {"appllog", log_dict}
+TypeError: unhashable type: 'list'
+11:29:04,259 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:29:06,449 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 707, in viewlog
+    return render(request, 'sdntool/logview.html', context)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+11:29:08,416 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 707, in viewlog
+    return render(request, 'sdntool/logview.html', context)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than set.
+11:29:20,503 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:30:12,302 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:30:15,192 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 706, in viewlog
+    context = {"appllog", log_dict}
+TypeError: unhashable type: 'dict'
+11:31:41,305 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:31:46,70 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 703, in viewlog
+    log_dict.update({{"timestamp": x.timestamp, "level": x.level, "message": x.message, "source": x.source}})
+TypeError: unhashable type: 'dict'
+11:32:11,269 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:32:32,847 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 707, in viewlog
+    context = {"appllog", log_dict}
+TypeError: unhashable type: 'dict'
+11:32:33,964 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 707, in viewlog
+    context = {"appllog", log_dict}
+TypeError: unhashable type: 'dict'
+11:33:06,780 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:35:27,717 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:35:31,423 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 707, in viewlog
+    context = {"appllog", log_dict}
+TypeError: unhashable type: 'dict'
+11:35:32,577 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 707, in viewlog
+    context = {"appllog", log_dict}
+TypeError: unhashable type: 'dict'
+11:35:33,11 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 707, in viewlog
+    context = {"appllog", log_dict}
+TypeError: unhashable type: 'dict'
+11:35:33,388 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 707, in viewlog
+    context = {"appllog", log_dict}
+TypeError: unhashable type: 'dict'
+11:36:03,309 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:36:31,817 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:36:35,934 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 708, in viewlog
+    return render(request, 'sdntool/logview.html', log_list)
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 57, in render
+    context = make_context(
+  File "/usr/local/lib/python3.8/site-packages/django/template/context.py", line 278, in make_context
+    raise TypeError(
+TypeError: context must be a dict rather than list.
+11:37:01,919 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:37:18,750 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:47:34,351 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:59:32,6 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/template/defaulttags.py", line 1026, in find_library
+    return parser.libraries[name]
+KeyError: 'humanize'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 707, in viewlog
+    return render(request, 'sdntool/logview.html', {'appllog': log_list})
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/usr/local/lib/python3.8/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "/usr/local/lib/python3.8/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python3.8/site-packages/django/template/defaulttags.py", line 1088, in load
+    lib = find_library(parser, name)
+  File "/usr/local/lib/python3.8/site-packages/django/template/defaulttags.py", line 1028, in find_library
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: 'humanize' is not a registered tag library. Must be one of:
+admin_list
+admin_modify
+admin_urls
+cache
+custom_tags
+i18n
+l10n
+log
+static
+tz
+12:03:22,865 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+12:03:59,289 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+12:04:19,139 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 704, in viewlog
+    log_dict = {"timestamp": datetime.fromtimestamp(x.timestamp), "level": x.level, "message": x.message, "source": x.source}
+ValueError: year 55195 is out of range
+12:05:09,518 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+12:05:26,619 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+12:05:29,814 django.request ERROR Internal Server Error: /logview/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 704, in viewlog
+    log_dict = {"timestamp": datetime.fromtimestamp(x.timestamp), "level": x.level, "message": x.message, "source": x.source}
+ValueError: year 55195 is out of range
+12:05:53,525 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+12:08:33,660 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+13:20:49,988 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+13:21:00,8 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+14:15:06,698 django.request ERROR Internal Server Error: /shownfv/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 382, in shownfv
+    return render(request, 'sdntool/nfv.html',
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 208, in render
+    return template.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 177, in render
+    return self._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/defaulttags.py", line 321, in render
+    return nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'lioview' not found. 'lioview' is not a valid view function or pattern name.
+15:10:46,208 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+15:13:44,57 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+15:55:13,515 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+15:55:57,155 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+15:58:24,121 django.request ERROR Internal Server Error: /createvnilink/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view sdntool.views.createvnilink didn't return an HttpResponse object. It returned None instead.
+15:58:35,694 django.request ERROR Internal Server Error: /createvnilink/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view sdntool.views.createvnilink didn't return an HttpResponse object. It returned None instead.
+15:59:31,992 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:13:23,525 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:14:14,166 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:16:42,993 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:38:50,358 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:39:08,473 django.request ERROR Internal Server Error: /createvnilink/
+Traceback (most recent call last):
+  File "/app/sdntool/views.py", line 487, in createvnilink
+    request.POST("vnf2"))
+TypeError: 'QueryDict' object is not callable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 495, in createvnilink
+    return JsonResponse({
+  File "/usr/local/lib/python3.8/site-packages/django/http/response.py", line 691, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "/usr/local/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/local/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/local/lib/python3.8/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type TypeError is not JSON serializable
+16:39:24,481 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:41:11,992 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+17:59:35,553 django.request ERROR Internal Server Error: /shownv/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 370, in shownv
+    return render(request, 'sdntool/nv.html')
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/usr/local/lib/python3.8/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "/usr/local/lib/python3.8/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 558, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 92: 'static', expected 'endblock'. Did you forget to register or load this tag?
+18:03:19,196 django.request ERROR Internal Server Error: /shownv/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 370, in shownv
+    return render(request, 'sdntool/nv.html')
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/usr/local/lib/python3.8/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "/usr/local/lib/python3.8/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 558, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 92: 'static', expected 'endblock'. Did you forget to register or load this tag?
+19:20:11,660 django.request ERROR Internal Server Error: /shownv/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 370, in shownv
+    return render(request, 'sdntool/nv.html')
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'importnvifromfile' not found. 'importnvifromfile' is not a valid view function or pattern name.
+19:27:04,864 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+19:28:50,248 django.utils.autoreload INFO /app/sdntool/generator.py changed, reloading.
+19:30:19,275 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+19:32:36,611 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+19:32:58,694 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+19:33:34,105 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+19:39:23,282 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+19:46:00,714 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+20:06:48,347 django.utils.autoreload INFO /app/sdntool/Neo4jmodels.py changed, reloading.
+20:07:53,891 django.utils.autoreload INFO /app/sdntool/Neo4jmodels.py changed, reloading.
+20:11:35,410 django.utils.autoreload INFO /app/sdntool/Neo4jmodels.py changed, reloading.
+20:11:52,806 django.utils.autoreload INFO /app/sdntool/Neo4jmodels.py changed, reloading.
+20:12:05,429 django.utils.autoreload INFO /app/sdntool/Neo4jmodels.py changed, reloading.
+20:12:23,462 django.utils.autoreload INFO /app/sdntool/Neo4jmodels.py changed, reloading.
+20:12:36,597 django.utils.autoreload INFO /app/sdntool/Neo4jmodels.py changed, reloading.
+20:13:04,854 django.utils.autoreload INFO /app/sdntool/Neo4jmodels.py changed, reloading.
+20:13:42,183 django.utils.autoreload INFO /app/sdntool/Neo4jmodels.py changed, reloading.
+20:19:25,779 django.utils.autoreload INFO /app/sdntool/generator.py changed, reloading.
+20:24:17,949 django.utils.autoreload INFO /app/sdntool/generator.py changed, reloading.
+20:26:32,171 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+20:33:15,459 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+20:50:06,144 django.utils.autoreload INFO /app/sdntool/utils.py changed, reloading.
+20:52:16,582 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+20:57:07,18 django.utils.autoreload INFO /app/sdntool/urls.py changed, reloading.
+21:14:55,644 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+21:24:33,476 django.utils.autoreload INFO /app/sdntool/utils.py changed, reloading.
+21:53:23,641 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+21:54:09,878 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+23:44:06,177 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+23:45:07,697 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+23:53:47,521 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+00:04:29,198 django.request WARNING Not Found: /createnvilink/
+00:05:59,458 django.utils.autoreload INFO /app/sdntool/urls.py changed, reloading.
+00:08:24,83 django.utils.autoreload INFO /app/sdntool/urls.py changed, reloading.
+00:09:03,433 django.utils.autoreload INFO /app/sdntool/urls.py changed, reloading.
+00:13:10,771 django.request ERROR Internal Server Error: /createnvilink/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'vni'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/sdntool/views.py", line 579, in createnvilink
+    print(request.POST["vni"])
+  File "/usr/local/lib/python3.8/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'vni'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 594, in createnvilink
+    return JsonResponse({
+  File "/usr/local/lib/python3.8/site-packages/django/http/response.py", line 691, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "/usr/local/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/local/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/local/lib/python3.8/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type MultiValueDictKeyError is not JSON serializable
+00:13:18,450 django.request ERROR Internal Server Error: /createnvilink/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'vni'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/sdntool/views.py", line 579, in createnvilink
+    print(request.POST["vni"])
+  File "/usr/local/lib/python3.8/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'vni'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 594, in createnvilink
+    return JsonResponse({
+  File "/usr/local/lib/python3.8/site-packages/django/http/response.py", line 691, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "/usr/local/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/local/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/local/lib/python3.8/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type MultiValueDictKeyError is not JSON serializable
+00:14:27,778 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+00:14:37,396 django.request ERROR Internal Server Error: /createnvilink/
+Traceback (most recent call last):
+  File "/app/sdntool/views.py", line 582, in createnvilink
+    Neo4JController.createnvilink_vn_to_rtr(request.POST["nvi"], request.POST["vn"],
+AttributeError: type object 'Neo4JController' has no attribute 'createnvilink_vn_to_rtr'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 594, in createnvilink
+    return JsonResponse({
+  File "/usr/local/lib/python3.8/site-packages/django/http/response.py", line 691, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "/usr/local/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/local/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/local/lib/python3.8/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type AttributeError is not JSON serializable
+00:15:31,776 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+00:17:13,195 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+00:18:39,663 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+02:49:23,871 django.utils.autoreload INFO /app/sdntool/urls.py changed, reloading.
+02:50:36,162 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+02:52:10,842 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+02:55:23,795 django.request ERROR Internal Server Error: /shownfv/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 380, in shownfv
+    return render(request, 'sdntool/nfv.html',
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for '/updatenode/' not found. '/updatenode/' is not a valid view function or pattern name.
+02:55:24,688 django.request WARNING Not Found: /favicon.ico
+02:55:32,992 django.request ERROR Internal Server Error: /shownfv/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 380, in shownfv
+    return render(request, 'sdntool/nfv.html',
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for '/updatenode/' not found. '/updatenode/' is not a valid view function or pattern name.
+02:56:02,261 django.request ERROR Internal Server Error: /shownfv/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 380, in shownfv
+    return render(request, 'sdntool/nfv.html',
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for '/updatenode/' not found. '/updatenode/' is not a valid view function or pattern name.
+02:57:50,936 django.request ERROR Internal Server Error: /updatenode/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view sdntool.views.updatenode didn't return an HttpResponse object. It returned None instead.
+02:58:44,495 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+02:59:28,42 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+03:02:09,24 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+03:02:16,698 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+03:03:00,153 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+03:04:05,277 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+03:04:58,2 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+03:05:12,718 django.request ERROR Internal Server Error: /updatenode/
+Traceback (most recent call last):
+  File "/app/sdntool/views.py", line 543, in updatenode
+    Neo4JController.updatenode(request.POST)
+  File "/app/sdntool/Neo4jcontroller.py", line 723, in updatenode
+    del data["network_id"]
+  File "/usr/local/lib/python3.8/site-packages/django/http/request.py", line 536, in __delitem__
+    self._assert_mutable()
+  File "/usr/local/lib/python3.8/site-packages/django/http/request.py", line 527, in _assert_mutable
+    raise AttributeError("This QueryDict instance is immutable")
+AttributeError: This QueryDict instance is immutable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 550, in updatenode
+    return JsonResponse({
+  File "/usr/local/lib/python3.8/site-packages/django/http/response.py", line 691, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "/usr/local/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/local/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/local/lib/python3.8/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type AttributeError is not JSON serializable
+03:07:08,575 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+03:09:15,311 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+03:34:01,915 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+03:35:27,973 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+03:36:13,797 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+03:44:35,255 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+03:47:26,864 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+03:47:32,528 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+03:48:34,537 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+03:50:10,820 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+03:50:44,484 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+03:51:02,435 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+03:52:28,284 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+03:53:13,453 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+03:57:34,631 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+04:00:45,537 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+04:02:56,309 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+04:04:19,190 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+04:06:14,190 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+04:07:24,122 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+04:09:07,713 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+04:10:18,741 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+04:11:35,280 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+04:13:37,876 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+04:14:51,523 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+04:18:25,522 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+04:20:06,809 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+04:29:18,155 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+04:32:42,515 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+04:40:02,99 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+04:59:23,321 django.utils.autoreload INFO /app/sdntool/urls.py changed, reloading.
+04:59:50,959 django.request WARNING Not Found: /deletenode/5/
+05:00:02,652 django.request WARNING Not Found: /deletenode/5/
+05:01:17,453 django.utils.autoreload INFO /app/sdntool/urls.py changed, reloading.
+05:01:24,781 django.request WARNING Not Found: /deletenode/5/
+05:01:45,673 django.utils.autoreload INFO /app/sdntool/urls.py changed, reloading.
+05:01:50,833 django.request ERROR Internal Server Error: /deletenode/5/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+TypeError: delete_node() got an unexpected keyword argument 'id'
+05:02:29,363 django.utils.autoreload INFO /app/sdntool/urls.py changed, reloading.
+05:04:27,512 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+05:04:44,318 django.utils.autoreload INFO /app/sdntool/urls.py changed, reloading.
+05:11:04,233 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+05:14:51,870 django.request ERROR Internal Server Error: /createvnilink/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'vnf1'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/sdntool/views.py", line 474, in createvnilink
+    Neo4JController.createvnilink_vn_to_vnf(request.POST["vni"], request.POST["vnf1"],
+  File "/usr/local/lib/python3.8/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'vnf1'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 496, in createvnilink
+    return JsonResponse({
+  File "/usr/local/lib/python3.8/site-packages/django/http/response.py", line 691, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "/usr/local/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/local/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/local/lib/python3.8/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type MultiValueDictKeyError is not JSON serializable
+05:14:53,629 django.request ERROR Internal Server Error: /createvnilink/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'vnf1'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/sdntool/views.py", line 474, in createvnilink
+    Neo4JController.createvnilink_vn_to_vnf(request.POST["vni"], request.POST["vnf1"],
+  File "/usr/local/lib/python3.8/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'vnf1'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 496, in createvnilink
+    return JsonResponse({
+  File "/usr/local/lib/python3.8/site-packages/django/http/response.py", line 691, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "/usr/local/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/local/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/local/lib/python3.8/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type MultiValueDictKeyError is not JSON serializable
+05:14:55,911 django.request ERROR Internal Server Error: /createvnilink/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'vnf1'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/sdntool/views.py", line 474, in createvnilink
+    Neo4JController.createvnilink_vn_to_vnf(request.POST["vni"], request.POST["vnf1"],
+  File "/usr/local/lib/python3.8/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'vnf1'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 496, in createvnilink
+    return JsonResponse({
+  File "/usr/local/lib/python3.8/site-packages/django/http/response.py", line 691, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "/usr/local/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/local/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/local/lib/python3.8/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type MultiValueDictKeyError is not JSON serializable
+05:14:56,253 django.request ERROR Internal Server Error: /createvnilink/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'vnf1'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/sdntool/views.py", line 474, in createvnilink
+    Neo4JController.createvnilink_vn_to_vnf(request.POST["vni"], request.POST["vnf1"],
+  File "/usr/local/lib/python3.8/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'vnf1'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 496, in createvnilink
+    return JsonResponse({
+  File "/usr/local/lib/python3.8/site-packages/django/http/response.py", line 691, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "/usr/local/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/local/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/local/lib/python3.8/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type MultiValueDictKeyError is not JSON serializable
+05:15:06,518 django.request ERROR Internal Server Error: /createvnilink/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'vnf1'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/sdntool/views.py", line 474, in createvnilink
+    Neo4JController.createvnilink_vn_to_vnf(request.POST["vni"], request.POST["vnf1"],
+  File "/usr/local/lib/python3.8/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'vnf1'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 496, in createvnilink
+    return JsonResponse({
+  File "/usr/local/lib/python3.8/site-packages/django/http/response.py", line 691, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "/usr/local/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/local/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/local/lib/python3.8/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type MultiValueDictKeyError is not JSON serializable
+05:17:29,917 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+05:17:32,990 django.request ERROR Internal Server Error: /createvnilink/
+Traceback (most recent call last):
+  File "/app/sdntool/views.py", line 474, in createvnilink
+    Neo4JController.createvnilink_vn_to_vnf(request.POST["vni"], request.POST.getlist("vnf"))
+TypeError: createvnilink_vn_to_vnf() missing 1 required positional argument: 'vnf'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 495, in createvnilink
+    return JsonResponse({
+  File "/usr/local/lib/python3.8/site-packages/django/http/response.py", line 691, in __init__
+    data = json.dumps(data, cls=encoder, **json_dumps_params)
+  File "/usr/local/lib/python3.8/json/__init__.py", line 234, in dumps
+    return cls(
+  File "/usr/local/lib/python3.8/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/local/lib/python3.8/site-packages/django/core/serializers/json.py", line 106, in default
+    return super().default(o)
+  File "/usr/local/lib/python3.8/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type TypeError is not JSON serializable
+05:18:01,608 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+05:36:55,516 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+05:47:13,946 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+06:09:23,487 django.request WARNING Not Found: /graph/node/properties/undefined/
+06:09:32,24 django.request WARNING Not Found: /graph/node/properties/undefined/
+06:09:35,805 django.request WARNING Not Found: /graph/node/properties/undefined/
+06:09:36,590 django.request WARNING Not Found: /graph/node/properties/undefined/
+06:10:50,759 django.request WARNING Not Found: /graph/node/properties/undefined/
+06:11:09,672 django.request WARNING Not Found: /graph/node/properties/undefined/
+06:11:21,617 django.request WARNING Not Found: /graph/node/properties/undefined/
+06:16:22,495 django.request WARNING Not Found: /graph/node/properties/undefined/
+06:16:29,700 django.request WARNING Not Found: /deletenode//

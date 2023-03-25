@@ -1,11 +1,18 @@
 from django.urls import path, include, re_path
 from . import views
-urlpatterns = [
 
+urlpatterns = [
+    # ==========================Agniswar=========================
     path('', views.login, name='login'),
     path('logincontroller/', views.logincontroller, name='logincontroller'),
     path('logout/', views.logout, name='logout'),
     path('dashboard/', views.home, name='home'),
+
+    path('userconfig/', views.userconfig, name='userconfig'),
+    path('usercreatecontroller/', views.usercreatecontroller, name='usercreatecontroller'),
+    path('logview/', views.viewlog, name='logview'),
+    path('userdelete/<int:id>', views.userdelete, name='userdelete'),
+    # ==========================Agniswar=========================
 
     path('graph/visjs/<int:parent_id>/', views.get_graph_visjs, name='getgraphvisjs'),
     path('graph/hierarchical/<int:parent_id>/', views.get_graph_hierarchical, name='getgraphhierarchical'),
@@ -25,8 +32,7 @@ urlpatterns = [
     path('nodes/<int:network_id>/<str:node_type>/', views.get_nodes_under_network, name='getnodesundernetwork'),
 
     path('showsdn/', views.showsdn, name='sdn'),
-    path('shownv/', views.shownv, name='nv'),
-    path('shownfv/', views.shownfv, name='nfv'),
+
     path('managenetwork/', views.managenetwork, name='managenetwork'),
 
     path('networkconfig/', views.networkconfig, name='networkconfig'),
@@ -37,22 +43,22 @@ urlpatterns = [
     path('config/policy/<int:id>/activate/', views.activate_core_policy_api, name='activatepolicy'),
     path('config/policy/<int:id>/deactivate/', views.deactivate_core_policy_api, name='deactivatepolicy'),
 
-    path('userconfig/', views.userconfig, name='userconfig'),
-    path('usercreatecontroller/', views.usercreatecontroller, name='usercreatecontroller'),
-    path('userdelete/<int:id>', views.userdelete, name='userdelete'),
     path('reportconfig/', views.reportconfig, name='reportconfig'),
     path('evidenceconfig/', views.evidenceconfig, name='evidenceconfig'),
+
+    # ================== Adwitiya ============================
+
+    path('shownfv/', views.shownfv, name='nfv'),
     path('createvni/', views.createvni, name='createvni'),
     path('importvnifromfile/', views.importvnifromfile, name='importvnifromfile'),
 
     path('graph/vnivisjs/<str:parent_name>/', views.get_graph_vnivisjs, name='getgraphvnivisjs'),
     path('createvnilink/', views.createvnilink, name='createvnilink'),
-    ]
-
-
-
-
-   
-   
-
-
+    path('shownv/', views.shownv, name='nv'),
+    path('createnvi/', views.createnvi, name='createnvi'),
+    path('importnvifromfile/', views.importnvifromfile, name='importnvifromfile'),
+    path('createnvilink/', views.createnvilink, name='createnvilink'),
+    path('updatenode/', views.updatenode, name='updatenode'),
+    path('deletenode/<int:node_id>/', views.deletenode, name='deletenode'),
+    # ================== Adwitiya ============================
+]

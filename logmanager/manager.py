@@ -2,7 +2,6 @@ from logmanager.models import NetworkLog, ApplicationLog, LogLevel, LogType, Par
 from logmanager.logparser import KarafLogParser, AtomixLogParser, PingLogParser, DeviceLogParser
 import time
 
-
 '''
 -----------------------
 If No Parser selected , it assumes the given data is formatted as per the required log type and inserts it as it is
@@ -13,14 +12,16 @@ in both dict and list format. If dict is provided, it converts it to list and th
 -----------------------
 '''
 
+
 class LogManager:
     @staticmethod
-    def insertLog(logs, log_type=LogType.APPLICATION, parser_type=ParserType.NONE, network_name=None, element_name=None, config_type=None):
+    def insertLog(logs, log_type=LogType.APPLICATION, parser_type=ParserType.NONE, network_name=None, element_name=None,
+                  config_type=None):
         # Check data type
         if type(logs) not in [dict, list]:
             print("Invalid data type provided to LogManagement. Expected dict or list.")
             return False
-        
+
         # If dict, convert to list
         if type(logs) is dict:
             logs = [logs]
@@ -50,11 +51,12 @@ class LogManager:
             elif parser_type == ParserType.NONE:
                 # Pre-process data if necessary , as they are not processed by any parser or additional function
                 # CHECK 1: Insert current timestamp if not present
-                logs = [log if "timestamp" in log else {**log, "timestamp": int(time.time()*1000)} for log in logs]
+                logs = [log if "timestamp" in log else {**log, "timestamp": int(time.time() * 1000)} for log in logs]
                 # CHECK 2: If level is not present, insert it as INFO
                 logs = [log if "level" in log else {**log, "level": LogLevel.INFO} for log in logs]
                 # CHECK 3: Convert level from enum to string, if applicable
-                logs = [log if "level" not in log or type(log["level"]) is not LogLevel else {**log, "level": log["level"].value} for log in logs]
+                logs = [log if "level" not in log or type(log["level"]) is not LogLevel else {**log, "level": log[
+                    "level"].value} for log in logs]
         except Exception as e:
             print("Error occured while parsing logs")
             print(e)
@@ -89,7 +91,14 @@ class LogManager:
             return False
 
         return False
-# An specified logger dedicated to application logs
+
+    # An specified logger dedicated to application logs
+    @staticmethod
+    def get_data(query={}):
+        return ApplicationLog.objects()
+
+
+
 class ApplicationLogger:
     source = ""
 
@@ -100,7 +109,7 @@ class ApplicationLogger:
     @staticmethod
     def insertLog(logs):
         LogManager.insertLog(logs, log_type=LogType.APPLICATION, parser_type=ParserType.NONE)
-    
+
     @staticmethod
     def info(message):
         ApplicationLogger.insertLog({
@@ -132,7 +141,7 @@ class ApplicationLogger:
             "level": LogLevel.ERROR,
             "message": message
         })
-    
+
     @staticmethod
     def trace(message):
         ApplicationLogger.insertLog({
@@ -140,3 +149,8 @@ class ApplicationLogger:
             "level": LogLevel.TRACE,
             "message": message
         })
+
+    @staticmethod
+    def get_data(query={}):
+        logs = LogManager.get_data(query)
+        return logs

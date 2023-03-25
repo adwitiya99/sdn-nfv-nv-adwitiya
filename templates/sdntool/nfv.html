@@ -32,6 +32,10 @@
             .hidden {
                 display: none;
             }
+
+            label {
+                font-weight: bold;
+            }
         </style>
 
         <div class="row">
@@ -52,32 +56,28 @@
                             <option value="{{ x.name }}"> {{ x.name }}</option>
                         {% endfor %}
                     </select>
+
+
                 </div>
 
                 <div id="network" class="row mt-4 p-1 position-relative">
                     <div id="viz"></div>
                     {#  Menu  #}
-                    <div class="position-absolute w-25 border border-2 border-secondary p-2 rounded bg-light"
-                         style="right: 10px; top: 10px; display: none;" id="node-details-window">
-                        <p class="mb-0"><span class="fw-bold">Type & ID : </span></span><span
-                                id="selected_node_type"></span>&nbsp;<span id="selected_node_id"></span></p>
-                        <ul id="selected_node_properties"></ul>
-                        <hr>
-                        <div class="d-flex flex-column gap-2">
-                            <button class="btn btn-success" id="add_controller">Add Controller</button>
-                            <button class="btn btn-success" id="add_switch">Add Switch</button>
-                            <button class="btn btn-success" id="add_router">Add Router</button>
-                            <button class="btn btn-success" id="add_host">Add Host</button>
-                            <button class="btn btn-danger" id="delete_node">Delete Node</button>
-                        </div>
 
-                    </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Descriptions</h4>
+                        <div class="d-flex justify-content-between">
+
+                            <h4>Toggle VNI Link</h4>
+
+                            <div class="form-check form-switch ml-auto">
+                                <input class="form-check-input h4" type="checkbox" id="toggleSwitch">
+                                <label class="form-check-label" for="toggleSwitch"></label>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <p class="d-flex"><img src="{% static 'images/vni.png' %}"
@@ -94,6 +94,29 @@
                             Function</p>
                     </div>
                 </div>
+
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h4>Properties</h4>
+                    </div>
+                    <div class="card-body">
+                        <div style="right: 10px; top: 10px; display:none" id="node-details-window">
+                            <p class="mb-0"><span class="fw-bold">Type & ID : </span></span><span
+                                    id="selected_node_type"></span>&nbsp;<span id="selected_node_id"></span></p>
+                            <ul id="selected_node_properties" style="list-style:none"></ul>
+                            <hr>
+                            <div class="d-flex flex-column gap-2">
+                                <button class="btn btn-success" id="updatebutton"><i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button class="btn btn-danger" id="deletenode"><i class="fas fa-trash-alt"></i> Delete
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
 
@@ -169,7 +192,8 @@
 
                         <option value="">---Select---</option>
                         <option value="vm">Virtual Machine</option>
-                        <option value="vnf">Virtual Network Function</option>
+                        <option value="vnf">Virtual Network</option>
+                        <option value="vnftovnf">Virtual Network Function</option>
                     </select> <br/>
 
 
@@ -178,8 +202,25 @@
                         <label>Select Virtual machine</label>
                         <select class="form-select" id="vm_link"></select> <br/>
 
-                        <label>Select Virtual Network</label>
-                        <select class="form-select" id="vn_link"></select>
+                        <label>Select Component</label>
+                        <select class="form-select" id="vm_component">
+                            <option value=""> ---Select---</option>
+                            <option value="virtualnetwork"> Virtual Network</option>
+                            <option value="virtualnetworkfunction"> Virtual Network function</option>
+
+                        </select> <br/>
+                        <div id="newvirtualnetwork" class="hidden">
+                            <label>Select Virtual Network</label>
+                            <select class="form-select" id="vn_link"></select>
+                        </div>
+                        <br/>
+
+                        <div id="newvirtualnetworkfunction" class="hidden">
+                            <label>Select Virtual Network Function</label>
+                            <select class="form-select" id="vnf_link_u"></select>
+                        </div>
+
+
                     </div>
 
 
@@ -189,6 +230,15 @@
 
                         <label>Select Virtual Network Function</label>
                         <select class="form-select" id="vnf_link" multiple="multiple"></select>
+
+                    </div>
+
+                    <div class="hidden mt-3" id="vnftovnfdiv">
+                        <label>Select Virtual Network Function</label>
+                        <select class="form-select" id="vnf_link1"></select> <br/>
+
+                        <label>Select Virtual Network Function</label>
+                        <select class="form-select" id="vnf_link2"></select>
 
                     </div>
 
@@ -204,7 +254,33 @@
 
     {#    ===============Cerete link Modal=======================#}
 
+    {#========================Update Modal================#}
 
+    <div class="modal fade" id="updatemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Select Component</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="updatemodalbody">
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="savechangesupdate">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {#========================Update Modal================#}
 
     <div id="overlay" class="hidden">
         <div id="spinner">
@@ -216,6 +292,15 @@
 {% endblock %}
 {% block javascript %}
     <script>
+
+        $(document).ready(function () {
+            if (localStorage.getItem('vnion') === 'on') {
+                $('#toggleSwitch').prop('checked', true);
+            } else {
+                $('#toggleSwitch').prop('checked', false);
+            }
+        });
+
         const nodes = new vis.DataSet();
         const edges = new vis.DataSet();
         const required_properties = {{ required_properties | safe }};
@@ -313,7 +398,7 @@
                     nodes.clear();
                     edges.clear();
 
-                    nodes.add({id: '0', name: network_id, group: "VNI", label: network_id})
+                    nodes.add({id: '0', name: network_id, group: "VNI", label: network_id, eid: 0})
                     data.data.nodes.map((nd, index) => {
                         if ((nd["n"].name).replace(/\d+/g, "") === "VM") {
 
@@ -322,7 +407,8 @@
                                     id: nd["n"].id,
                                     name: nd["n"].name,
                                     group: (nd["n"].name).replace(/\d+/g, ""),
-                                    label: nd["n"].name
+                                    label: nd["n"].name,
+                                    eid: nd["eid"]
                                 })
                         } else if ((nd["n"].name).replace(/\d+/g, "") === "VN") {
 
@@ -334,7 +420,8 @@
                                         name: nd["n"].name,
                                         group: (nd["n"].name).replace(/\d+/g, ""),
                                         image: '{% static "images/VN-off.png" %}',
-                                        label: nd["n"].name
+                                        label: nd["n"].name,
+                                        eid: nd["eid"]
                                     })
 
                                 } else {
@@ -344,7 +431,8 @@
                                         name: nd["n"].name,
                                         group: (nd["n"].name).replace(/\d+/g, ""),
                                         image: '{% static "images/VN.png" %}',
-                                        label: nd["n"].name
+                                        label: nd["n"].name,
+                                        eid: nd["eid"]
                                     })
 
                                 }
@@ -359,7 +447,8 @@
                                     id: nd["n"].vnfID,
                                     name: nd["n"].name,
                                     group: (nd["n"].name).replace(/\d+/g, ""),
-                                    label: nd["n"].name
+                                    label: nd["n"].name,
+                                    eid: nd["eid"]
                                 })
 
                             }
@@ -370,20 +459,26 @@
 
                         {# Srijita bolle bad debo #}
                         if (nd["parent"].name == network_id) {
-                            if ((nd["n"].name).replace(/\d+/g, "") === "VM") {
-                                edges.add({from: '0', to: nd["n"].id, weight: 1})
-                            } else if ((nd["n"].name).replace(/\d+/g, "") === "VN") {
 
-                                edges.add({from: '0', to: nd["n"].vn_id, weight: 1})
+                            if (localStorage.getItem('vnion') === 'on') {
+                                if ((nd["n"].name).replace(/\d+/g, "") === "VM") {
+                                    edges.add({from: '0', to: nd["n"].id, weight: 1})
+                                } else if ((nd["n"].name).replace(/\d+/g, "") === "VN") {
 
-                            } else {
-                                edges.add({from: '0', to: nd["n"].vnfID, weight: 1})
+                                    edges.add({from: '0', to: nd["n"].vn_id, weight: 1})
+
+                                } else {
+                                    edges.add({from: '0', to: nd["n"].vnfID, weight: 1})
+
+                                }
 
                             }
 
-                        } else  {# Srijita bolle bad debo #}
+                        } else
 
-                            if ((nd["parent"].name).replace(/\d+/g, "") == "VM") {
+                            {# Srijita bolle bad debo #}
+
+                        if ((nd["parent"].name).replace(/\d+/g, "") == "VM") {
 
                             if ((nd["n"].name).replace(/\d+/g, "") === "VN") {
 
@@ -395,7 +490,7 @@
                             }
 
 
-                        } else {
+                        } else if ((nd["parent"].name).replace(/\d+/g, "") == "VN") {
 
                             if ((nd["n"].name).replace(/\d+/g, "") === "VM") {
 
@@ -405,6 +500,12 @@
                                 edges.add({from: nd["parent"].vn_id, to: nd["n"].vnfID, weight: 1})
 
                             }
+
+                        } else {
+
+
+                            edges.add({from: nd["parent"].vnfID, to: nd["n"].vnfID, weight: 1})
+
 
                         }
 
@@ -422,6 +523,173 @@
                 }
             });
         }
+
+
+        function handle_node_click(node_id) {
+            selected_node_details = nodes.get(node_id);
+            $("#updatebutton").val(selected_node_details.eid)
+            if(selected_node_details.eid===0){
+
+                $("#updatebutton").prop('disabled', true);
+            }else{
+
+                  $("#updatebutton").prop('disabled', false);
+
+            }
+
+            $("#deletenode").val(selected_node_details.eid)
+            $("#node-details-window").show();
+            console.log(selected_node_details)
+            fetch_node_properties(selected_node_details.eid);
+        }
+
+
+        function fetch_node_properties(node_id) {
+            $("#selected_node_properties").empty();
+            $.ajax({
+                url: "/graph/node/properties/" + node_id + "/",
+                type: "GET",
+                success: function (data) {
+                    console.log(data.data)
+                    if (data.success) {
+                        let properties = data.data;
+                        for (let key in properties) {
+                            $("#selected_node_properties").append("<li ><span class='fst-italic'  >" + snakeToSentenceCase(key) + "</span>&nbsp;:&nbsp;" + properties[key] + "</li>");
+                        }
+                    } else {
+                        console.log(data.message);
+                    }
+                }
+            });
+        }
+
+
+        function snakeToSentenceCase(str) {
+            return str.replace(/^[-_]*(.)/, (_, c) => c.toUpperCase())
+                .replace(/[-_]+(.)/g, (_, c) => ' ' + c.toUpperCase())
+        }
+
+
+        $("#updatebutton").on("click", function () {
+            $("#updatemodal").modal("show");
+            let id = $(this).val();
+            $.ajax({
+                url: "/graph/node/properties/" + id + "/",
+                type: "GET",
+                success: function (data) {
+                    console.log(data.data)
+                    if (data.success) {
+                        let properties = data.data;
+                        let inputs = ''
+                        for (let key in properties) {
+                            if(key.toLowerCase()!== "name"){
+
+                                inputs += `<label>${snakeToSentenceCase(key)}</label><input type="text" name="${key}" value="${properties[key]}" class="form-control" />`
+                            }else{
+                                inputs += `<label>${snakeToSentenceCase(key)}</label><input type="text" name="${key}" value="${properties[key]}" class="form-control disabled" disabled />`
+
+                            }
+
+                        }
+
+                        $("#updatemodalbody").html(`<form id="updateform"> ${inputs}
+                            <input type="hidden" name="id" value= ${id}>
+
+                            </form>`)
+                    } else {
+                        console.log(data.message);
+                    }
+                }
+            });
+        })
+
+        $("#deletenode").on("click", function () {
+let id = $(this).val();
+            $.confirm({
+                title: "Warn",
+                type: "red",
+                content: "Are you sure?",
+                buttons: {
+                    confirm: function () {
+
+                        $.ajax({
+
+                            url:'/deletenode/'+id+'/',
+                            type:"get",
+
+                            success:function(){
+                                if(id===0){
+                                     location.reload();
+
+                                }else{
+
+                                      loadNetworkGraph();
+                                }
+
+                            }
+                        })
+
+
+
+
+
+                    },
+                    cancel: function () {
+                        $.alert('Canceled!');
+                    }
+                }
+
+            })
+
+
+        })
+        $("#savechangesupdate").on("click", function () {
+
+                const formDataArray = $('#updateform').serializeArray();
+                const formDataObject = formDataArray.reduce(function (obj, field) {
+                    obj[field.name] = field.value;
+                    return obj;
+                }, {});
+
+                formDataObject.network_id = get_selected_network_id()
+                console.log(formDataObject);
+
+
+                $.ajax({
+
+                    type: "post",
+                    url: '/updatenode/',
+                    data: formDataObject,
+                    success: function (data) {
+                        $("#updatemodal").modal("hide")
+                        loadNetworkGraph();
+                        {#handle_node_click(data.data)#}
+                        {#$("#node-details-window").show();#}
+
+                        $.confirm({
+                            title: "Sucess",
+                            type: "green",
+                            content: data.message,
+                            buttons: {
+                                confirm: function () {
+                                    fetch_node_properties(data.data);
+                                },
+                                cancel: function () {
+                                    $.alert('Canceled!');
+                                }
+                            },
+
+
+                        })
+
+                    }
+
+
+                })
+
+
+            }
+        )
 
         $("#createvni").on("click", function (e) {
             $.confirm({
@@ -587,20 +855,6 @@
                     }
                 });
             }
-            /*   if(type === "link"){
-                   readJSONFromFile($("#link_configuration_file")[0].files[0], (data)=>{
-                       import_configs.link = JSON.parse(data);
-                       if(import_configs.link === null) {
-                           $.alert({
-                               title: "Error",
-                               content: "Invalid link configuration file",
-                               type: "red",
-                           });
-                           import_configs.link = null;
-                       }
-                   });
-               } */
-
             if (type === "virtualnetwork") {
                 readJSONFromFile($("#virtualnetwork_configuration_file")[0].files[0], (data) => {
                     import_configs.virtualnetwork = JSON.parse(data);
@@ -634,15 +888,31 @@
 
         {#link component area  #}
 
+
+        $("#vm_component").on("change", function () {
+            if (this.value == "virtualnetwork") {
+
+                $("#newvirtualnetwork").removeClass("hidden")
+                $("#newvirtualnetworkfunction").addClass("hidden")
+
+            } else {
+                $("#newvirtualnetworkfunction").removeClass("hidden")
+                $("#newvirtualnetwork").addClass("hidden")
+
+            }
+
+
+        })
+
         $("#selectcomponent").on("change", function () {
 
-
+            const network_id = get_selected_network_id();
             if (this.value == "vm") {
 
                 $("#virtualmachinediv").removeClass("hidden")
                 $("#virtualnetworkfunctiondiv").addClass("hidden")
+                $("#vnftovnfdiv").addClass("hidden")
 
-                const network_id = get_selected_network_id();
                 $.ajax({
                     url: "/graph/vnivisjs/" + network_id + "/",
                     type: "POST",
@@ -650,9 +920,11 @@
                         {#console.log(data.data)#}
                         var select_vn = $('#vn_link');
                         var select_vm = $('#vm_link');
+                        var select_vnf = $('#vnf_link_u');
 
                         vm_list = [];
-                        vn_list = []
+                        vn_list = [];
+                        vnf_list = []
                         data.data.nodes.map((nd, index) => {
                             if ((nd["n"].name).replace(/\d+/g, "") === "VM" & nd["n"].status === "Active") {
                                 vm_list.push('<option value="' + nd["n"].id + '">' + nd["n"].name + '</option>');
@@ -662,21 +934,28 @@
                             if ((nd["n"].name).replace(/\d+/g, "") === "VN" & nd["n"].Status === "Active") {
                                 vn_list.push('<option value="' + nd["n"].vn_id + '">' + nd["n"].name + '</option>');
                             }
+
+                            if ((nd["n"].name).replace(/\d+/g, "") === "VNF") {
+                                vnf_list.push('<option value="' + nd["n"].vnfID + '">' + nd["n"].name + '</option>');
+                            }
+
                         });
 
                         select_vm.append($.uniqueSort(vm_list))
                         select_vn.append($.uniqueSort(vn_list))
-
+                        select_vnf.append($.uniqueSort(vnf_list))
 
                     }
 
                 })
 
-            } else {
+
+            } else if (this.value == "vnf") {
 
                 $("#virtualnetworkfunctiondiv").removeClass("hidden")
                 $("#virtualmachinediv").addClass("hidden")
-                const network_id = get_selected_network_id();
+                $("#vnftovnfdiv").addClass("hidden")
+
 
                 {#$('#multipleSelect').val();#}
                 $.ajax({
@@ -706,15 +985,43 @@
                 })
 
 
+            } else {
+
+                $("#virtualmachinediv").addClass("hidden")
+                $("#virtualnetworkfunctiondiv").addClass("hidden")
+                $("#vnftovnfdiv").removeClass("hidden")
+
+                $.ajax({
+                    url: "/graph/vnivisjs/" + network_id + "/",
+                    type: "POST",
+                    success: function (data) {
+                        {#console.log(data.data)#}
+                        var select_vnf1 = $('#vnf_link1');
+                        var select_vnf2 = $('#vnf_link2');
+
+                        vnf_list = [];
+
+                        data.data.nodes.map((nd, index) => {
+                            if ((nd["n"].name).replace(/\d+/g, "") === "VNF") {
+                                vnf_list.push('<option value="' + nd["n"].vnfID + '">' + nd["n"].name + '</option>');
+                            }
+                        });
+                        select_vnf1.append($.uniqueSort(vnf_list))
+                        select_vnf2.append($.uniqueSort(vnf_list))
+
+                    }
+
+                })
+
+
             }
 
 
         })
 
-
         $("#savechanges").on("click", function () {
 
-            if ($("#selectcomponent").val() === "" | $("#selectcomponent").val() === null) {
+            if (($("#selectcomponent").val() === "" | $("#selectcomponent").val() === null)) {
 
                 $.alert({
                     title: "Error",
@@ -725,28 +1032,41 @@
 
                 console.log($("#vn_link").val())
                 console.log($("#vm_link").val())
+                if (($("#vm_component").val() === "" | $("#vm_component").val() === null)) {
 
-                $.ajax({
+                    $.alert({
+                        title: "Error",
+                        content: "Select a proper value for the component",
+                        type: "red",
+                    });
+                } else {
 
-                    url: '/createvnilink/',
-                    type: "post",
-                    data: {
-                        "vni": get_selected_network_id(),
-                        "vm": $("#vm_link").val(),
-                        "vn": $("#vn_link").val(),
-                        "category": "vm_to_vn",
+                    $.ajax({
 
-                    },
-                    success: function (data) {
-                        $("#crreatemodal").modal("hide");
-                        loadNetworkGraph()
+                        url: '/createvnilink/',
+                        type: "post",
+                        data: {
+                            "vni": get_selected_network_id(),
+                            "vm": $("#vm_link").val(),
+                            "vn": $("#vn_link").val(),
+                            "vnf": $("#vnf_link_u").val(),
+                            "category": "vm_to_vn",
+                            "component": $("#vm_component").val()
+
+                        },
+                        success: function (data) {
+                            $("#crreatemodal").modal("hide");
+                            loadNetworkGraph()
 
 
-                    },
+                        },
 
-                })
+                    })
 
-            } else {
+                }
+
+
+            } else if ($("#selectcomponent").val() === "vnf") {
 
                 console.log($("#vn_vnf_link").val())
                 console.log($("#vnf_link").val())
@@ -773,12 +1093,59 @@
                 })
 
 
-            }
+            } else {
 
+                if ($("#vnf_link1").val() === $("#vnf_link2").val()) {
+
+                    $.alert({
+                        title: "Error",
+                        content: "You Can not select same virtual network connect to connect each other",
+                        type: "red",
+                    });
+
+                } else {
+
+                    $.ajax({
+
+                        url: '/createvnilink/',
+                        type: "post",
+                        enctype: "multipart/form-data",
+                        data: {
+                            "vni": get_selected_network_id(),
+                            "vnf1": $("#vnf_link1").val(),
+                            "vnf2": $("#vnf_link2").val(),
+                            "category": "vnf_to_vnf",
+
+                        },
+                        success: function (data) {
+                            $("#crreatemodal").modal("hide");
+                            loadNetworkGraph()
+
+                        },
+
+                    })
+
+                }
+
+
+            }
 
         })
 
         {#link component area  #}
+
+
+        $('#toggleSwitch').on('change', function () {
+            if ($(this).is(':checked')) {
+                // Perform an action if the switch is checked
+                localStorage.setItem("vnion", "on")
+                loadNetworkGraph()
+            } else {
+                // Perform an action if the switch is not checked
+                localStorage.setItem("vnion", "off")
+                loadNetworkGraph()
+            }
+        });
 
 
     </script>

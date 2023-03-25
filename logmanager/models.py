@@ -59,6 +59,8 @@ class ApplicationLog(Document):
     source = StringField()
     meta = {'collection': 'appication_log'}
 
+
+
     @staticmethod
     def from_json(data: dict):
         return ApplicationLog(

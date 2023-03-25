@@ -566,7 +566,7 @@ class Neo4JController:
         def _get_network_tree(tx, _parent_name):
             result = tx.run(f"""
                     MATCH (n:{parent_name})<-[:LINK]-(parent)
-                    RETURN n, parent
+                    RETURN ID(n) as eid, n, parent
                    
                 """, parent_name=_parent_name).data()
             nodes = []
@@ -595,10 +595,28 @@ MERGE (a)-[r:LINK]->(b)
             print(e)
             return False
 
+    @staticmethod
+    def createvnilink_vm_to_vnf(vni, vm, vnf, properties={}):
+        def _createvnilink_vm_to_vn(tx, _vni, _vm, _vnf):
+            result = tx.run(f"""
+
+                MATCH (a:{vni}), (b:{vni})
+    WHERE a.id = $vm AND b.vnfID = $vnf
+    MERGE (a)-[r:LINK]->(b)
+
+                 {Neo4JController.generate_query_for_properties('r', properties)}
+                                """, vni=_vni, vm=_vm, vnf=_vnf, **properties).data()
+            return {"nodes": result}
+
+        try:
+            response = Neo4JController.write_transaction(_createvnilink_vm_to_vn, vni, vm, vnf)
+            return True
+        except Exception as e:
+            print(e)
+            return False
 
     @staticmethod
     def createvnilink_vn_to_vnf(vni, vn, vnf, properties={}):
-
 
         def _createvnilink_vn_to_vnf(tx, _vni, _vn, _vnf):
             result = tx.run(f"""
@@ -619,4 +637,106 @@ MERGE (a)-[r:LINK]->(b)
             print(e)
             return False
 
+    @staticmethod
+    def createvnilink_vnf_to_vnf(vni, vnf1, vnf2, properties={}):
+        def _createvnilink_vnf_to_vnf(tx, _vni, _vnf1, _vnf2):
+            result = tx.run(f"""
+  
+                    MATCH (a:{vni}), (b:{vni})
+                    WHERE a.vnfID = $vnf1 AND b.vnfID = $vnf2
+                    MERGE (a)-[r:LINK]->(b)
+    
+                     {Neo4JController.generate_query_for_properties('r', properties)}
+                                    """, vni=_vni, vnf1=_vnf1, vnf2=_vnf2, **properties).data()
+            return {"nodes": result}
 
+        try:
+            response = Neo4JController.write_transaction(_createvnilink_vnf_to_vnf, vni, vnf1, vnf2)
+            return True
+        except Exception as e:
+            print(e)
+            return False
+
+    @staticmethod
+    def create_nvi(name, properties={}):
+        def _create_nvi(tx, _name):
+            result = tx.run(
+                f"CREATE (n:NVI {{name: $name}}) {Neo4JController.generate_query_for_properties('n', properties)} RETURN ID(n), n.name",
+                name=_name, **properties)
+            return result.single()
+
+        return Network.from_neo4j_response(Neo4JController.write_transaction(_create_nvi, name))
+
+    @staticmethod
+    def get_nvi():
+        def _get_nvi(tx):
+            result = tx.run("MATCH (n:NVI) RETURN ID(n), n.name")
+            return result.values()
+
+        return [Network.from_neo4j_response(response) for response in Neo4JController.read_transaction(_get_nvi)]
+
+    @staticmethod
+    def createnvilink_vm_to_vn(nvi, vm, vn, properties={}):
+        def _createnvilink_vm_to_vn(tx, _vni, _vm, _vn):
+            result = tx.run(f"""
+
+                MATCH (a:{nvi}), (b:{nvi})
+    WHERE a.id = $vm AND b.vn_id = $vn
+    MERGE (a)-[r:LINK]->(b)
+
+                 {Neo4JController.generate_query_for_properties('r', properties)}
+                                """, nvi=_vni, vm=_vm, vn=_vn, **properties).data()
+            return {"nodes": result}
+
+        try:
+            response = Neo4JController.write_transaction(_createnvilink_vm_to_vn, nvi, vm, vn)
+            return True
+        except Exception as e:
+            print(e)
+            return False
+
+    @staticmethod
+    def createnvilink_vn_to_rtr(nvi, vn, rtr, properties={}):
+
+        def _createnvilink_vn_to_rtr(tx, _nvi, _vn, _rtr):
+            result = tx.run(f"""
+
+                    MATCH (a:{nvi}), (b:{nvi})
+                    WHERE a.vn_id = $vn AND b.routerID = $rtr
+                    MERGE (a)-[r:LINK]->(b)
+
+                     {Neo4JController.generate_query_for_properties('r', properties)}
+                                    """, nvi=_nvi, vn=_vn, rtr=_rtr, **properties).data()
+            return {"nodes": result}
+
+        try:
+
+            response = Neo4JController.write_transaction(_createnvilink_vn_to_rtr, nvi, vn, rtr)
+            return True
+        except Exception as e:
+            print(e)
+            return False
+
+    @staticmethod
+    def updatenode(data, properties={}):
+        network_id = data["network_id"]
+        id = data["id"]
+        del data["network_id"]
+        del data["id"]
+
+        def _updatenode(tx, _id):
+            query_string = f"""
+                MATCH (n)
+                WHERE id(n) = {id}
+                SET {', '.join([f"n.{prop}= '{data[prop]}'" for prop in data])}
+                {Neo4JController.generate_query_for_properties('n', properties)}
+            """
+            result = tx.run(query_string, id=_id, **properties)
+            return {"nodes": result, "query": query_string}
+
+        try:
+            response = Neo4JController.write_transaction(_updatenode, id)
+            return True
+        except Exception as e:
+            print(e)
+            return False

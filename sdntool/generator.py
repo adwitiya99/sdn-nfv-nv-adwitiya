@@ -91,3 +91,25 @@ class NameGenerator:
         counter.save()
 
         return "VNF" + str(counter.value)
+
+    @staticmethod
+    def get_next_nvi_name():
+        counter = Counter.objects.get_or_create(key="nvi", defaults={
+            "value": 0
+        })[0]
+        counter.value = counter.value + 1
+        counter.save()
+
+        return "NVI" + str(counter.value)
+
+    @staticmethod
+    def get_next_router_nv_name():
+        counter = Counter.objects.get_or_create(key="router", defaults={
+            "value": 0
+        })[0]
+        counter.value = counter.value + 1
+        counter.save()
+
+        return "RTR" + str(counter.value)
+
+

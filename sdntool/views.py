@@ -18,14 +18,20 @@ from sdntool.Neo4jmodels import required_properties
 from sdntool.login_validator import login_check
 from sdntool.generator import NameGenerator
 from sdntool.utils import import_network, import_vni, extract_required_properties_based_on_requirement, \
-    generate_random_id_for_node
+    generate_random_id_for_node, import_nvi
 from django.views.decorators.csrf import csrf_exempt
-
+import logging
+from datetime import datetime
 
 # Create your views here.
 
 
-# ========================Login=======================
+# ========================Logging=======================
+logging.basicConfig(filename='toollog.log',
+                    filemode='a',
+                    format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                    datefmt='%H:%M:%S',
+                    level=logging.INFO)
 
 
 def login(request):
@@ -359,9 +365,6 @@ def showsdn(request):
 
 
 # ================ NV SELECTION====================================
-@login_check
-def shownv(request):
-    return render(request, 'sdntool/nv.html')
 
 
 # ========================================================================
@@ -449,7 +452,163 @@ def get_graph_vnivisjs(request, parent_name):
 def createvnilink(request):
     try:
         if request.POST["category"] == "vm_to_vn":
-            Neo4JController.createvnilink_vm_to_vn(request.POST["vni"], request.POST["vm"],
+
+            if request.POST["component"] == "virtualnetwork":
+                Neo4JController.createvnilink_vm_to_vn(request.POST["vni"], request.POST["vm"],
+                                                       request.POST["vn"])
+            else:
+                Neo4JController.createvnilink_vm_to_vnf(request.POST["vni"], request.POST["vm"],
+                                                        request.POST["vnf"])
+
+            return JsonResponse({
+                "success": True,
+                "message": "Link created successfully",
+                "data": "Link created successfully",
+            })
+
+        elif request.POST["category"] == "vn_to_vnf":
+
+            print(request.POST["vni"])
+            print(request.POST["vn"])
+            print(request.POST.getlist("vnf[]"))
+            Neo4JController.createvnilink_vn_to_vnf(request.POST["vni"], request.POST["vn"],
+                                                    request.POST.getlist("vnf[]"))
+            return JsonResponse({
+                "success": True,
+                "message": "Link created successfully",
+                "data": "Link created successfully",
+            })
+        else:
+
+            print(request.POST["vni"])
+            print(request.POST["vnf1"])
+            print(request.POST["vnf2"])
+
+            Neo4JController.createvnilink_vnf_to_vnf(request.POST["vni"], request.POST["vnf1"],
+                                                     request.POST["vnf2"])
+
+            return JsonResponse({
+                "success": True,
+                "message": "Link  created successfully",
+                "data": "Link created successfully",
+            })
+    except Exception as e:
+        return JsonResponse({
+            "success": False,
+            "message": e,
+            "data": {}
+        })
+
+
+# ========================================================================
+
+# ======================= Network Virtualisation Instance ========================
+@login_check
+def shownv(request):
+    nvi = Neo4JController.get_nvi()
+    nvi_json = [x.to_json() for x in nvi]
+
+    return render(request, 'sdntool/nv.html',
+                  {'networks': nvi_json, 'required_properties': SafeString(required_properties)})
+
+
+@require_POST
+@login_check
+def createnvi(request):
+    try:
+        name = NameGenerator.get_next_nvi_name()
+        nvi = Neo4JController.create_nvi(name, properties={})
+        return JsonResponse({
+            "success": True,
+            "message": "Network Virtualisation Instance created successfully",
+            "data": nvi.to_json()
+        })
+    except neo4j.exceptions.ConstraintError:
+        return JsonResponse({
+            "success": False,
+            "message": "Failed ! Network Virtualisation Instance already exists"
+        })
+    except Exception as e:
+        return JsonResponse({
+            "success": False,
+            "message": "Network Virtualisation Instance creation failed due to unexpected reason",
+            "data": {}
+        })
+
+
+@require_POST
+@login_check
+def updatenode(request):
+    try:
+        print(request.POST["id"])
+
+        Neo4JController.updatenode(request.POST.copy())
+        return JsonResponse({
+            "success": True,
+            "message": "Node updated successfully",
+            "data": request.POST["id"]
+        })
+    except Exception as e:
+        return JsonResponse({
+            "success": False,
+            "message": "Some problem occurred",
+            "data": e
+        })
+
+
+def deletenode(request, node_id):
+    try:
+        if(node_id==0):
+            Neo4JController.delete_node(node_id, delete_all_nodes_relationship=True)
+        else:
+            Neo4JController.delete_node(node_id, delete_all_nodes_relationship=False)
+
+        return JsonResponse({
+            "success": True,
+            "message": "Node deleted successfully",
+            "data": {}
+        })
+    except Exception as e:
+        return JsonResponse({
+            "success": False,
+            "message": "Node deletion failed due to unexpected reason",
+            "data": {}
+        })
+
+
+@require_POST
+@login_check
+def importnvifromfile(request):
+    try:
+        body = json.loads(request.body)
+        if "virtualmachine" not in body or "virtualnetwork_nv" not in body or "router_nv" not in body:
+            # or "link" not in body has been removed
+            return JsonResponse({
+                "success": False,
+                "message": "Invalid request body"
+            })
+        # print(body["virtualnetwork"])
+        network = import_nvi(Neo4JController, NameGenerator, body["virtualmachine"], body["virtualnetwork_nv"],
+                             body["router_nv"])
+        return JsonResponse({
+            "success": True,
+            "message": "Network imported successfully",
+            "data": network.to_json()
+        })
+    except Exception as e:
+        return JsonResponse({
+            "success": False,
+            "message": e,
+            "data": {}
+        })
+
+
+@login_check
+@require_POST
+def createnvilink(request):
+    try:
+        if request.POST["category"] == "vm_to_vn":
+            Neo4JController.createnvilink_vm_to_vn(request.POST["nvi"], request.POST["vm"],
                                                    request.POST["vn"])
             return JsonResponse({
                 "success": True,
@@ -459,11 +618,11 @@ def createvnilink(request):
 
         else:
 
-            print(request.POST["vni"])
+            print(request.POST["nvi"])
             print(request.POST["vn"])
-            print(request.POST.getlist("vnf[]"))
-            Neo4JController.createvnilink_vn_to_vnf(request.POST["vni"], request.POST["vn"],
-                                                   request.POST.getlist("vnf[]"))
+            print(request.POST["rtr"])
+            Neo4JController.createnvilink_vn_to_rtr(request.POST["nvi"], request.POST["vn"],
+                                                    request.POST["rtr"])
             return JsonResponse({
                 "success": True,
                 "message": "Link created successfully",
@@ -479,9 +638,6 @@ def createvnilink(request):
             "message": e,
             "data": {}
         })
-
-
-# ========================================================================
 
 
 # ================ Network Topology ====================================
@@ -674,6 +830,7 @@ def usercreatecontroller(request):
     ApplicationLogger.info(
         f"A new user {username} with role {userrole} has been created by {request.session['login']['username']} ")
     messages.success(request, "You have successfully created a user", extra_tags='usercreation')
+    # logging.info("A new user is created")
     return redirect('userconfig')
 
 
@@ -682,7 +839,26 @@ def usercreatecontroller(request):
 def userdelete(request, id):
     member = Usermanagement.objects.get(idusermanagement=id)
     member.delete()
+
+    ApplicationLogger.warn(
+        f"A  user  has been deleted by {request.session['login']['username']} ")
     return redirect('userconfig')
+
+
+@login_check
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def viewlog(request):
+    if request.session["login"]["userrole"] == "admin":
+
+        logs = ApplicationLogger.get_data()
+        log_list = []
+        for x in logs:
+            log_dict = {"timestamp": datetime.fromtimestamp(x.timestamp / 1000), "level": x.level, "message": x.message,
+                        "source": x.source}
+            log_list.append(log_dict)
+        return render(request, 'sdntool/logview.html', {'appllog': log_list})
+    else:
+        return redirect('home')
 
 
 # ========================================================================

@@ -1,0 +1,30 @@
+{% extends "sdntool/base.html" %}
+
+{% block content %}
+<div class="container table-responsive">
+
+<table class="table table-bordered table-dark table-hover">
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Level</th>
+        <th>Message</th>
+        <th>Source</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for ap in appllog %}
+    <tr>
+        <td>{{ ap.timestamp }}</td>
+        <td>{{ ap.level }}</td>
+        <td>{{ ap.message }}</td>
+        <td>{{ ap.source }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+</div>
+
+{% endblock %}

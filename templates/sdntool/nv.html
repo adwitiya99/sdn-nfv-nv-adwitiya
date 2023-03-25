@@ -1,3 +1,1053 @@
-{% extends "sdntool/base.html" %} 
+{% extends "sdntool/base.html" %}
+{% load static %}
 {% block content %}
+    <div class="container-fluid" style="margin-bottom: 10%">
+
+        <style>
+            #viz {
+
+                width: 95%;
+                height: 600px;
+                padding: 3%;
+                /*border: 1px solid lightgray;*/
+                background-color: #ffffff;
+                color: black;
+            }
+
+            #overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 9999;
+            }
+
+            #spinner {
+                position: absolute;
+                top: calc(50% - 25px);
+                left: calc(50% - 25px);
+            }
+
+            .hidden {
+                display: none;
+            }
+
+             label {
+                font-weight: bold;
+            }
+        </style>
+        <div class="row">
+
+
+            <div class="col-md-9">
+                <h2>Create Network Virtualisation Instance</h2>
+                <div style="display:flex">
+                    {# <button class="btn btn-success  mr-2 w-auto" id="createvni">Create Virtual Network Infrastructure</button>#}
+                    <button class="btn btn-success  mr-2 w-auto" id="createlinks" data-bs-toggle="modal"
+                            data-bs-target="#crreatemodal">Link Different Components
+                    </button>
+                    <button class="btn btn-warning mr-2 w-auto" id="importnvi" data-bs-toggle="modal"
+                            data-bs-target="#importNetworkModal">Import Network Virtualisation Instance
+                    </button>
+                    <select class="form-select w-auto inline-group" id="selected_nvi" onchange="loadNetworkGraph()">
+                        {% for x in networks %}
+                            <option value="{{ x.name }}"> {{ x.name }}</option>
+                        {% endfor %}
+                    </select>
+
+
+                </div>
+
+                <div id="network" class="row mt-4 p-1 position-relative">
+                    <div id="viz"></div>
+                    {#  Menu  #}
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+
+                            <h4>Toggle NVI Link</h4>
+
+                            <div class="form-check form-switch ml-auto">
+                                <input class="form-check-input h4" type="checkbox" id="toggleSwitch">
+                                <label class="form-check-label" for="toggleSwitch"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="d-flex"><img src="{% static 'images/vni.png' %}"
+                                               style="width:20px;height:auto; margin-right: 6px"> NVI- Network
+                            Virtualisation Instance</p>
+                        <p class="d-flex"><img src="{% static 'images/nvi.png' %}"
+                                               style="width:20px;height:auto ;margin-right: 6px"> VM - Virtual Machine
+                        </p>
+                        <p class="d-flex"><img src="{% static 'images/VN.png' %}"
+                                               style="width:20px;height:auto;margin-right: 6px"> VN - Virtual Network
+                        </p>
+                        <p class="d-flex"><img src="{% static 'images/router.png' %}"
+                                               style="width:20px;height:auto;margin-right: 6px">Router</p>
+                    </div>
+                </div>
+
+
+              <div class="card mt-4">
+                    <div class="card-header">
+                        <h4>Properties</h4>
+                    </div>
+                    <div class="card-body">
+                        <div style="right: 10px; top: 10px; display:none" id="node-details-window">
+                            <p class="mb-0"><span class="fw-bold">Type & ID : </span></span><span
+                                    id="selected_node_type"></span>&nbsp;<span id="selected_node_id"></span></p>
+                            <ul id="selected_node_properties" style="list-style:none"></ul>
+                            <hr>
+                            <div class="d-flex flex-column gap-2">
+                                <button class="btn btn-success" id="updatebutton"><i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button class="btn btn-danger" id="deletenode"><i class="fas fa-trash-alt"></i> Delete
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="importNetworkModal" tabindex="-1" aria-labelledby="importNetworkModalLabel"
+         aria-hidden="true" style="z-index: 9999">
+        <div class="modal-dialog modal-dialog-centered w-50">
+            <div class="modal-content">
+                <form id="import-network-form">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="importNetworkModalLabel">Import Network from ONOS</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="virtualmachine_configuration_file" class="form-label">Virtual Machine
+                                Configuration Files</label>
+                            <input type="file" accept=".json" class="form-control"
+                                   id="virtualmachine_configuration_file" placeholder="Upload file" required
+                                   onchange="loadContentFromfile('virtualmachine')">
+                        </div>
+                        <div class="mb-3">
+                            <label for="virtualnetwork_configuration_file" class="form-label">Virtual Network
+                                Configuration Files</label>
+                            <input type="file" accept=".json" class="form-control"
+                                   id="virtualnetwork_nv_configuration_file" placeholder="Upload file" required
+                                   onchange="loadContentFromfile('virtualnetwork_nv')">
+                        </div>
+                        <div class="mb-3">
+                            <label for="router_nv_configuration_file" class="form-label">Router Configuration
+                                Files</label>
+                            <input type="file" accept=".json" class="form-control"
+                                   id="router_nv_configuration_file" placeholder="Upload file" required
+                                   onchange="loadContentFromfile('router_nv')">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" onclick="">Import & Create Network Virtualisation
+                            Instance
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    {#    ===============Cerete link Modal=======================#}
+    <div class="modal fade" id="crreatemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Select Component</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <select id="selectcomponent_nv" class="form-select">
+
+                        <option value="">---Select---</option>
+                        <option value="vm_nv">Virtual Machine</option>
+                        <option value="vn_nv">Virtual Network</option>
+                    </select> <br/>
+
+
+                    <div class="hidden mt-3" id="virtualmachine_nv_div">
+
+                        <label>Select Virtual machine</label>
+                        <select class="form-select" id="vm_nv_link"></select> <br/>
+
+                        <label>Select Virtual Network</label>
+                        <select class="form-select" id="vn_nv_link"></select>
+                    </div>
+
+
+                    <div class="hidden mt-3" id="virtualnetwork_nv_div">
+                        <label>Select Virtual Network</label>
+                        <select class="form-select" id="vn_rtr_link"></select> <br/>
+
+                        <label>Select Router</label>
+                        <select class="form-select" id="rtr_link"></select>
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="savechanges_nv">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {#    ===============Cerete link Modal=======================#}
+
+
+ {#========================Update Modal================#}
+
+    <div class="modal fade" id="updatemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Select Component</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="updatemodalbody">
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="savechangesupdate">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {#========================Update Modal================#}
+   <div id="overlay" class="hidden">
+        <div id="spinner">
+            <!-- Replace this with your own spinner image or animation -->
+            <img src="{% static "images/loader.gif" %}" alt="Loading...">
+        </div>
+    </div>
+
 {% endblock %}
+{% block javascript %}
+    <script>
+
+        $(document).ready(function () {
+            if (localStorage.getItem('nvion') === 'on') {
+                $('#toggleSwitch').prop('checked', true);
+            } else {
+                $('#toggleSwitch').prop('checked', false);
+            }
+        });
+
+        const nodes = new vis.DataSet();
+        const edges = new vis.DataSet();
+        const required_properties = {{ required_properties | safe }};
+        let import_configs = {
+            virtualmachine: {},
+            virtualnetwork_nv: {},
+            router_nv: {}
+
+        };
+
+        $(document).ready(function () {
+            // Ajax setup for csrf
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRFTOKEN': readCookie("csrftoken")
+                }
+            });
+            $('#import-network-form').on('submit', (e) => handle_import_form_submission(e))
+            initVisJS()
+            loadNetworkGraph(1);
+        });
+
+        function initVisJS() {
+            let viz_container = document.getElementById("viz");
+            let data = {
+                nodes: nodes,
+                edges: edges,
+            };
+            let options = {
+                nodes: {
+                    size: 25,
+                    font: {
+                        size: 15,
+                        color: "#000",
+                    },
+                    borderWidth: 1,
+                },
+                edges: {
+                    width: 1,
+                    arrows: {
+                        to: {enabled: true, scaleFactor: 0.4, type: "arrow"}
+                    }
+                },
+                groups: {
+                    NVI: {
+                        shape: "image",
+                        image: "{% static "images/nvi.png" %}",
+                    },
+                    VM: {
+
+                        shape: "image",
+                        {#image: "{% static "images/VM.png" %}",#}
+
+                    },
+                    VN: {
+
+                        shape: "image",
+                        {#image: "{% static "images/VN.png" %}",#}
+
+                    },
+                    RTR: {
+                        shape: "image",
+                        image: "{% static "images/router.png" %}",
+
+
+                    },
+                    GATEWAY:{
+
+                        shape: "image",
+                        image: "{% static "images/gatewy.png" %}",
+
+                    }
+
+                },
+
+            }
+            network = new vis.Network(viz_container, data, options);
+            network.on('selectNode', function (properties) {
+                if (properties.nodes.length === 1) {
+                    if (network.isCluster(properties.nodes[0]) === true) {
+                        network.openCluster(properties.nodes[0]);
+                    }
+                }
+
+                const ids = properties.nodes;
+                if (ids.length > 0) {
+                    handle_node_click(ids[0]);
+                }
+            });
+        }
+
+        function loadNetworkGraph() {
+            const network_id = get_selected_network_id();
+            if (network_id === null || network_id === undefined) return;
+            $.ajax({
+                url: "/graph/vnivisjs/" + network_id + "/",
+                type: "GET",
+                success: function (data) {
+                    console.log(data.data)
+                    nodes.clear();
+                    edges.clear();
+
+                    nodes.add({id: '0', name: network_id, group: "NVI", label: network_id, eid:0})
+                    data.data.nodes.map((nd, index) => {
+                        if ((nd["n"].name).replace(/\d+/g, "") === "VM") {
+                            if (nd["n"].Status == "Shut-off") {
+                                if (!nodes.get(nd["n"].id,))
+                                    nodes.add({
+                                        id: nd["n"].id,
+                                        name: nd["n"].name,
+                                        group: (nd["n"].name).replace(/\d+/g, ""),
+                                        image: '{% static "images/VM-off.png" %}',
+                                        label: `${nd["n"].name}\n(${nd["n"].ip})`,
+                                    eid: nd["eid"]
+                                    })
+
+                            } else {
+
+                                if (!nodes.get(nd["n"].id,))
+                                    nodes.add({
+                                        id: nd["n"].id,
+                                        name: nd["n"].name,
+                                        group: (nd["n"].name).replace(/\d+/g, ""),
+                                        image: '{% static "images/VM.png" %}',
+                                        label: `${nd["n"].name}\n(${nd["n"].ip})`,
+                                    eid: nd["eid"]
+                                    })
+
+                            }
+                        } else if ((nd["n"].name).replace(/\d+/g, "") === "VN") {
+
+
+                            if (!nodes.get(nd["n"].vn_id)) {
+                                if (nd["n"].Status == "Shut-off") {
+                                    nodes.add({
+                                        id: nd["n"].vn_id,
+                                        name:  nd["n"].name,
+                                        group: (nd["n"].name).replace(/\d+/g, ""),
+                                        image: '{% static "images/VN-off.png" %}',
+                                        label: `${nd["n"].name}\n(${nd["n"].nature})`,
+                                    eid: nd["eid"]
+                                    })
+
+                                } else {
+
+                                    nodes.add({
+                                        id: nd["n"].vn_id,
+                                        name: nd["n"].name,
+                                        group: (nd["n"].name).replace(/\d+/g, ""),
+                                        image: '{% static "images/VN.png" %}',
+                                        label: `${nd["n"].name}\n(${nd["n"].nature})`,
+                                    eid: nd["eid"]
+                                    })
+
+                                }
+
+
+                            }
+
+                        } else {
+
+                            if (!nodes.get(nd["n"].routerID)) {
+                                nodes.add({
+                                    id: nd["n"].routerID,
+                                    name: nd["n"].name,
+                                    group: (nd["n"].name).replace(/\d+/g, ""),
+                                    label: nd["n"].name,
+                                    eid: nd["eid"]
+                                })
+
+                                if((nd["n"].ex_gateway !=="" | nd["n"].ex_gateway !==null) ){
+
+                                nodes.add({id: `GW_${nd["n"].routerID}`, name: nd["n"].ex_gateway , group: "GATEWAY", label: `GATEWAY \n ${nd["n"].ex_gateway}`})
+                            }
+
+
+
+                            }
+                        }
+
+
+                        {#edge population#}
+
+                        {# Srijita bolle bad debo #}
+                        if (nd["parent"].name == network_id) {
+
+                            if (localStorage.getItem('nvion') === 'on') {
+                                if ((nd["n"].name).replace(/\d+/g, "") === "VM") {
+                                    edges.add({from: '0', to: nd["n"].id, weight: 1})
+                                } else if ((nd["n"].name).replace(/\d+/g, "") === "VN") {
+
+                                    edges.add({from: '0', to: nd["n"].vn_id, weight: 1})
+
+                                } else {
+                                    edges.add({from: '0', to: nd["n"].routerID, weight: 1})
+
+                                }
+
+                            }
+
+                        } else
+
+                            {# Srijita bolle bad debo #}
+
+                        if ((nd["parent"].name).replace(/\d+/g, "") == "VM") {
+
+                            edges.add({from: nd["parent"].id, to: nd["n"].vn_id, weight: 1})
+
+                        } else if ((nd["parent"].name).replace(/\d+/g, "") == "VN") {
+
+                            if (nd["parent"].nature === "public") {
+
+                                edges.add({from: nd["parent"].vn_id, to: `GW_${nd["n"].routerID}`, weight: 1})
+                                edges.add({from: nd["n"].routerID, to: `GW_${nd["n"].routerID}`, weight: 1})
+
+                            } else {
+                                edges.add({from: nd["parent"].vn_id, to: nd["n"].routerID, weight: 1})
+
+                            }
+
+                        } else {
+
+
+                            {#edges.add({from: nd["parent"].vnfID, to: nd["n"].vnfID, weight: 1})#}
+
+
+
+
+                        }
+
+
+                        {#edge population#}
+
+
+                        {#console.log(nd["n"].id)#}
+                    })
+
+
+                    {#console.log(edges)#}
+                    {#console.log(data.data.nodes[0]["n"])#}
+                    network.cluster(clusterOptionsByData);
+                }
+            });
+        }
+
+
+         function handle_node_click(node_id) {
+            selected_node_details = nodes.get(node_id);
+            $("#updatebutton").val(selected_node_details.eid)
+            if(selected_node_details.eid===0){
+
+                $("#updatebutton").prop('disabled', true);
+            }else{
+
+                  $("#updatebutton").prop('disabled', false);
+
+            }
+
+            $("#deletenode").val(selected_node_details.eid)
+            $("#node-details-window").show();
+            console.log(selected_node_details)
+            fetch_node_properties(selected_node_details.eid);
+        }
+
+
+        function fetch_node_properties(node_id) {
+            $("#selected_node_properties").empty();
+            $.ajax({
+                url: "/graph/node/properties/" + node_id + "/",
+                type: "GET",
+                success: function (data) {
+                    console.log(data.data)
+                    if (data.success) {
+                        let properties = data.data;
+                        for (let key in properties) {
+                            $("#selected_node_properties").append("<li ><span class='fst-italic'  >" + snakeToSentenceCase(key) + "</span>&nbsp;:&nbsp;" + properties[key] + "</li>");
+                        }
+                    } else {
+                        console.log(data.message);
+                    }
+                }
+            });
+        }
+
+
+        function snakeToSentenceCase(str) {
+            return str.replace(/^[-_]*(.)/, (_, c) => c.toUpperCase())
+                .replace(/[-_]+(.)/g, (_, c) => ' ' + c.toUpperCase())
+        }
+
+
+        $("#updatebutton").on("click", function () {
+            $("#updatemodal").modal("show");
+            let id = $(this).val();
+            $.ajax({
+                url: "/graph/node/properties/" + id + "/",
+                type: "GET",
+                success: function (data) {
+                    console.log(data.data)
+                    if (data.success) {
+                        let properties = data.data;
+                        let inputs = ''
+                        for (let key in properties) {
+                            if(key.toLowerCase()!== "name"){
+
+                                inputs += `<label>${snakeToSentenceCase(key)}</label><input type="text" name="${key}" value="${properties[key]}" class="form-control" />`
+                            }else{
+                                inputs += `<label>${snakeToSentenceCase(key)}</label><input type="text" name="${key}" value="${properties[key]}" class="form-control disabled" disabled />`
+
+                            }
+
+                        }
+
+                        $("#updatemodalbody").html(`<form id="updateform"> ${inputs}
+                            <input type="hidden" name="id" value= ${id}>
+
+                            </form>`)
+                    } else {
+                        console.log(data.message);
+                    }
+                }
+            });
+        })
+
+        $("#deletenode").on("click", function () {
+let id = $(this).val();
+            $.confirm({
+                title: "Warn",
+                type: "red",
+                content: "Are you sure?",
+                buttons: {
+                    confirm: function () {
+
+                        $.ajax({
+
+                            url:'/deletenode/'+id+'/',
+                            type:"get",
+
+                            success:function(){
+                                if(id===0){
+                                     location.reload();
+
+                                }else{
+
+                                      loadNetworkGraph();
+                                }
+
+                            }
+                        })
+
+
+
+
+
+                    },
+                    cancel: function () {
+                        $.alert('Canceled!');
+                    }
+                }
+
+            })
+
+
+        })
+        $("#savechangesupdate").on("click", function () {
+
+                const formDataArray = $('#updateform').serializeArray();
+                const formDataObject = formDataArray.reduce(function (obj, field) {
+                    obj[field.name] = field.value;
+                    return obj;
+                }, {});
+
+                formDataObject.network_id = get_selected_network_id()
+                console.log(formDataObject);
+
+
+                $.ajax({
+
+                    type: "post",
+                    url: '/updatenode/',
+                    data: formDataObject,
+                    success: function (data) {
+                        $("#updatemodal").modal("hide")
+                        loadNetworkGraph();
+                        {#handle_node_click(data.data)#}
+                        {#$("#node-details-window").show();#}
+
+                        $.confirm({
+                            title: "Sucess",
+                            type: "green",
+                            content: data.message,
+                            buttons: {
+                                confirm: function () {
+                                    fetch_node_properties(data.data);
+                                },
+                                cancel: function () {
+                                    $.alert('Canceled!');
+                                }
+                            },
+
+
+                        })
+
+                    }
+
+
+                })
+
+
+            }
+        )
+
+
+
+        $("#createnvi").on("click", function (e) {
+            $.confirm({
+                title: 'Create Network Virtualisation Instance',
+                content: generateForm(required_properties["nvi"]),
+                buttons: {
+                    formSubmit: {
+                        text: 'Submit',
+                        btnClass: 'btn-blue',
+                        action: function () {
+                            const parsed_data = processDataFromForm(this.$content, required_properties["nvi"]);
+                            $.ajax({
+                                type: 'POST',
+                                url: "{% url 'createnvi' %}",
+                                data: parsed_data,
+                            })
+                                .done(function (response) {
+                                    if (response.success) {
+                                        $.alert({
+                                            title: "Success",
+                                            type: "green",
+                                            content: response.message
+                                        });
+                                        add_option_to_nvi_selection(response.data.id, response.data.name);
+                                        $("#selected_nvi").val(response.data.id).trigger("change");
+                                    } else {
+                                        $.alert({
+                                            title: "Error",
+                                            type: "red",
+                                            content: response.message
+                                        });
+                                    }
+                                })
+                                .fail(function (jqXHR, status, error) {
+                                    $.alert('Some unexpected events');
+                                })
+
+                        }
+                    },
+                    cancel: function () {
+                        //close
+                    },
+                },
+                onContentReady: function () {
+                    // bind to events
+                    var jc = this;
+                    this.$content.find('form').on('submit', function (e) {
+                        e.preventDefault();
+                        jc.$$formSubmit.trigger('click'); // reference the button and click it
+                    });
+                }
+            });
+        })
+
+        function generateForm(properties) {
+            let form = `<form action="" class="formName">`;
+            for (const property_index in properties) {
+                form += `
+                    <div class="form-group mt-2">
+                        <label>${snakeToSentenceCase(properties[property_index])}</label>
+                        <input id="generated_${properties[property_index]}" type="text" placeholder="Enter ${snakeToSentenceCase(properties[property_index])}" class="label form-control" name="${properties[property_index]}" required />
+                    </div>`
+            }
+            form += `</form>`;
+            return form;
+        }
+
+        function processDataFromForm(form_reference, properties) {
+            let data = {};
+            for (const property_index in properties) {
+                data[properties[property_index]] = form_reference.find(`#generated_${properties[property_index]}`).val();
+            }
+            return data;
+        }
+
+        function get_selected_network_id() {
+            let selected_network = document.getElementById("selected_nvi");
+            return selected_network.options[selected_network.selectedIndex].value;
+        }
+
+        function add_option_to_nvi_selection(nvi_id, nvi_name) {
+            let select = document.getElementById("selected_nvi");
+            let option = document.createElement("option");
+            option.text = nvi_name;
+            option.value = nvi_id;
+            select.add(option);
+        }
+
+        function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        function handle_import_form_submission(e) {
+            e.preventDefault();
+            if (import_configs.virtualmachine === {} || import_configs.virtualnetwork_nv === {} || import_configs.router_nv === {}) {
+                alert("Please import the network configuration file according to labels first");
+                return;
+            }
+
+            $('#overlay').removeClass('hidden');
+            {#$.LoadingOverlay("show");#}
+            $.ajax({
+                url: "{% url "importnvifromfile" %}",
+                type: "POST",
+                data: JSON.stringify(import_configs),
+                success: function (data) {
+
+                    $('#overlay').addClass('hidden');
+                    {#$.LoadingOverlay("hide");#}
+                    if (data.success) {
+                        let _data = data.data;
+                        add_option_to_nvi_selection(_data.id, _data.name);
+                        $("#importNetworkModal").hide();
+                        $.alert({
+                            title: "Success",
+                            content: "Network " + _data.name + " imported successfully\nPage will be refreshed within 3 seconds",
+                            type: "green"
+                        });
+                        setTimeout(function () {
+                            location.reload();
+                        }, 3000);
+                    } else {
+                        console.log(data.message);
+                    }
+                }
+            });
+        }
+
+        function loadContentFromfile(type) {
+            if (type === "virtualmachine") {
+                readJSONFromFile($("#virtualmachine_configuration_file")[0].files[0], (data) => {
+                    import_configs.virtualmachine = JSON.parse(data);
+                    if (import_configs.virtualmachine === null || import_configs.virtualmachine.vms === undefined) {
+                        $.alert({
+                            title: "Error",
+                            content: "Invalid Virtual Machine configuration file",
+                            type: "red",
+                        });
+                        import_configs.virtualmachine = null;
+                        $("#virtualmachine_configuration_file").val(null);
+                    }
+                });
+            }
+            if (type === "virtualnetwork_nv") {
+                readJSONFromFile($("#virtualnetwork_nv_configuration_file")[0].files[0], (data) => {
+                    import_configs.virtualnetwork_nv = JSON.parse(data);
+                    if (import_configs.virtualnetwork_nv === null || import_configs.virtualnetwork_nv.vns === undefined) {
+                        $.alert({
+                            title: "Error",
+                            content: "Invalid virtual network configuration file",
+                            type: "red",
+                        });
+                        import_configs.virtualnetwork = null;
+                        $("#virtualnetwork_nv_configuration_file").val(null);
+                    }
+                });
+
+            }
+
+            if (type === "router_nv") {
+                readJSONFromFile($("#router_nv_configuration_file")[0].files[0], (data) => {
+                    import_configs.router_nv = JSON.parse(data);
+                    if (import_configs.router_nv === null || import_configs.router_nv.vrouter === undefined) {
+                        $.alert({
+                            title: "Error",
+                            content: "Invalid virtual network configuration file",
+                            type: "red",
+                        });
+                        import_configs.router_nv = null;
+                        $("#router_nv_configuration_file").val(null);
+                    }
+                });
+
+            }
+
+
+        }
+
+        function readJSONFromFile(fileReference, callback) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                callback(e.target.result);
+            };
+            reader.onerror = (e) => {
+                $.alert("Error reading file");
+            };
+            reader.readAsText(fileReference);
+        }
+
+
+
+
+    {#link component area  #}
+
+    $("#selectcomponent_nv").on("change", function () {
+
+
+            if (this.value == "vm_nv") {
+
+                $("#virtualmachine_nv_div").removeClass("hidden")
+                $("#virtualnetwork_nv_div").addClass("hidden")
+
+                const network_id = get_selected_network_id();
+                $.ajax({
+                    url: "/graph/vnivisjs/" + network_id + "/",
+                    type: "POST",
+                    success: function (data) {
+                        {#console.log(data.data)#}
+                        var select_vn_nv = $('#vn_nv_link');
+                        var select_vm_nv = $('#vm_nv_link');
+
+                        vm_nv_list = [];
+                        vn_nv_list = []
+                        data.data.nodes.map((nd, index) => {
+                            if ((nd["n"].name).replace(/\d+/g, "") === "VM" & nd["n"].status === "Active") {
+                                vm_nv_list.push('<option value="' + nd["n"].id + '">' + nd["n"].name + '</option>');
+
+                            }
+
+                            if ((nd["n"].name).replace(/\d+/g, "") === "VN" & nd["n"].Status === "Active" & nd["n"].nature !== "public") {
+                                vn_nv_list.push('<option value="' + nd["n"].vn_id + '">' + nd["n"].name + '</option>');
+                            }
+                        });
+
+                        select_vm_nv.append($.uniqueSort(vm_nv_list))
+                        select_vn_nv.append($.uniqueSort(vn_nv_list))
+
+
+                    }
+
+                })
+
+            } else {
+
+                $("#virtualnetwork_nv_div").removeClass("hidden")
+                $("#virtualmachine_nv_div").addClass("hidden")
+                const network_id = get_selected_network_id();
+
+                {#$('#multipleSelect').val();#}
+                $.ajax({
+                    url: "/graph/vnivisjs/" + network_id + "/",
+                    type: "POST",
+                    success: function (data) {
+                        {#console.log(data.data)#}
+                        var select_vn_rtr = $('#vn_rtr_link');
+                        var select_rtr = $('#rtr_link');
+
+                        vn_rtr_list = [];
+                        rtr_list = [];
+                        data.data.nodes.map((nd, index) => {
+                            if ((nd["n"].name).replace(/\d+/g, "") === "VN" & nd["n"].Status === "Active") {
+                                vn_rtr_list.push('<option value="' + nd["n"].vn_id + '">' + nd["n"].name + '</option>');
+                            }
+
+                            if ((nd["n"].name).replace(/\d+/g, "") === "RTR") {
+                                rtr_list.push('<option value="' + nd["n"].routerID + '">' + nd["n"].name + '</option>');
+                            }
+                        });
+                        select_vn_rtr.append($.uniqueSort(vn_rtr_list))
+                        select_rtr.append($.uniqueSort(rtr_list))
+
+                    }
+
+                })
+
+
+            }
+
+
+        })
+
+
+
+    $("#savechanges_nv").on("click", function () {
+
+            if ($("#selectcomponent_nv").val() === "" | $("#selectcomponent_nv").val() === null) {
+
+                $.alert({
+                    title: "Error",
+                    content: "Select a proper value",
+                    type: "red",
+                });
+            } else if ($("#selectcomponent_nv").val() === "vm_nv") {
+
+                console.log($("#vn_nv_link").val())
+                console.log($("#vm_nv_link").val())
+
+                $.ajax({
+
+                    url: '/createnvilink/',
+                    type: "post",
+                    data: {
+                        "nvi": get_selected_network_id(),
+                        "vm": $("#vm_nv_link").val(),
+                        "vn": $("#vn_nv_link").val(),
+                        "category": "vm_to_vn",
+
+                    },
+                    success: function (data) {
+                        $("#crreatemodal").modal("hide");
+                        loadNetworkGraph()
+
+
+                    },
+
+                })
+
+            } else {
+
+                console.log($("#vn_rtr_link").val())
+                console.log($("#rtr_link").val())
+
+
+                $.ajax({
+
+                    url: '/createnvilink/',
+                    type: "post",
+                    data: {
+                        "nvi": get_selected_network_id(),
+                        "vn": $("#vn_rtr_link").val(),
+                        "rtr": $("#rtr_link").val(),
+                        "category": "vn_to_rtr",
+
+                    },
+                    success: function (data) {
+                        $("#crreatemodal").modal("hide");
+                        loadNetworkGraph()
+
+                    },
+
+                })
+
+
+            }
+
+
+        })
+
+        {#link component area  #}
+
+
+  $('#toggleSwitch').on('change', function() {
+  if ($(this).is(':checked')) {
+    // Perform an action if the switch is checked
+    localStorage.setItem("nvion", "on")
+      loadNetworkGraph()
+  } else {
+    // Perform an action if the switch is not checked
+  localStorage.setItem("nvion", "off")
+      loadNetworkGraph()
+  }
+});
+
+
+
+    </script>
+
+{% endblock %}
+
+
+
+
+

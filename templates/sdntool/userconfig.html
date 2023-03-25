@@ -28,6 +28,20 @@
                    placeholder="Enter temporary password for the user"> <br/>
             <input type="submit" value="Create" class="btn btn-danger">
         </form>
+
+    {% if messages %}
+              <div class="alert alert-success mt-2" role="alert">
+ <ul class="messages"  style="list-style: none">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+</div>
+
+
+{% endif %}
+
+
     </div>
 
     <div class="row mt-5">

@@ -14,7 +14,11 @@ required_properties = {
     "vni": [],
     "virtualmachine": ["id", "status", "name", "ip", "sec_group", "vCPU", "RAM", "size", "image_name"],
     "virtualnetwork": ["name", "vn_id", "Status", "MTU", "network_address", "attached_devices"],
-    "virtualnetworkfunction": ["num_cpus", "mem_size", "disk_size", "image", "cps", "vnfID", "vimID"]
+    "virtualnetworkfunction": ["num_cpus", "mem_size", "disk_size", "image", "cps", "vnfID", "vimID"],
+    "nvi": [],
+    "virtualnetwork_nv":["name", "vn_id", "Status", "MTU", "network_address", "attached_devices", "nature"],
+    "router_nv":["name", "routerID", "status", "interfaces", "ex_gateway"]
+
 }
 
 
