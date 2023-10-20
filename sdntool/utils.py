@@ -231,3 +231,8 @@ def import_nvi(neo4j_controller, name_generator, virtualmachine_data, virtualnet
     #     neo4j_controller.create_link(lnk["source_id"], lnk["dest_id"],)
 
     return new_nvi
+
+
+
+def flowruleexists(controller, node1, node2):
+    return True

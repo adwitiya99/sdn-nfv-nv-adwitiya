@@ -51,6 +51,7 @@
                     <button class="btn btn-warning mr-2 w-auto" id="importvni" data-bs-toggle="modal"
                             data-bs-target="#importNetworkModal">Import Virtual Network Infrastructure
                     </button>
+                    <button class="btn btn-danger w-auto mr-2" id="calculator" data-bs-toggle="modal" data-bs-target="#jitter">Path Analysis</button>
                     <select class="form-select w-auto inline-group" id="selected_vni" onchange="loadNetworkGraph()">
                         {% for x in networks %}
                             <option value="{{ x.name }}"> {{ x.name }}</option>
@@ -278,7 +279,48 @@
         </div>
     </div>
 
+<div class="modal fade" id="jitter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Path Analysis</h5>
+        <button type="button" class="close"   data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
 
+        <form id="pathanalylysisform" method="post" action="{% url 'calculatecostsecond' %}">
+            {% csrf_token %}
+
+          <label>Select First Node</label>
+            <select id="firstcostnode" name="firstcostnode" class="form-control"></select> <br/>
+
+            <label>Select Second Node</label>
+            <select id="secondcostnode" name="secondcostnode" class="form-control"></select> <br/>
+
+
+            <label>Weightage for Bandwidth</label>
+            <input type="text" class="form-control" name="bw" /><br/>
+            <label>Weightage for Latency</label>
+            <input type="text" class="form-control" name="lw" /><br/>
+            <label>Weightage for Jiiter</label>
+            <input type="text" class="form-control" name="jw" /><br/>
+
+            <button type="submit" class="btn btn-primary mx-right">Calculate</button>
+        </form>
+
+
+
+
+      </div>
+      <div class="modal-footer">
+
+
+      </div>
+    </div>
+  </div>
+</div>
 
     {#========================Update Modal================#}
 
@@ -517,8 +559,24 @@
                     })
 
 
-                    {#console.log(edges)#}
+                    console.log(data.data.nodes)
                     {#console.log(data.data.nodes[0]["n"])#}
+
+                    $.each(data.data.nodes, function(index, item) {
+  $("#firstcostnode").append($('<option>', {
+    value: item.eid,
+    text: item.n.name
+  }));
+
+  $("#secondcostnode").append($('<option>', {
+    value: item.eid,
+    text: item.n.name
+  }));
+
+
+
+
+});
                     network.cluster(clusterOptionsByData);
                 }
             });

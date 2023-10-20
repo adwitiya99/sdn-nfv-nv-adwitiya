@@ -2428,3 +2428,1898 @@ TypeError: Object of type TypeError is not JSON serializable
 06:11:21,617 django.request WARNING Not Found: /graph/node/properties/undefined/
 06:16:22,495 django.request WARNING Not Found: /graph/node/properties/undefined/
 06:16:29,700 django.request WARNING Not Found: /deletenode//
+11:45:37,179 django.request WARNING Not Found: /graph/node/properties/undefined/
+12:01:00,830 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+12:01:00,831 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+12:01:00,831 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+12:01:00,832 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+12:01:00,832 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+12:01:00,833 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+12:01:00,833 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+12:01:00,833 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+12:01:00,834 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+12:01:00,834 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+12:01:00,834 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+12:27:15,100 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+12:27:15,101 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+12:27:15,101 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+12:27:15,102 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+12:27:15,102 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+12:27:15,103 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+12:27:15,103 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+12:27:15,104 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+12:27:15,104 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+12:27:15,104 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+12:27:15,105 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+12:33:10,98 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+12:33:10,98 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+12:33:10,99 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+12:33:10,99 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+12:33:10,99 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+12:33:10,100 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+12:33:10,100 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+12:33:10,101 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+12:33:10,101 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+12:33:10,101 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+12:33:10,102 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+14:53:46,654 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+14:56:53,791 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+14:57:10,536 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+14:59:04,133 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+15:00:02,873 django.request ERROR Internal Server Error: /managenetwork/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 650, in managenetwork
+    return render(request, 'sdntool/managenetwork.html',
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'calculatecost' not found. 'calculatecost' is not a valid view function or pattern name.
+15:00:09,821 django.request ERROR Internal Server Error: /managenetwork/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 650, in managenetwork
+    return render(request, 'sdntool/managenetwork.html',
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'calculatecost' not found. 'calculatecost' is not a valid view function or pattern name.
+15:00:39,316 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+15:00:43,286 django.request ERROR Internal Server Error: /managenetwork/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 650, in managenetwork
+    return render(request, 'sdntool/managenetwork.html',
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'calculatecost' not found. 'calculatecost' is not a valid view function or pattern name.
+15:00:57,850 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+15:01:03,784 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+15:01:27,943 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+15:01:30,927 django.request ERROR Internal Server Error: /managenetwork/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 650, in managenetwork
+    return render(request, 'sdntool/managenetwork.html',
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'calculatecost' not found. 'calculatecost' is not a valid view function or pattern name.
+15:03:29,40 django.utils.autoreload INFO /app/sdntool/urls.py changed, reloading.
+15:04:05,109 django.security.csrf WARNING Forbidden (CSRF token missing.): /calculatecost/
+15:04:33,326 django.security.csrf WARNING Forbidden (CSRF token missing.): /calculatecost/
+15:04:44,769 django.request ERROR Internal Server Error: /calculatecost/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 919, in calculatecost
+    file = request.FILES("linkdata")
+TypeError: 'MultiValueDict' object is not callable
+15:06:10,919 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+15:38:40,278 django.request ERROR Internal Server Error: /calculatecost/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'linkdata'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 919, in calculatecost
+    file = request.FILES["linkdata"]
+  File "/usr/local/lib/python3.8/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'linkdata'
+15:47:09,477 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+15:47:21,627 django.request ERROR Internal Server Error: /calculatecost
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/utils/deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+  File "/usr/local/lib/python3.8/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+  File "/usr/local/lib/python3.8/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 0.0.0.0:8000/calculatecost/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+15:47:43,420 django.utils.autoreload INFO /app/sdntool/urls.py changed, reloading.
+15:48:17,444 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:21:17,920 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+16:23:31,206 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+16:25:25,906 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+16:27:03,816 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:27:49,473 django.request ERROR Internal Server Error: /calculatecost
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 920, in calculatecost
+    dataallpath= Neo4JController.get_all_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+  File "/app/sdntool/Neo4jcontroller.py", line 755, in get_all_path
+    Neo4JController.read_transaction(_get_all_path, hid1,hid2)]
+  File "/app/sdntool/Neo4jcontroller.py", line 25, in read_transaction
+    return session.execute_read(function_reference, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 615, in execute_read
+    return self._run_transaction(
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 512, in _run_transaction
+    result = transaction_function(tx, *args, **kwargs)
+  File "/app/sdntool/Neo4jcontroller.py", line 749, in _get_all_path
+    result = tx.run("""
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/transaction.py", line 159, in run
+    result._tx_ready_run(query, parameters)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 116, in _tx_ready_run
+    self._run(query, parameters, None, None, None, None, None, None)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 166, in _run
+    self._attach()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 274, in _attach
+    self._connection.fetch_message()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 180, in inner
+    func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt.py", line 808, in fetch_message
+    res = self._process_message(tag, fields)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt5.py", line 361, in _process_message
+    response.on_failure(summary_metadata or {})
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 247, in on_failure
+    raise Neo4jError.hydrate(**metadata)
+neo4j.exceptions.DatabaseError: {code: Neo.DatabaseError.General.UnknownError} {message: Lexical error at line 2, column 17.  Encountered: <EOF> after : ""}
+16:28:23,188 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+16:28:26,855 django.request ERROR Internal Server Error: /calculatecost
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 920, in calculatecost
+    dataallpath= Neo4JController.get_all_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+  File "/app/sdntool/Neo4jcontroller.py", line 755, in get_all_path
+    Neo4JController.read_transaction(_get_all_path, hid1,hid2)]
+  File "/app/sdntool/Neo4jcontroller.py", line 25, in read_transaction
+    return session.execute_read(function_reference, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 615, in execute_read
+    return self._run_transaction(
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 512, in _run_transaction
+    result = transaction_function(tx, *args, **kwargs)
+  File "/app/sdntool/Neo4jcontroller.py", line 749, in _get_all_path
+    result = tx.run("""
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/transaction.py", line 159, in run
+    result._tx_ready_run(query, parameters)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 116, in _tx_ready_run
+    self._run(query, parameters, None, None, None, None, None, None)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 166, in _run
+    self._attach()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 274, in _attach
+    self._connection.fetch_message()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 180, in inner
+    func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt.py", line 808, in fetch_message
+    res = self._process_message(tag, fields)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt5.py", line 361, in _process_message
+    response.on_failure(summary_metadata or {})
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 247, in on_failure
+    raise Neo4jError.hydrate(**metadata)
+neo4j.exceptions.DatabaseError: {code: Neo.DatabaseError.General.UnknownError} {message: Lexical error at line 2, column 17.  Encountered: <EOF> after : ""}
+16:31:00,252 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+16:31:03,874 django.request ERROR Internal Server Error: /calculatecost
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 920, in calculatecost
+    dataallpath= Neo4JController.get_all_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+  File "/app/sdntool/Neo4jcontroller.py", line 755, in get_all_path
+    Neo4JController.read_transaction(_get_all_path, hid1,hid2)]
+  File "/app/sdntool/Neo4jcontroller.py", line 25, in read_transaction
+    return session.execute_read(function_reference, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 615, in execute_read
+    return self._run_transaction(
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 512, in _run_transaction
+    result = transaction_function(tx, *args, **kwargs)
+  File "/app/sdntool/Neo4jcontroller.py", line 749, in _get_all_path
+    result = tx.run("""
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/transaction.py", line 159, in run
+    result._tx_ready_run(query, parameters)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 116, in _tx_ready_run
+    self._run(query, parameters, None, None, None, None, None, None)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 166, in _run
+    self._attach()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 274, in _attach
+    self._connection.fetch_message()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 180, in inner
+    func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt.py", line 808, in fetch_message
+    res = self._process_message(tag, fields)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt5.py", line 361, in _process_message
+    response.on_failure(summary_metadata or {})
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 247, in on_failure
+    raise Neo4jError.hydrate(**metadata)
+neo4j.exceptions.DatabaseError: {code: Neo.DatabaseError.General.UnknownError} {message: Lexical error at line 2, column 17.  Encountered: <EOF> after : ""}
+16:33:17,0 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+16:33:20,236 django.request ERROR Internal Server Error: /calculatecost
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 920, in calculatecost
+    dataallpath= Neo4JController.get_all_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+  File "/app/sdntool/Neo4jcontroller.py", line 755, in get_all_path
+    Neo4JController.read_transaction(_get_all_path, hid1,hid2)]
+  File "/app/sdntool/Neo4jcontroller.py", line 25, in read_transaction
+    return session.execute_read(function_reference, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 615, in execute_read
+    return self._run_transaction(
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 512, in _run_transaction
+    result = transaction_function(tx, *args, **kwargs)
+  File "/app/sdntool/Neo4jcontroller.py", line 749, in _get_all_path
+    result = tx.run("""
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/transaction.py", line 159, in run
+    result._tx_ready_run(query, parameters)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 116, in _tx_ready_run
+    self._run(query, parameters, None, None, None, None, None, None)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 166, in _run
+    self._attach()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 274, in _attach
+    self._connection.fetch_message()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 180, in inner
+    func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt.py", line 808, in fetch_message
+    res = self._process_message(tag, fields)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt5.py", line 361, in _process_message
+    response.on_failure(summary_metadata or {})
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 247, in on_failure
+    raise Neo4jError.hydrate(**metadata)
+neo4j.exceptions.DatabaseError: {code: Neo.DatabaseError.General.UnknownError} {message: Lexical error at line 2, column 17.  Encountered: <EOF> after : ""}
+16:38:20,931 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+16:38:20,958 django.request ERROR Internal Server Error: /calculatecost
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 920, in calculatecost
+    dataallpath= Neo4JController.get_all_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+  File "/app/sdntool/Neo4jcontroller.py", line 755, in get_all_path
+    Neo4JController.read_transaction(_get_all_path, hid1,hid2)]
+  File "/app/sdntool/Neo4jcontroller.py", line 25, in read_transaction
+    return session.execute_read(function_reference, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 615, in execute_read
+    return self._run_transaction(
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 512, in _run_transaction
+    result = transaction_function(tx, *args, **kwargs)
+  File "/app/sdntool/Neo4jcontroller.py", line 749, in _get_all_path
+    result = tx.run("""
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/transaction.py", line 159, in run
+    result._tx_ready_run(query, parameters)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 116, in _tx_ready_run
+    self._run(query, parameters, None, None, None, None, None, None)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 166, in _run
+    self._attach()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 274, in _attach
+    self._connection.fetch_message()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 180, in inner
+    func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt.py", line 808, in fetch_message
+    res = self._process_message(tag, fields)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt5.py", line 361, in _process_message
+    response.on_failure(summary_metadata or {})
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 247, in on_failure
+    raise Neo4jError.hydrate(**metadata)
+neo4j.exceptions.DatabaseError: {code: Neo.DatabaseError.General.UnknownError} {message: Lexical error at line 2, column 17.  Encountered: <EOF> after : ""}
+16:40:28,665 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+16:40:44,88 django.request ERROR Internal Server Error: /calculatecost
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 920, in calculatecost
+    dataallpath= Neo4JController.get_all_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+  File "/app/sdntool/Neo4jcontroller.py", line 755, in get_all_path
+    Neo4JController.read_transaction(_get_all_path, hid1,hid2)]
+  File "/app/sdntool/Neo4jcontroller.py", line 25, in read_transaction
+    return session.execute_read(function_reference, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 615, in execute_read
+    return self._run_transaction(
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 512, in _run_transaction
+    result = transaction_function(tx, *args, **kwargs)
+  File "/app/sdntool/Neo4jcontroller.py", line 752, in _get_all_path
+    return result.values()
+AttributeError: 'list' object has no attribute 'values'
+16:40:57,350 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+16:40:59,895 django.request ERROR Internal Server Error: /calculatecost
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 920, in calculatecost
+    dataallpath= Neo4JController.get_all_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+  File "/app/sdntool/Neo4jcontroller.py", line 754, in get_all_path
+    return [NetworkHost.from_neo4j_response(response) for response in
+  File "/app/sdntool/Neo4jcontroller.py", line 754, in <listcomp>
+    return [NetworkHost.from_neo4j_response(response) for response in
+  File "/app/sdntool/Neo4jmodels.py", line 163, in from_neo4j_response
+    return NetworkController(response[0], response[1])
+KeyError: 0
+16:42:15,582 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+16:42:18,2 django.request ERROR Internal Server Error: /calculatecost
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 924, in calculatecost
+    "data": dataallpath.to_json()
+AttributeError: 'str' object has no attribute 'to_json'
+16:42:33,773 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:42:50,830 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+16:43:09,919 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:43:11,626 django.request ERROR Internal Server Error: /calculatecost
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 924, in calculatecost
+    "data": dataallpath.to_json()
+AttributeError: 'dict' object has no attribute 'to_json'
+16:43:23,878 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:43:51,96 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+16:44:33,687 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+16:45:52,727 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+16:48:31,803 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+16:52:09,608 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:53:14,134 django.request ERROR Internal Server Error: /calculatecost
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 922, in calculatecost
+    return render("costcalculation.html", {"dataallpath":dataallpath})
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/usr/local/lib/python3.8/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "/usr/local/lib/python3.8/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loaders/base.py", line 17, in get_template
+    for origin in self.get_template_sources(template_name):
+  File "/usr/local/lib/python3.8/site-packages/django/template/loaders/cached.py", line 70, in get_template_sources
+    yield from loader.get_template_sources(template_name)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loaders/filesystem.py", line 35, in get_template_sources
+    name = safe_join(template_dir, template_name)
+  File "/usr/local/lib/python3.8/site-packages/django/utils/_os.py", line 17, in safe_join
+    final_path = abspath(join(base, *paths))
+  File "/usr/local/lib/python3.8/posixpath.py", line 90, in join
+    genericpath._check_arg_types('join', a, *p)
+  File "/usr/local/lib/python3.8/genericpath.py", line 152, in _check_arg_types
+    raise TypeError(f'{funcname}() argument must be str, bytes, or '
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'dict'
+16:53:28,332 django.request ERROR Internal Server Error: /calculatecost
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 922, in calculatecost
+    return render("costcalculation.html", {"dataallpath":dataallpath})
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/usr/local/lib/python3.8/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "/usr/local/lib/python3.8/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loaders/base.py", line 17, in get_template
+    for origin in self.get_template_sources(template_name):
+  File "/usr/local/lib/python3.8/site-packages/django/template/loaders/cached.py", line 70, in get_template_sources
+    yield from loader.get_template_sources(template_name)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loaders/filesystem.py", line 35, in get_template_sources
+    name = safe_join(template_dir, template_name)
+  File "/usr/local/lib/python3.8/site-packages/django/utils/_os.py", line 17, in safe_join
+    final_path = abspath(join(base, *paths))
+  File "/usr/local/lib/python3.8/posixpath.py", line 90, in join
+    genericpath._check_arg_types('join', a, *p)
+  File "/usr/local/lib/python3.8/genericpath.py", line 152, in _check_arg_types
+    raise TypeError(f'{funcname}() argument must be str, bytes, or '
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'dict'
+16:54:54,680 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:54:58,884 django.request ERROR Internal Server Error: /calculatecost
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 922, in calculatecost
+    return render(request, "costcalculation.html", {"dataallpath":dataallpath})
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: costcalculation.html
+16:55:24,506 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:57:36,270 django.request ERROR Internal Server Error: /managenetwork/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 650, in managenetwork
+    return render(request, 'sdntool/managenetwork.html',
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'costcalculation' not found. 'costcalculation' is not a valid view function or pattern name.
+16:58:07,579 django.security.csrf WARNING Forbidden (CSRF token missing.): /calculatecost
+16:58:20,541 django.security.csrf WARNING Forbidden (CSRF token missing.): /calculatecost
+16:58:28,418 django.request ERROR Internal Server Error: /calculatecost
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 920, in calculatecost
+    dataallpath= Neo4JController.get_all_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+  File "/app/sdntool/Neo4jcontroller.py", line 754, in get_all_path
+    response = Neo4JController.read_transaction(_get_all_path, hid1,hid2)
+  File "/app/sdntool/Neo4jcontroller.py", line 25, in read_transaction
+    return session.execute_read(function_reference, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 615, in execute_read
+    return self._run_transaction(
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 512, in _run_transaction
+    result = transaction_function(tx, *args, **kwargs)
+  File "/app/sdntool/Neo4jcontroller.py", line 749, in _get_all_path
+    result = tx.run(f"""
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/transaction.py", line 159, in run
+    result._tx_ready_run(query, parameters)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 116, in _tx_ready_run
+    self._run(query, parameters, None, None, None, None, None, None)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 166, in _run
+    self._attach()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 274, in _attach
+    self._connection.fetch_message()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 180, in inner
+    func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt.py", line 808, in fetch_message
+    res = self._process_message(tag, fields)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt5.py", line 361, in _process_message
+    response.on_failure(summary_metadata or {})
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 247, in on_failure
+    raise Neo4jError.hydrate(**metadata)
+neo4j.exceptions.CypherSyntaxError: {code: Neo.ClientError.Statement.SyntaxError} {message: Variable `None` not defined (line 2, column 36 (offset: 52))
+"                match path=(n)-[*]-(p) where ID(n)=None and ID(p)=None return path"
+                                                    ^}
+17:03:34,615 django.security.csrf WARNING Forbidden (Origin checking failed - null does not match any trusted origins.): /calculatecost
+17:03:51,779 django.security.csrf WARNING Forbidden (Origin checking failed - null does not match any trusted origins.): /calculatecost
+17:10:18,797 django.request ERROR Internal Server Error: /calculatecost
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 922, in calculatecost
+    return render(request, "sdntool/costcalculation.html", {"dataallpath":dataallpath})
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/usr/local/lib/python3.8/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "/usr/local/lib/python3.8/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 558, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 65: 'static', expected 'endblock'. Did you forget to register or load this tag?
+17:20:54,863 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+17:21:50,505 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+17:36:15,597 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+17:36:18,164 django.request ERROR Internal Server Error: /calculatecost
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 920, in calculatecost
+    dataallpath= Neo4JController.get_all_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+  File "/app/sdntool/Neo4jcontroller.py", line 754, in get_all_path
+    response = Neo4JController.read_transaction(_get_all_path, hid1,hid2)
+  File "/app/sdntool/Neo4jcontroller.py", line 25, in read_transaction
+    return session.execute_read(function_reference, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 615, in execute_read
+    return self._run_transaction(
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 512, in _run_transaction
+    result = transaction_function(tx, *args, **kwargs)
+  File "/app/sdntool/Neo4jcontroller.py", line 752, in _get_all_path
+    return  result.values()
+AttributeError: 'list' object has no attribute 'values'
+17:36:19,128 django.request WARNING Not Found: /favicon.ico
+17:36:46,882 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+17:41:23,792 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+09:17:01,55 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+09:17:01,56 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+09:17:01,57 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+09:17:01,58 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+09:17:01,58 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+09:17:01,59 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+09:17:01,59 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+09:17:01,60 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+09:17:01,61 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+09:17:01,61 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+09:17:01,62 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+09:17:22,716 django.request WARNING Not Found: /favicon.ico
+09:19:36,334 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+09:23:02,76 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+09:24:50,21 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+11:04:20,438 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:18:49,19 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+16:18:49,128 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+16:18:49,130 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+16:18:49,131 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+16:18:49,133 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+16:18:49,135 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+16:18:49,137 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+16:18:49,138 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+16:18:49,139 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+16:18:49,141 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+16:18:49,142 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+16:20:50,489 django.request WARNING Not Found: /favicon.ico
+20:52:15,797 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+20:52:15,798 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+20:52:15,799 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+20:52:15,799 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+20:52:15,814 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+20:52:15,815 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+20:52:15,816 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+20:52:15,817 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+20:52:15,817 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+20:52:15,818 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+20:52:15,819 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+20:52:30,893 django.request WARNING Not Found: /favicon.ico
+19:48:33,435 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+19:48:33,436 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+19:48:33,436 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+19:48:33,436 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+19:48:33,437 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+19:48:33,437 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+19:48:33,438 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+19:48:33,438 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+19:48:33,438 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+19:48:33,439 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+19:48:33,439 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+19:51:27,685 django.request WARNING Not Found: /favicon.ico
+08:24:44,650 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+08:24:44,651 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+08:24:44,652 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+08:24:44,652 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+08:24:44,653 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+08:24:44,654 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+08:24:44,654 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+08:24:44,655 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+08:24:44,655 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+08:24:44,656 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+08:24:44,656 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+08:24:53,191 django.request WARNING Not Found: /favicon.ico
+09:04:43,151 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+09:12:49,563 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+09:15:56,345 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+09:17:48,652 django.request ERROR Internal Server Error: /shownfv/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/app/sdntool/views.py", line 379, in shownfv
+    return render(request, 'sdntool/nfv.html',
+  File "/usr/local/lib/python3.8/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "/usr/local/lib/python3.8/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/usr/local/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/usr/local/lib/python3.8/site-packages/django/template/defaulttags.py", line 471, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/urls/resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'calculatecostsecond' not found. 'calculatecostsecond' is not a valid view function or pattern name.
+09:18:19,525 django.utils.autoreload INFO /app/sdntool/urls.py changed, reloading.
+09:18:40,555 django.request ERROR Internal Server Error: /calculatecostsecond
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 933, in calculatecostsecond
+    dataallpath= Neo4JController.get_second_shortest_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+  File "/app/sdntool/Neo4jcontroller.py", line 781, in get_second_shortest_path
+    shortest_path_data = Neo4JController.read_transaction(_get_second_shortest_path, hid1, hid2)
+  File "/app/sdntool/Neo4jcontroller.py", line 25, in read_transaction
+    return session.execute_read(function_reference, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 615, in execute_read
+    return self._run_transaction(
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 512, in _run_transaction
+    result = transaction_function(tx, *args, **kwargs)
+TypeError: _get_second_shortest_path() missing 1 required positional argument: 'exclude_nodes'
+09:21:31,886 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+09:25:22,712 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+09:25:56,610 django.request ERROR Internal Server Error: /calculatecostsecond
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 933, in calculatecostsecond
+    dataallpath= Neo4JController.get_second_shortest_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+  File "/app/sdntool/Neo4jcontroller.py", line 783, in get_second_shortest_path
+    response = Neo4JController.read_transaction(_get_second_shortest_path, hid1, hid2)
+  File "/app/sdntool/Neo4jcontroller.py", line 25, in read_transaction
+    return session.execute_read(function_reference, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 615, in execute_read
+    return self._run_transaction(
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 512, in _run_transaction
+    result = transaction_function(tx, *args, **kwargs)
+  File "/app/sdntool/Neo4jcontroller.py", line 771, in _get_second_shortest_path
+    result = tx.run(f"""
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/transaction.py", line 159, in run
+    result._tx_ready_run(query, parameters)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 116, in _tx_ready_run
+    self._run(query, parameters, None, None, None, None, None, None)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 166, in _run
+    self._attach()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 274, in _attach
+    self._connection.fetch_message()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 180, in inner
+    func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt.py", line 808, in fetch_message
+    res = self._process_message(tag, fields)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt5.py", line 361, in _process_message
+    response.on_failure(summary_metadata or {})
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 247, in on_failure
+    raise Neo4jError.hydrate(**metadata)
+neo4j.exceptions.ClientError: {code: Neo.ClientError.Procedure.ProcedureNotFound} {message: There is no procedure with the name `apoc.algo.dijkstraWithDefaultWeight` registered for this database instance. Please ensure you've spelled the procedure name correctly and that the procedure is properly deployed.}
+09:27:18,523 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+09:27:27,299 django.request ERROR Internal Server Error: /calculatecostsecond
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 933, in calculatecostsecond
+    dataallpath= Neo4JController.get_second_shortest_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+  File "/app/sdntool/Neo4jcontroller.py", line 792, in get_second_shortest_path
+    shortest_path_nodes = shortest_path_data[0]['nodes']
+IndexError: list index out of range
+09:27:58,695 django.request ERROR Internal Server Error: /calculatecostsecond
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 933, in calculatecostsecond
+    dataallpath= Neo4JController.get_second_shortest_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+  File "/app/sdntool/Neo4jcontroller.py", line 792, in get_second_shortest_path
+    shortest_path_nodes = shortest_path_data[0]['nodes']
+IndexError: list index out of range
+09:29:16,89 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+09:36:04,79 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+09:45:47,219 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+09:57:19,231 django.utils.autoreload INFO /app/sdntool/Neo4jcontroller.py changed, reloading.
+10:12:54,123 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+10:12:54,124 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+10:12:54,124 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+10:12:54,125 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+10:12:54,125 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+10:12:54,126 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+10:12:54,126 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+10:12:54,127 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+10:12:54,127 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+10:12:54,128 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+10:12:54,128 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+10:26:36,5 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:27:30,842 django.request ERROR Internal Server Error: /calculatecostsecond
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 936, in calculatecostsecond
+    if dataallpath in None:
+TypeError: argument of type 'NoneType' is not iterable
+10:28:35,258 django.request ERROR Internal Server Error: /calculatecostsecond
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 936, in calculatecostsecond
+    if dataallpath in None:
+TypeError: argument of type 'NoneType' is not iterable
+10:28:59,913 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:29:59,374 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:31:39,781 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:33:41,844 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:34:13,663 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:34:48,189 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+22:46:50,353 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+22:46:50,354 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+22:46:50,354 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+22:46:50,354 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+22:46:50,355 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+22:46:50,355 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+22:46:50,356 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+22:46:50,356 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+22:46:50,356 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+22:46:50,357 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+22:46:50,357 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+22:47:27,266 django.request WARNING Not Found: /favicon.ico
+02:05:57,986 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+02:05:57,986 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+02:05:57,987 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+02:05:57,987 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+02:05:57,987 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+02:05:57,988 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+02:05:57,988 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+02:05:57,989 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+02:05:57,989 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+02:05:57,989 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+02:05:57,990 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+20:14:28,456 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+20:14:28,457 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+20:14:28,457 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+20:14:28,458 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+20:14:28,458 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+20:14:28,458 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+20:14:28,458 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+20:14:28,459 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+20:14:28,459 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+20:14:28,459 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+20:14:28,459 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+20:15:41,730 django.request WARNING Not Found: /favicon.ico
+21:08:25,420 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+21:08:25,421 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+21:08:25,421 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+21:08:25,421 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+21:08:25,422 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+21:08:25,422 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+21:08:25,422 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+21:08:25,422 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+21:08:25,423 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+21:08:25,423 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+21:08:25,423 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+12:13:31,46 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+12:13:31,46 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+12:13:31,47 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+12:13:31,47 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+12:13:31,47 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+12:13:31,48 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+12:13:31,48 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+12:13:31,48 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+12:13:31,48 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+12:13:31,49 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+12:13:31,49 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+12:16:07,652 django.request WARNING Not Found: /favicon.ico
+13:38:22,618 django.utils.autoreload INFO /app/sdntool/utils.py changed, reloading.
+13:42:13,12 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+13:42:13,13 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+13:42:13,13 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+13:42:13,13 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+13:42:13,13 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+13:42:13,14 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+13:42:13,14 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+13:42:13,14 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+13:42:13,15 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+13:42:13,15 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+13:42:13,15 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+14:41:27,990 django.utils.autoreload INFO /app/sdntool/urls.py changed, reloading.
+14:41:53,945 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+14:42:15,429 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:32:39,426 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:33:54,86 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:34:42,611 django.request ERROR Internal Server Error: /pingcontroller
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 946, in pingcontroller
+    dataallpath= Neo4JController.get_second_shortest_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+  File "/app/sdntool/Neo4jcontroller.py", line 782, in get_second_shortest_path
+    response = Neo4JController.read_transaction(_get_second_shortest_path, hid1, hid2)
+  File "/app/sdntool/Neo4jcontroller.py", line 25, in read_transaction
+    return session.execute_read(function_reference, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 658, in execute_read
+    return self._run_transaction(
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 550, in _run_transaction
+    result = transaction_function(tx, *args, **kwargs)
+  File "/app/sdntool/Neo4jcontroller.py", line 771, in _get_second_shortest_path
+    result = tx.run(f"""
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/transaction.py", line 164, in run
+    result._tx_ready_run(query, parameters)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 116, in _tx_ready_run
+    self._run(query, parameters, None, None, None, None, None, None)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 166, in _run
+    self._attach()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 274, in _attach
+    self._connection.fetch_message()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 180, in inner
+    func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt.py", line 851, in fetch_message
+    res = self._process_message(tag, fields)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt5.py", line 376, in _process_message
+    response.on_failure(summary_metadata or {})
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 247, in on_failure
+    raise Neo4jError.hydrate(**metadata)
+neo4j.exceptions.CypherSyntaxError: {code: Neo.ClientError.Statement.SyntaxError} {message: Variable `None` not defined (line 3, column 62 (offset: 93))
+"                WHERE ID(start) = None AND ID(end) = None"
+                                   ^}
+16:35:30,309 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:35:54,231 django.request ERROR Internal Server Error: /pingcontroller
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 946, in pingcontroller
+    dataallpath= Neo4JController.get_second_shortest_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+  File "/app/sdntool/Neo4jcontroller.py", line 782, in get_second_shortest_path
+    response = Neo4JController.read_transaction(_get_second_shortest_path, hid1, hid2)
+  File "/app/sdntool/Neo4jcontroller.py", line 25, in read_transaction
+    return session.execute_read(function_reference, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 658, in execute_read
+    return self._run_transaction(
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 550, in _run_transaction
+    result = transaction_function(tx, *args, **kwargs)
+  File "/app/sdntool/Neo4jcontroller.py", line 771, in _get_second_shortest_path
+    result = tx.run(f"""
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/transaction.py", line 164, in run
+    result._tx_ready_run(query, parameters)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 116, in _tx_ready_run
+    self._run(query, parameters, None, None, None, None, None, None)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 166, in _run
+    self._attach()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 274, in _attach
+    self._connection.fetch_message()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 180, in inner
+    func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt.py", line 851, in fetch_message
+    res = self._process_message(tag, fields)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt5.py", line 376, in _process_message
+    response.on_failure(summary_metadata or {})
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 247, in on_failure
+    raise Neo4jError.hydrate(**metadata)
+neo4j.exceptions.CypherSyntaxError: {code: Neo.ClientError.Statement.SyntaxError} {message: Variable `None` not defined (line 3, column 62 (offset: 93))
+"                WHERE ID(start) = None AND ID(end) = None"
+                                   ^}
+16:36:47,994 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:38:58,389 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:46:54,240 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:48:53,362 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+16:49:04,253 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+11:52:39,564 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+11:52:39,572 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+11:52:39,573 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+11:52:39,574 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+11:52:39,575 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+11:52:39,575 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+11:52:39,576 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+11:52:39,577 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+11:52:39,578 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+11:52:39,578 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+11:52:39,579 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+11:52:49,576 django.request WARNING Not Found: /favicon.ico
+11:55:15,765 django.request WARNING Not Found: /favicon.ico
+11:57:37,862 django.security.csrf WARNING Forbidden (Origin checking failed - null does not match any trusted origins.): /pingcontroller
+11:58:08,608 django.security.csrf WARNING Forbidden (Origin checking failed - null does not match any trusted origins.): /pingcontroller
+12:00:40,533 django.utils.autoreload INFO /app/sdntool/urls.py changed, reloading.
+12:00:56,382 django.security.csrf WARNING Forbidden (Origin checking failed - null does not match any trusted origins.): /pingcontroller/
+12:02:15,704 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+12:03:15,502 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+12:16:22,128 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+12:16:42,652 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+12:17:00,71 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.

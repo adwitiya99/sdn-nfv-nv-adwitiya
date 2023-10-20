@@ -49,6 +49,9 @@ urlpatterns = [
     # ================== Adwitiya ============================
 
     path('shownfv/', views.shownfv, name='nfv'),
+    path('calculatecost', views.calculatecost, name='calculatecost'),
+    path('calculatecostsecond', views.calculatecostsecond, name='calculatecostsecond'),
+    path('pingcontroller/', views.pingcontroller, name='pingcontroller'),
     path('createvni/', views.createvni, name='createvni'),
     path('importvnifromfile/', views.importvnifromfile, name='importvnifromfile'),
 

@@ -9,8 +9,15 @@
         }
     </style>
     <div class="row gap-2">
-        <button class="btn btn-success w-auto" id="createnetwork">Create Network</button>
+        {# <button class="btn btn-success w-auto" id="createnetwork">Create Network</button> #}
         <button class="btn btn-primary w-auto" id="importnetwork" data-bs-toggle="modal" data-bs-target="#importNetworkModal">Import Network</button>
+     <button class="btn btn-danger w-auto" id="calculator" data-bs-toggle="modal" data-bs-target="#jitter">Path Analysis</button>
+     <button class="btn btn-dark w-auto" id="ping" data-bs-toggle="modal" data-bs-target="#pingmodal">Ping</button>
+
+
+
+
+
         <select class="form-select w-auto inline-group" id="selected_network" onchange="loadNetworkGraph()">
             {% for x in networks %}
                 <option value="{{ x.id }}"> {{ x.name }}</option>
@@ -31,6 +38,7 @@
                 <button class="btn btn-success" id="add_router">Add Router</button>
                 <button class="btn btn-success" id="add_host">Add Host</button>
                 <button class="btn btn-danger" id="delete_node">Delete Node</button>
+
             </div>
 
         </div>
@@ -71,10 +79,144 @@
           </div>
       </div>
     </div>
+
+
+  <!-- Modal -->
+<div class="modal fade" id="jitter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Path Analysis</h5>
+        <button type="button" class="close"   data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form id="pathanalylysisform" method="post" action="{% url 'calculatecost' %}">
+            {% csrf_token %}
+
+          <label>Select First Node</label>
+            <select id="firstcostnode" name="firstcostnode" class="form-control"></select> <br/>
+
+            <label>Select Second Node</label>
+            <select id="secondcostnode" name="secondcostnode" class="form-control"></select> <br/>
+
+
+            <label>Weightage for Bandwidth</label>
+            <input type="text" class="form-control" name="bw" /><br/>
+            <label>Weightage for Latency</label>
+            <input type="text" class="form-control" name="lw" /><br/>
+            <label>Weightage for Jiiter</label>
+            <input type="text" class="form-control" name="jw" /><br/>
+
+            <button type="submit" class="btn btn-primary mx-right">Calculate</button>
+        </form>
+
+
+
+
+      </div>
+      <div class="modal-footer">
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+ <div class="modal fade" id="pingmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ping</h5>
+        <button type="button" class="close"   data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form id="pingform" method="post" action="{% url 'pingcontroller' %}">
+            {% csrf_token %}
+
+          <label>Select First Node</label>
+            <select id="firstcostnodeping" name="firstcostnodeping" class="form-control"></select> <br/>
+
+            <label>Select Second Node</label>
+            <select id="secondcostnodeping" name="secondcostnodeping" class="form-control"></select> <br/>
+
+            <button type="submit" class="btn btn-primary mx-right">Ping</button>
+        </form>
+
+
+
+
+      </div>
+      <div class="modal-footer">
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
 {% endblock %}
 
 {% block javascript %}
     <script>
+
+
+{##}
+{#    $("#pathanalylysisform").on("submit", function (e){#}
+{##}
+{#        e.preventDefault()#}
+{##}
+{##}
+{##}
+{##}
+{#      $.ajax({#}
+{#                url: "/calculatecost",#}
+{#                data:{#}
+{#                    "firstcostnode":$("#firstcostnode").val(),#}
+{#                    "secondcostnode":$("#secondcostnode").val(),#}
+{##}
+{#                },#}
+{#                type: "POST",#}
+{#                success: function(data){#}
+{#                  console(data.data)#}
+{#                }#}
+{#            });#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#    })#}
+
+
+
+
+
+
+
+
+
+
+
         // Graph related operations and functions
         const nodes = new vis.DataSet();
         const edges = new vis.DataSet();
@@ -144,13 +286,7 @@
                         image: "{% static "images/host.png" %}",
                     },
                 },
-                layout: {
-                    hierarchical: {
-                        enabled: true,
-                        direction: "DU",
-                        sortMethod: "directed",
-                    },
-                },
+
             }
             network = new vis.Network(viz_container, data, options);
             network.on('selectNode', function (properties) {
@@ -178,6 +314,10 @@
             },
         };
 
+
+
+
+
         function loadNetworkGraph(){
             const network_id = get_selected_network_id();
             if(network_id === null || network_id === undefined) return;
@@ -188,6 +328,43 @@
                     nodes.clear();
                     edges.clear();
                     nodes.add(data.data[0]);
+
+
+$.each(data.data[0], function(index, item) {
+  $("#firstcostnode").append($('<option>', {
+    value: item.id,
+    text: item.label
+  }));
+
+  $("#secondcostnode").append($('<option>', {
+    value: item.id,
+    text: item.label
+  }));
+
+
+
+
+});
+$.each(data.data[0], function(index, item) {
+
+    if(item.label.startsWith("H") | item.label.startsWith("SW") ) {
+        $("#firstcostnodeping").append($('<option>', {
+            value: item.id,
+            text: item.label
+        }));
+
+        $("#secondcostnodeping").append($('<option>', {
+            value: item.id,
+            text: item.label
+        }));
+
+
+    }
+
+});
+
+
+
                     edges.add(data.data[1]);
                     network.cluster(clusterOptionsByData);
                 }

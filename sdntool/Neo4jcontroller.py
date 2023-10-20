@@ -740,3 +740,60 @@ MERGE (a)-[r:LINK]->(b)
         except Exception as e:
             print(e)
             return False
+
+    @staticmethod
+    def get_all_path(hid1, hid2):
+        def _get_all_path(tx, _hid1, _hid2):
+            result = tx.run(f"""
+                match path=(n)-[*]-(p) where ID(n)={hid1} and ID(p)={hid2} return path
+                """, hid1=_hid1, hid2=_hid2).data()
+            return result
+
+        response = Neo4JController.read_transaction(_get_all_path, hid1, hid2)
+        return json.dumps(response)
+
+    @staticmethod
+    def get_shortest_path(hid1, hid2):
+        def _get_shortest_path(tx, _hid1, _hid2):
+            result = tx.run(f"""
+                  MATCH path = shortestPath((start)-[*]-(end))
+WHERE ID(start) = {hid1} AND ID(end) = {hid2} 
+RETURN nodes(path) AS nodes, relationships(path) AS links
+                  """, hid1=_hid1, hid2=_hid2).data()
+            return result
+
+        response = Neo4JController.read_transaction(_get_shortest_path, hid1, hid2)
+        return json.dumps(response)
+
+    @staticmethod
+    def get_second_shortest_path(hid1, hid2):
+        def _get_second_shortest_path(tx, _hid1, _hid2):
+            result = tx.run(f"""
+                           MATCH path = (start)-[*]-(end)
+                WHERE ID(start) = {_hid1} AND ID(end) = {_hid2}
+                AND NONE(node IN nodes(path) WHERE node.name CONTAINS 'VNI')
+                WITH path, reduce(totalCost = 0, rel in relationships(path) | totalCost + rel.cost) AS total_weight
+                ORDER BY total_weight
+                LIMIT 1
+                RETURN nodes(path) AS nodes, relationships(path) AS links, total_weight
+                          """, hid1=_hid1, hid2=_hid2).data()
+            return result
+
+        response = Neo4JController.read_transaction(_get_second_shortest_path, hid1, hid2)
+        return json.dumps(response)
+
+
+
+    # def get_graph_vni(parent_name, format="HierarchicalFormat"):
+    #     # NOTE : This function query depends on `apoc` plugin for neo4j, So enable it before using this function
+    #     def _get_network_tree(tx, _parent_name):
+    #         result = tx.run(f"""
+    #                 MATCH (n:{parent_name})<-[:LINK]-(parent)
+    #                 RETURN ID(n) as eid, n, parent
+    #
+    #             """, parent_name=_parent_name).data()
+    #         nodes = []
+    #         return {"nodes": result}
+    #
+    #     response = Neo4JController.read_transaction(_get_network_tree, parent_name)
+    #     return json.dumps(response)

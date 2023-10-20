@@ -1,0 +1,217 @@
+{% extends "sdntool/base.html" %}
+{% load static %}
+{% block head %}
+    <menu></menu>
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+        #graph {
+            width: 100%;
+            height: 800px;
+        {#top:0#}{#border: 1px solid lightgray;#}
+        }
+
+        #link-properties {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            display: none;
+        }
+
+        #cost {
+            margin-top: 10px;
+            padding: 5px;
+            background-color: #eee;
+            border: 1px solid #ccc;
+            min-height: 60px;
+            font-size: 1.4em;
+        }
+    </style>
+
+    <div>
+ <h2>{{ message }}</h2>
+        <h3>Cost</h3>
+        <div id="cost"></div>
+    </div>
+    <div id="graph"></div>
+
+
+
+
+
+
+
+
+    <div id="link-properties">
+        <h3>Link Properties</h3>
+        <div id="link-properties-content"></div>
+
+    </div>
+
+
+
+{% endblock %}
+
+{% block javascript %}
+
+    <script type="text/javascript">
+
+        var linkData = {};
+
+        // Define the updateLinkProperty function in the global scope
+        function updateLinkProperty(edgeId, property, value) {
+            var edge = edges.get(edgeId);
+            edge[property] = value;
+            edges.update(edge);
+
+            // Store the link data
+            linkData[edgeId] = {
+                bandwidth: edge.bandwidth,
+                latency: edge.latency,
+                jitter: edge.jitter
+            };
+
+            // Perform any additional calculations or processing here
+            // You can access the linkData object to retrieve the stored values
+            // Calculate the cost based on the entered values
+            var cost = calculateCost(linkData);
+
+            // Update the content of the cost <div>
+            var costDiv = document.getElementById("cost");
+            costDiv.innerHTML = "Cost: " + cost;
+        }
+
+        var edges;
+
+
+        function calculateCost(linkData) {
+            // Perform your cost calculation logic here
+            // You can access the linkData object to retrieve the stored values
+            // and calculate the cost based on your requirements
+
+            var totalCost = 0;
+            var count =0;
+            // Example calculation: Sum of bandwidth, latency, and jitter values
+            for (var edgeId in linkData) {
+                var link = linkData[edgeId];
+                totalCost += {{ bw }}*parseFloat(link.bandwidth) - {{ lw }}*parseFloat(link.latency) - {{ jw }}*parseFloat(link.jitter);
+                count++;
+            }
+
+
+            if (count > 0) {
+
+                if(isNaN(totalCost)){
+
+                    return  "Calculating..."
+                }else{
+
+                       return totalCost / count
+                }
+
+            } else {
+                if(isNaN(totalCost)){
+
+                    return  "Calculating..."
+                }else{
+
+                       return totalCost
+                }
+            }
+
+
+        }
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var dataallpath = {{dataallpath | safe }};
+            var nodes = new vis.DataSet(dataallpath[0].nodes.map(function (node) {
+                return {
+                    id: node.name,
+                    label: node.name,
+                    group: node.name.startsWith('H') ? 'Host' : (
+                        node.name.startsWith('Network') ? 'Network' : (
+                            node.name.startsWith('Controller') ? 'Controller' : (
+                                node.name.startsWith('Router') ? 'Router' : 'Switch'
+                            )
+                        )
+                    )
+                };
+            }));
+
+            edges = new vis.DataSet(dataallpath[0].links.map(function (link) {
+                return {
+                    id: link[0].name + '-' + link[2].name,
+                    from: link[0].name,
+                    to: link[2].name,
+                    bandwidth: '',
+                    latency: '',
+                    jitter: ''
+                };
+            }));
+
+            var container = document.getElementById("graph");
+            var data = {
+                nodes: nodes,
+                edges: edges
+            };
+
+            var options = {
+                groups: {
+                    Network: {
+                        shape: "image",
+                        image: "{% static 'images/network.png' %}",
+                    },
+                    Controller: {
+                        shape: "image",
+                        image: "{% static 'images/controller.png' %}",
+                    },
+                    Router: {
+                        shape: "image",
+                        image: "{% static 'images/router.png' %}",
+                    },
+                    Switch: {
+                        shape: "image",
+                        image: "{% static 'images/switch.png' %}",
+                    },
+                    Host: {
+                        shape: "image",
+                        image: "{% static 'images/host.png' %}",
+                    },
+                }
+            };
+
+            var network = new vis.Network(container, data, options);
+
+            // Add event listener to handle click on edges
+            network.on("click", function (params) {
+                var edgeId = params.edges[0];
+                var edge = edges.get(edgeId);
+
+                // Render the link properties form
+                var linkPropertiesContent = document.getElementById("link-properties-content");
+                linkPropertiesContent.innerHTML = `
+                    <form>
+                        <label for="bandwidth-input">Bandwidth:</label>
+                        <input type="text" id="bandwidth-input" class="form-control" value="${edge.bandwidth}" onchange="updateLinkProperty('${edgeId}', 'bandwidth', this.value)">
+                        <br>
+                        <label for="latency-input">Latency:</label>
+                        <input type="text" id="latency-input" class="form-control"  value="${edge.latency}" onchange="updateLinkProperty('${edgeId}', 'latency', this.value)">
+                        <br>
+                        <label for="jitter-input">Jitter:</label>
+                        <input type="text" id="jitter-input"  class="form-control"  value="${edge.jitter}" onchange="updateLinkProperty('${edgeId}', 'jitter', this.value)">
+                    </form>
+                `;
+
+                // Position the link properties form
+                var linkProperties = document.getElementById("link-properties");
+                linkProperties.style.left = params.pointer.DOM.x + "px";
+                linkProperties.style.top = params.pointer.DOM.y + "px";
+                linkProperties.style.display = "block";
+            });
+        });
+    </script>
+{% endblock %}

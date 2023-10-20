@@ -908,3 +908,47 @@ def get_nodes_under_network(request, network_id, node_type):
             "message": "Failed to get nodes",
             "data": {}
         })
+
+
+
+
+@login_check
+@require_POST
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def calculatecost(request):
+
+    dataallpath= Neo4JController.get_shortest_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+    print(dataallpath)
+
+    return render(request, "sdntool/costcalculation.html", {"dataallpath":dataallpath, "bw":request.POST.get("bw"), "lw":request.POST.get("lw"), "jw":request.POST.get("jw"), "message":""  })
+
+
+
+
+@login_check
+@require_POST
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def calculatecostsecond(request):
+
+    dataallpath= Neo4JController.get_second_shortest_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+    print(len(dataallpath))
+
+    if len(dataallpath) <3:
+        return render(request, "sdntool/costcalculation.html", {"dataallpath":dataallpath, "bw":request.POST.get("bw"), "lw":request.POST.get("lw"), "jw":request.POST.get("jw"), "message":"No path exists."})
+    else:
+        return render(request, "sdntool/costcalculation.html",
+                      {"dataallpath": dataallpath, "bw": request.POST.get("bw"), "lw": request.POST.get("lw"),"jw": request.POST.get("jw"), "message": ""})
+
+
+@login_check
+@require_POST
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def pingcontroller(request):
+    dataallpath = Neo4JController.get_shortest_path(request.POST.get("firstcostnodeping"),
+                                                           request.POST.get("secondcostnodeping"))
+    if len(dataallpath) <3:
+        return render(request, "sdntool/pingstatus.html", {"dataallpath":dataallpath,  "message":"No path exists."})
+    else:
+        return render(request, "sdntool/pingstatus.html",
+                      {"dataallpath": dataallpath,  "message": ""})
+

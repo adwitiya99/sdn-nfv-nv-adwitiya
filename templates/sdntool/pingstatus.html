@@ -1,0 +1,176 @@
+{% extends "sdntool/base.html" %}
+{% load static %}
+{% block head %}
+    <menu></menu>
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+        #graph {
+            width: 100%;
+            height: 800px;
+        {#top:0#}{#border: 1px solid lightgray;#}
+        }
+
+        #link-properties {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            display: none;
+        }
+
+        #cost {
+            margin-top: 10px;
+            padding: 5px;
+            background-color: #eee;
+            border: 1px solid #ccc;
+            min-height: 60px;
+            font-size: 1.4em;
+        }
+
+
+        .message-lost {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: red;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    </style>
+
+    <div>
+ <h2>{{ message }}</h2>
+        <h3>Ping</h3>
+
+    </div>
+    <div id="graph"></div>
+
+{% endblock %}
+
+{% block javascript %}
+
+    <script type="text/javascript">
+
+        var linkData = {};
+        var lost = true;
+function animateMessageLost() {
+      const messageElement = document.createElement("div");
+      messageElement.classList.add("message-lost");
+      messageElement.innerText = "Message Lost";
+       document.getElementById("graph").appendChild(messageElement);
+
+      setTimeout(function () {
+        document.getElementById("graph").removeChild(messageElement);
+      }, 3000);
+    }
+
+        $( document ).ready(function () {
+            var dataallpath = {{dataallpath | safe }};
+            {#console.log(dataallpath[0])#}
+            var nodes = new vis.DataSet(dataallpath[0].nodes.map(function (node) {
+                return {
+                    id: node.name,
+                    label: node.name,
+                    group: node.name.startsWith('H') ? 'Host' : (
+                        node.name.startsWith('Network') ? 'Network' : (
+                            node.name.startsWith('Controller') ? 'Controller' : (
+                                node.name.startsWith('Router') ? 'Router' : 'Switch'
+                            )
+                        )
+                    )
+                };
+            }));
+
+         var   edges = new vis.DataSet(dataallpath[0].links.map(function(link) {
+                return {
+                    id: link[0].name + '-' + link[2].name,
+                    from: link[0].name,
+                    to: link[2].name,
+                };
+            }));
+
+            var container = document.getElementById("graph");
+            var data = {
+                nodes: nodes,
+                edges: edges
+            };
+
+            var options = {
+                groups: {
+                    Network: {
+                        shape: "image",
+                        image: "{% static 'images/network.png' %}",
+                    },
+                    Controller: {
+                        shape: "image",
+                        image: "{% static 'images/controller.png' %}",
+                    },
+                    Router: {
+                        shape: "image",
+                        image: "{% static 'images/router.png' %}",
+                    },
+                    Switch: {
+                        shape: "image",
+                        image: "{% static 'images/switch.png' %}",
+                    },
+                    Host: {
+                        shape: "image",
+                        image: "{% static 'images/host.png' %}",
+                    },
+                }
+            };
+
+            var network = new vis.Network(container, data, options);
+
+ // Simulate traffic animation from start to end
+    var animateTraffic = function(index) {
+        if (index < dataallpath[0].links.length) {
+            var link = dataallpath[0].links[index];
+            var edgeId = null;
+            edges.forEach(function (edge) {
+                if (edge.from === link[0].name && edge.to === link[2].name) {
+                    edgeId = edge.id;
+                }
+            });
+            if (edgeId !== null) {
+
+                if(/^SW\d+-H\d+$/.test(edgeId) && (index +1 < dataallpath[0].links.length)){
+                     edges.update([{ id: edgeId, color: 'red', arrows: 'from' }]);
+                }else{
+                   edges.update([{ id: edgeId, color: 'red', arrows: 'to' }]);
+                }
+
+                if (link[2].name == "SW6") {
+
+                    animateMessageLost()
+                    return;
+                }
+                // Delay for a set amount of time (e.g., 1000 ms)
+                setTimeout(function () {
+                    edges.update([{ id: edgeId, color: 'black', arrows: { to: { enabled: false } }}]);
+                     animateTraffic((index + 1) % dataallpath[0].links.length); // Loop back to the start if at the end
+
+
+
+                }, 1000);
+
+
+
+
+            }
+        }
+    };
+
+    // Start the traffic animation
+    animateTraffic(0);
+
+
+
+        });
+    </script>
+{% endblock %}
