@@ -947,7 +947,7 @@ def pingcontroller(request):
     dataallpath = Neo4JController.get_shortest_path(request.POST.get("firstcostnodeping"),
                                                            request.POST.get("secondcostnodeping"))
     if len(dataallpath) <3:
-        return render(request, "sdntool/pingstatus.html", {"dataallpath":dataallpath,  "message":"No path exists."})
+        return render(request, "sdntool/pingstatus.html", {"dataallpath":dataallpath,   "message":"No path exists."})
     else:
         return render(request, "sdntool/pingstatus.html",
                       {"dataallpath": dataallpath,  "message": ""})

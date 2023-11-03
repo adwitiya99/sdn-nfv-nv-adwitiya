@@ -4323,3 +4323,62 @@ def chunks(task, it, n):
 12:16:22,128 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
 12:16:42,652 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
 12:17:00,71 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+22:26:36,785 django.request WARNING Not Found: /favicon.ico
+22:26:36,815 django.request WARNING Not Found: /favicon.ico
+22:26:36,825 django.request WARNING Not Found: /favicon.ico
+22:26:36,839 django.request WARNING Not Found: /favicon.ico
+23:45:38,310 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+23:46:06,856 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+23:47:09,808 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+00:00:20,628 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+08:57:17,814 django.request WARNING Not Found: /favicon.ico
+09:19:31,677 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+09:24:20,258 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+09:35:32,507 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+22:27:30,438 django.request WARNING Not Found: /favicon.ico
+22:27:30,444 django.request WARNING Not Found: /favicon.ico
+22:27:30,754 django.request WARNING Not Found: /favicon.ico
+00:29:22,321 django.request WARNING Not Found: /pingcontroller/process-json.php
+00:33:46,376 django.request WARNING Not Found: /pingcontroller/process-json.php
+00:39:31,348 django.request WARNING Not Found: /pingcontroller/process-json.php
+10:03:52,172 django.request WARNING Not Found: /favicon.ico
+10:03:52,216 django.request WARNING Not Found: /favicon.ico
+10:33:27,800 django.request WARNING Method Not Allowed (GET): /pingcontroller/
+10:34:53,668 django.request WARNING Method Not Allowed (GET): /pingcontroller/
+10:50:09,509 django.request WARNING Method Not Allowed (GET): /pingcontroller/
+10:50:23,308 django.request WARNING Method Not Allowed (GET): /pingcontroller/
+10:51:31,929 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:52:16,31 django.request WARNING Method Not Allowed (POST): /pingcontroller/
+10:52:28,363 django.request WARNING Method Not Allowed (POST): /pingcontroller/
+10:52:29,337 django.request WARNING Method Not Allowed (POST): /pingcontroller/
+10:52:29,864 django.request WARNING Method Not Allowed (POST): /pingcontroller/
+10:52:30,36 django.request WARNING Method Not Allowed (POST): /pingcontroller/
+10:52:30,213 django.request WARNING Method Not Allowed (POST): /pingcontroller/
+10:52:30,394 django.request WARNING Method Not Allowed (POST): /pingcontroller/
+10:52:30,564 django.request WARNING Method Not Allowed (POST): /pingcontroller/
+10:52:30,732 django.request WARNING Method Not Allowed (POST): /pingcontroller/
+10:52:30,908 django.request WARNING Method Not Allowed (POST): /pingcontroller/
+10:52:31,119 django.request WARNING Method Not Allowed (POST): /pingcontroller/
+10:54:39,47 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:54:46,281 django.request WARNING Method Not Allowed (POST): /pingcontroller/
+10:54:46,849 django.request WARNING Method Not Allowed (POST): /pingcontroller/
+10:54:47,43 django.request WARNING Method Not Allowed (POST): /pingcontroller/
+10:54:47,327 django.request WARNING Method Not Allowed (POST): /pingcontroller/
+10:54:47,532 django.request WARNING Method Not Allowed (POST): /pingcontroller/
+10:54:47,728 django.request WARNING Method Not Allowed (POST): /pingcontroller/
+10:54:47,957 django.request WARNING Method Not Allowed (POST): /pingcontroller/
+10:55:17,584 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+10:55:28,118 django.request ERROR Internal Server Error: /pingcontroller/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 41, in _cache_controlled
+    patch_cache_control(response, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/utils/cache.py", line 62, in patch_cache_control
+    if response.get("Cache-Control"):
+AttributeError: 'NoneType' object has no attribute 'get'
+10:55:52,171 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.

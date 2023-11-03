@@ -13,7 +13,7 @@
         <button class="btn btn-primary w-auto" id="importnetwork" data-bs-toggle="modal" data-bs-target="#importNetworkModal">Import Network</button>
      <button class="btn btn-danger w-auto" id="calculator" data-bs-toggle="modal" data-bs-target="#jitter">Path Analysis</button>
      <button class="btn btn-dark w-auto" id="ping" data-bs-toggle="modal" data-bs-target="#pingmodal">Ping</button>
-
+        {# <button class="btn btn-dark w-auto" id="flowrule" data-bs-toggle="modal" data-bs-target="#flowrulemodal">Flow Rule</button> #}
 
 
 
@@ -151,18 +151,34 @@
 
             <button type="submit" class="btn btn-primary mx-right">Ping</button>
         </form>
-
-
-
-
-      </div>
-      <div class="modal-footer">
-
-
-      </div>
     </div>
-  </div>
 </div>
+  </div>
+ </div>
+
+  {#  <div class="modal fade" id="flowrulemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
+  {# <div class="modal-dialog" role="document"> #}
+    {#  <div class="modal-content">#}
+              {#<form id="flowruleform">#}
+                  {#<div class="modal-header">#}
+                   {# <h5 class="modal-title" id="importflowruleLabel">Import Flow Rule</h5>#}
+                    {#<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+                  {#</div>#}
+                  {#<div class="modal-body">#}
+                      {# <div class="mb-3">#}
+                         {# <label for="flowrule_configuration_file" class="form-label">Flow Rule File</label>#}
+                          {# <input type="file" accept=".json" class="form-control" id="flowrule_configuration_file" placeholder="Upload file" required onchange='loadContentFromfile("controller")'>#}
+                    {#  </div>#}
+                  {#</div>#}
+                  {#<div class="modal-footer">#}
+                    {#  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>#}
+                    {#  <button type="submit" class="btn btn-primary" onclick="">Submit Flow Rule</button>#}
+                {#  </div> #}
+              {#</form>#}
+      {#</div>#}
+      {#  </div>#}
+    {#</div>#}
+
 
 
 
@@ -347,7 +363,7 @@ $.each(data.data[0], function(index, item) {
 });
 $.each(data.data[0], function(index, item) {
 
-    if(item.label.startsWith("H") | item.label.startsWith("SW") ) {
+    if(item.label.startsWith("H")) {
         $("#firstcostnodeping").append($('<option>', {
             value: item.id,
             text: item.label

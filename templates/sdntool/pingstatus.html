@@ -7,7 +7,8 @@
     <style type="text/css">
         #graph {
             width: 100%;
-            height: 800px;
+            height: 500px;
+            max-height: 80%;
         {#top:0#}{#border: 1px solid lightgray;#}
         }
 
@@ -41,11 +42,45 @@
       padding: 10px;
       border-radius: 5px;
     }
+        .message-sent{
+      position: absolute;
+      top: 30%;
+      left: 80%;
+      transform: translate(-50%, -50%);
+      background-color: green;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+    }
+        /* CSS for the button */
+        .upload-button {
+            background-color: #007BFF; /* Button background color */
+            color: white; /* Text color */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .upload-button-icon {
+            margin-right: 5px; /* Adjust the spacing between the icon and label */
+        }
+
+
     </style>
 
     <div>
  <h2>{{ message }}</h2>
         <h3>Ping</h3>
+     <label for="flowrulefile" class="form-label">Flow Rule Files</label>
+    <input type="file" accept=".json" class="form-control" id="flowrulefile" style="display: none" required onchange='loadFlowruleFromFile()'>
+
+    <button type="button" class="upload-button" onclick="document.getElementById('flowrulefile').click()">
+        <i class="fas fa-cloud-upload-alt upload-button-icon"></i> Upload Flow Rule
+    </button>
+
 
     </div>
     <div id="graph"></div>
@@ -56,22 +91,66 @@
 
     <script type="text/javascript">
 
+    $(document).ready(()=>{
+
+         localStorage.removeItem('flowruleData')
+
+
+    })
+
+
         var linkData = {};
         var lost = true;
+function loadFlowruleFromFile() {
+            const fileInput = document.getElementById('flowrulefile');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(event) {
+                    const jsonContent = event.target.result;
+
+                    try {
+                        const jsonData = JSON.parse(jsonContent);
+                        // Store the JSON data in localStorage
+                        localStorage.setItem('flowruleData', JSON.stringify(jsonData));
+                        console.log('Data stored in localStorage:', jsonData);
+                    } catch (error) {
+                        console.error('Error parsing JSON:', error);
+                    }
+                };
+
+                reader.readAsText(file);
+
+
+            } else {
+                console.error('No file selected.');
+            }
+        }
+
+
 function animateMessageLost() {
       const messageElement = document.createElement("div");
       messageElement.classList.add("message-lost");
       messageElement.innerText = "Message Lost";
        document.getElementById("graph").appendChild(messageElement);
 
+
+    }
+function animateMessageSent() {
+      const messageElement = document.createElement("div");
+      messageElement.classList.add("message-sent");
+      messageElement.innerText = "Message Sent!";
+       document.getElementById("graph").appendChild(messageElement);
+
       setTimeout(function () {
         document.getElementById("graph").removeChild(messageElement);
-      }, 3000);
+      }, 1000);
     }
-
         $( document ).ready(function () {
             var dataallpath = {{dataallpath | safe }};
-            {#console.log(dataallpath[0])#}
+            console.log(dataallpath[0])
             var nodes = new vis.DataSet(dataallpath[0].nodes.map(function (node) {
                 return {
                     id: node.name,
@@ -132,42 +211,78 @@ function animateMessageLost() {
         if (index < dataallpath[0].links.length) {
             var link = dataallpath[0].links[index];
             var edgeId = null;
+
+            {#var destination = {{ destination | safe}};#}
+            {#console.log(destination)#}
             edges.forEach(function (edge) {
                 if (edge.from === link[0].name && edge.to === link[2].name) {
                     edgeId = edge.id;
                 }
+
             });
             if (edgeId !== null) {
 
                 if(/^SW\d+-H\d+$/.test(edgeId) && (index +1 < dataallpath[0].links.length)){
                      edges.update([{ id: edgeId, color: 'red', arrows: 'from' }]);
-                }else{
+                }
+
+                else{
                    edges.update([{ id: edgeId, color: 'red', arrows: 'to' }]);
                 }
 
-                if (link[2].name == "SW6") {
 
-                    animateMessageLost()
-                    return;
+/*This if else part to be done*/
+                {#console.log(index)#}
+                {#console.log(dataallpath[0].links.length)#}
+                if (index+1==dataallpath[0].links.length){
+                    animateMessageSent()
                 }
+
+
+
+
                 // Delay for a set amount of time (e.g., 1000 ms)
                 setTimeout(function () {
                     edges.update([{ id: edgeId, color: 'black', arrows: { to: { enabled: false } }}]);
-                     animateTraffic((index + 1) % dataallpath[0].links.length); // Loop back to the start if at the end
 
-
+                     animateTraffic((index + 1) % dataallpath[0].links.length);
+                    // Loop back to the start if at the end
 
                 }, 1000);
 
-
-
-
             }
         }
+
     };
 
+
+    const flowruleData = JSON.parse(localStorage.getItem('flowruleData'));
+    if(flowruleData === null){
+
+        animateMessageLost();
+    }
+
+$("#flowrulefile").on("change", ()=>{
+  $(".message-lost").remove();
+    {#animateTraffic(0);#}
+ let ethSrc, ethDest;
+    const flowruleData = JSON.parse(localStorage.getItem('flowruleData'));
+ console.log(flowruleData)
+                if (flowruleData && flowruleData.treatment !== null) {
+                     animateTraffic(0)
+                }else {
+
+                    animateMessageLost();
+                }
+            })
+
+
+
+
+
+
     // Start the traffic animation
-    animateTraffic(0);
+
 
 
 
