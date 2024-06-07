@@ -1,18 +1,18 @@
 version: '3.9'
 services:
   sqldb:
-    image: mysql:8
+    image: mysql:8.4
     command:
-      - "--default-authentication-plugin=mysql_native_password"
+      - "--mysql-native-password=ON"
     environment:
       - MYSQL_DATABASE=sdntool
       - MYSQL_ROOT_PASSWORD=tmpsqlpass
-      - MYSQL_ROOT_HOST=10.2.0.6
+      - MYSQL_ROOT_HOST=10.2.0.9
     volumes:
       - sqldb_data:/var/lib/mysql
     networks:
       sdntool_private_network:
-        ipv4_address: 10.2.0.2
+        ipv4_address: 10.2.0.6
 
   redis:
     image: 'bitnami/redis:latest'
@@ -38,7 +38,8 @@ services:
       - neo4j_plugins:/plugins
     healthcheck:
       test: wget http://localhost:7474 || exit 1
-      interval: 1s
+      interval: 10s
+      #interval was initially 1s
       timeout: 10s
       retries: 20
       start_period: 3s
@@ -54,7 +55,7 @@ services:
     networks:
       sdntool_private_network:
         ipv4_address: 10.2.0.5
-        
+
   web:
     build: .
     command:
@@ -77,7 +78,7 @@ services:
       - SYSTEM_TIMEZONE=Asia/Kolkata
       - SECRET_KEY=qo1+kq2)$b(kfgrl7s2eht+=7myltu#&+#w3-gdyu79y-)-=5d
       - ALLOWED_HOSTS=*
-      - MYSQL_DB_HOST=10.2.0.2
+      - MYSQL_DB_HOST=10.2.0.6
       - MYSQL_DB_NAME=sdntool
       - MYSQL_DB_USERNAME=root
       - MYSQL_DB_PASSWORD=tmpsqlpass
@@ -95,7 +96,7 @@ services:
         condition: service_healthy
     networks:
       sdntool_private_network:
-        ipv4_address: 10.2.0.6
+        ipv4_address: 10.2.0.9
       accessible_network:
 networks:
   sdntool_private_network:

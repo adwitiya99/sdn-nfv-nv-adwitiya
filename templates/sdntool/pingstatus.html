@@ -33,25 +33,27 @@
 
 
         .message-lost {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: red;
-      color: white;
-      padding: 10px;
-      border-radius: 5px;
-    }
-        .message-sent{
-      position: absolute;
-      top: 30%;
-      left: 80%;
-      transform: translate(-50%, -50%);
-      background-color: green;
-      color: white;
-      padding: 10px;
-      border-radius: 5px;
-    }
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: red;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .message-sent {
+            position: absolute;
+            top: 30%;
+            left: 80%;
+            transform: translate(-50%, -50%);
+            background-color: green;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
         /* CSS for the button */
         .upload-button {
             background-color: #007BFF; /* Button background color */
@@ -72,14 +74,14 @@
     </style>
 
     <div>
- <h2>{{ message }}</h2>
+        <h2>{{ message }}</h2>
         <h3>Ping</h3>
-     <label for="flowrulefile" class="form-label">Flow Rule Files</label>
-    <input type="file" accept=".json" class="form-control" id="flowrulefile" style="display: none" required onchange='loadFlowruleFromFile()'>
+        <label for="flowrulefile" class="form-label">Flow Rule Files</label>
+        <input type="file" accept=".json" class="form-control" id="flowrulefile" style="" required>
 
-    <button type="button" class="upload-button" onclick="document.getElementById('flowrulefile').click()">
-        <i class="fas fa-cloud-upload-alt upload-button-icon"></i> Upload Flow Rule
-    </button>
+        {#    <button type="button" class="upload-button" onclick="document.getElementById('flowrulefile').click()">#}
+        {#        <i class="fas fa-cloud-upload-alt upload-button-icon"></i> Change Flow Rule#}
+        {#    </button>#}
 
 
     </div>
@@ -91,17 +93,17 @@
 
     <script type="text/javascript">
 
-    $(document).ready(()=>{
-
-         localStorage.removeItem('flowruleData')
-
-
-    })
+        $(document).ready(() => {
+        localStorage.removeItem('flowruleData')
+        })
 
 
         var linkData = {};
         var lost = true;
-function loadFlowruleFromFile() {
+        var stop = false
+
+       const  loadFlowruleFromFile = () =>{
+             localStorage.removeItem('flowruleData')
             const fileInput = document.getElementById('flowrulefile');
             const file = fileInput.files[0];
 
@@ -109,46 +111,46 @@ function loadFlowruleFromFile() {
                 const reader = new FileReader();
 
                 reader.onload = function(event) {
-                    const jsonContent = event.target.result;
-
                     try {
+                        const jsonContent = event.target.result;
                         const jsonData = JSON.parse(jsonContent);
-                        // Store the JSON data in localStorage
                         localStorage.setItem('flowruleData', JSON.stringify(jsonData));
-                        console.log('Data stored in localStorage:', jsonData);
+                        console.log('Data stored successfully in localStorage');
+                        $("#flowrulefile").val(null);
                     } catch (error) {
-                        console.error('Error parsing JSON:', error);
+                        console.error('Error parsing or storing JSON:', error);
                     }
                 };
 
                 reader.readAsText(file);
-
-
             } else {
                 console.error('No file selected.');
             }
         }
 
 
-function animateMessageLost() {
-      const messageElement = document.createElement("div");
-      messageElement.classList.add("message-lost");
-      messageElement.innerText = "Message Lost";
-       document.getElementById("graph").appendChild(messageElement);
+        function animateMessageLost() {
+
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("message-lost");
+            messageElement.innerText = "Message Lost";
+            document.getElementById("graph").appendChild(messageElement);
 
 
-    }
-function animateMessageSent() {
-      const messageElement = document.createElement("div");
-      messageElement.classList.add("message-sent");
-      messageElement.innerText = "Message Sent!";
-       document.getElementById("graph").appendChild(messageElement);
+        }
 
-      setTimeout(function () {
-        document.getElementById("graph").removeChild(messageElement);
-      }, 1000);
-    }
-        $( document ).ready(function () {
+        function animateMessageSent() {
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("message-sent");
+            messageElement.innerText = "Message Sent!";
+            document.getElementById("graph").appendChild(messageElement);
+
+            setTimeout(function () {
+                document.getElementById("graph").removeChild(messageElement);
+            }, 1000);
+        }
+
+        $(document).ready(function () {
             var dataallpath = {{dataallpath | safe }};
             console.log(dataallpath[0])
             var nodes = new vis.DataSet(dataallpath[0].nodes.map(function (node) {
@@ -165,7 +167,7 @@ function animateMessageSent() {
                 };
             }));
 
-         var   edges = new vis.DataSet(dataallpath[0].links.map(function(link) {
+            var edges = new vis.DataSet(dataallpath[0].links.map(function (link) {
                 return {
                     id: link[0].name + '-' + link[2].name,
                     from: link[0].name,
@@ -206,86 +208,102 @@ function animateMessageSent() {
 
             var network = new vis.Network(container, data, options);
 
- // Simulate traffic animation from start to end
-    var animateTraffic = function(index) {
-        if (index < dataallpath[0].links.length) {
-            var link = dataallpath[0].links[index];
-            var edgeId = null;
+            // Simulate traffic animation from start to end
+            var animateTraffic = function (index) {
 
-            {#var destination = {{ destination | safe}};#}
-            {#console.log(destination)#}
-            edges.forEach(function (edge) {
-                if (edge.from === link[0].name && edge.to === link[2].name) {
-                    edgeId = edge.id;
+                 if(!stop){
+                if (index < dataallpath[0].links.length) {
+                    var link = dataallpath[0].links[index];
+                    var edgeId = null;
+
+                    {#var destination = {{ destination | safe}};#}
+                    {#console.log(destination)#}
+                    edges.forEach(function (edge) {
+                        if (edge.from === link[0].name && edge.to === link[2].name) {
+                            edgeId = edge.id;
+                        }
+
+                    });
+                    if (edgeId !== null) {
+
+                        if (/^SW\d+-H\d+$/.test(edgeId) && (index + 1 < dataallpath[0].links.length)) {
+                            edges.update([{id: edgeId, color: 'red', arrows: 'from'}]);
+                        } else {
+                            edges.update([{id: edgeId, color: 'red', arrows: 'to'}]);
+                        }
+
+
+                        /*This if else part to be done*/
+                        {#console.log(index)#}
+                        {#console.log(dataallpath[0].links.length)#}
+                        if (index + 1 == dataallpath[0].links.length) {
+                            animateMessageSent()
+                        }
+
+
+                        // Delay for a set amount of time (e.g., 1000 ms)
+                        setTimeout(function () {
+                            edges.update([{id: edgeId, color: 'black', arrows: {to: {enabled: false}}}]);
+
+
+                            animateTraffic((index + 1) % dataallpath[0].links.length);
+
+
+                            // Loop back to the start if at the end
+
+                        }, 1000);
+
+                    }else{
+
+                        return
+                    }
+
+                    }
                 }
 
-            });
-            if (edgeId !== null) {
+            };
+            var flowruleData = JSON.parse(localStorage.getItem('flowruleData'));
+            if (flowruleData === null) {
 
-                if(/^SW\d+-H\d+$/.test(edgeId) && (index +1 < dataallpath[0].links.length)){
-                     edges.update([{ id: edgeId, color: 'red', arrows: 'from' }]);
-                }
-
-                else{
-                   edges.update([{ id: edgeId, color: 'red', arrows: 'to' }]);
-                }
-
-
-/*This if else part to be done*/
-                {#console.log(index)#}
-                {#console.log(dataallpath[0].links.length)#}
-                if (index+1==dataallpath[0].links.length){
-                    animateMessageSent()
-                }
-
-
-
-
-                // Delay for a set amount of time (e.g., 1000 ms)
-                setTimeout(function () {
-                    edges.update([{ id: edgeId, color: 'black', arrows: { to: { enabled: false } }}]);
-
-                     animateTraffic((index + 1) % dataallpath[0].links.length);
-                    // Loop back to the start if at the end
-
-                }, 1000);
-
+                animateMessageLost();
             }
+
+
+
+
+$(document).on('change', '#flowrulefile', () => {
+    loadFlowruleFromFile();
+    $(".message-lost").remove();
+
+    // Use a callback function to handle data retrieval
+    function handleData() {
+        const data = JSON.parse(localStorage.getItem('flowruleData'));
+        console.log('Data stored in localStorage:', data.treatment['instructions'] );
+        if (data && data.treatment['instructions']) {
+            stop=false
+            animateTraffic(0);
+        } else {
+            stop=true
+            animateMessageLost();
         }
-
-    };
-
-
-    const flowruleData = JSON.parse(localStorage.getItem('flowruleData'));
-    if(flowruleData === null){
-
-        animateMessageLost();
     }
 
-$("#flowrulefile").on("change", ()=>{
-  $(".message-lost").remove();
-    {#animateTraffic(0);#}
- let ethSrc, ethDest;
-    const flowruleData = JSON.parse(localStorage.getItem('flowruleData'));
- console.log(flowruleData)
-                if (flowruleData && flowruleData.treatment !== null) {
-                     animateTraffic(0)
-                }else {
-
-                    animateMessageLost();
-                }
-            })
+    // Check if the data is available in localStorage, and if not, set a timer to check again
+    if (localStorage.getItem('flowruleData')) {
+        handleData();
+    } else {
+        // Set a timeout to check again after a short delay (adjust the delay as needed)
+        setTimeout(handleData, 1000); // Wait for 1 second (adjust as needed)
+    }
+});
 
 
 
 
-
-
-    // Start the traffic animation
-
-
-
-
+           // Start the traffic animation
         });
+
+
+
     </script>
 {% endblock %}

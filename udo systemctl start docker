@@ -1,0 +1,21 @@
+[0;1;32m●[0m docker.service - Docker Application Container Engine
+     Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+     Active: [0;1;32mactive (running)[0m since Mon 2024-05-27 17:40:16 IST; 17s ago
+TriggeredBy: [0;1;32m●[0m docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 18617 (dockerd)
+      Tasks: 11
+     Memory: 29.5M
+     CGroup: /system.slice/docker.service
+             └─18617 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+May 27 17:40:14 prantik-Ubuntu dockerd[18617]: time="2024-05-27T17:40:14.019726081+05:30" level=info msg="Starting up"
+May 27 17:40:14 prantik-Ubuntu dockerd[18617]: time="2024-05-27T17:40:14.020389971+05:30" level=info msg="detected 127.0.0.53 nameserver, assuming systemd-resolved, so using resolv.conf: /run/systemd/resolve/resolv.conf"
+May 27 17:40:14 prantik-Ubuntu dockerd[18617]: time="2024-05-27T17:40:14.844842176+05:30" level=info msg="[graphdriver] using prior storage driver: overlay2"
+May 27 17:40:14 prantik-Ubuntu dockerd[18617]: time="2024-05-27T17:40:14.863918213+05:30" level=info msg="Loading containers: start."
+May 27 17:40:15 prantik-Ubuntu dockerd[18617]: time="2024-05-27T17:40:15.464336797+05:30" level=info msg="Default bridge (docker0) is assigned with an IP address 172.17.0.0/16. Daemon option --bip can be used to set a preferred IP address"
+May 27 17:40:15 prantik-Ubuntu dockerd[18617]: time="2024-05-27T17:40:15.748026637+05:30" level=info msg="Loading containers: done."
+May 27 17:40:16 prantik-Ubuntu dockerd[18617]: time="2024-05-27T17:40:16.025630138+05:30" level=info msg="Docker daemon" commit=8e96db1 containerd-snapshotter=false storage-driver=overlay2 version=26.1.3
+May 27 17:40:16 prantik-Ubuntu dockerd[18617]: time="2024-05-27T17:40:16.025723578+05:30" level=info msg="Daemon has completed initialization"
+May 27 17:40:16 prantik-Ubuntu dockerd[18617]: time="2024-05-27T17:40:16.913564869+05:30" level=info msg="API listen on /run/docker.sock"
+May 27 17:40:16 prantik-Ubuntu systemd[1]: Started Docker Application Container Engine.

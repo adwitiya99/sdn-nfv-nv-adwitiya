@@ -33,7 +33,7 @@
 
     <div>
  <h2>{{ message }}</h2>
-        <h3>Cost</h3>
+        <h3>QoS</h3>
         <div id="cost"></div>
     </div>
     <div id="graph"></div>
@@ -81,7 +81,32 @@
 
             // Update the content of the cost <div>
             var costDiv = document.getElementById("cost");
-            costDiv.innerHTML = "Cost: " + cost;
+            costDiv.innerHTML = "Q: " + cost;
+            updateCostLabel(cost);
+        }
+
+        function updateCostLabel(qos) {
+            var costDiv = document.getElementById("cost");
+
+            if (qos === "Calculating...") {
+                costDiv.innerHTML = "Q: Calculating...";
+            } else {
+                var qosValue = parseFloat(qos);
+
+                if (qosValue < 1) {
+                    costDiv.innerHTML = "Q: " + qos + " (Gold)";
+                    costDiv.style.backgroundColor = 'gold';
+                } else if (qosValue >= 1 && qosValue < 2) {
+                    costDiv.innerHTML = "Q: " + qos + " (Silver)";
+                    costDiv.style.backgroundColor = 'silver';
+                } else if (qosValue >= 2 && qosValue < 3) {
+                    costDiv.innerHTML = "Q: " + qos + " (Bronze)";
+                    costDiv.style.backgroundColor = '#cd7f32'; // Bronze
+                } else {
+                    costDiv.innerHTML = "Q: " + qos + " (Poor)";
+                    costDiv.style.backgroundColor = 'red';
+                }
+            }
         }
 
         var edges;
@@ -94,12 +119,24 @@
 
             var totalCost = 0;
             var count =0;
+            var minBandwidth = Infinity;
+            var sumlatency=0;
+            var sumjitter=0;
+            
             // Example calculation: Sum of bandwidth, latency, and jitter values
             for (var edgeId in linkData) {
                 var link = linkData[edgeId];
-                totalCost += {{ bw }}*parseFloat(link.bandwidth) - {{ lw }}*parseFloat(link.latency) - {{ jw }}*parseFloat(link.jitter);
-                count++;
+                var bandwidthweight = parseFloat(link.bandwidth);
+                var latencyweight = parseFloat(link.latency);
+                var jitterweight = parseFloat(link.jitter);
+                if (bandwidthweight < minBandwidth) {
+                    minBandwidth = bandwidthweight;
+                }
+                sumlatency += latencyweight;
+                sumjitter += jitterweight;
             }
+            totalCost=sumjitter*sumlatency/minBandwidth;
+            
 
 
             if (count > 0) {
@@ -109,7 +146,7 @@
                     return  "Calculating..."
                 }else{
 
-                       return totalCost / count
+                       return totalCost
                 }
 
             } else {

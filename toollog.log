@@ -4382,3 +4382,1889 @@ Traceback (most recent call last):
     if response.get("Cache-Control"):
 AttributeError: 'NoneType' object has no attribute 'get'
 10:55:52,171 django.utils.autoreload INFO /app/sdntool/views.py changed, reloading.
+23:01:31,586 django.request WARNING Not Found: /favicon.ico
+20:06:18,942 django.request WARNING Not Found: /favicon.ico
+10:08:54,847 django.request WARNING Not Found: /favicon.ico
+14:13:48,773 django.request WARNING Not Found: /favicon.ico
+12:02:17,505 django.request WARNING Not Found: /favicon.ico
+12:02:17,524 django.request WARNING Not Found: /favicon.ico
+12:02:17,536 django.request WARNING Not Found: /favicon.ico
+00:14:29,556 django.request WARNING Not Found: /favicon.ico
+01:23:07,785 django.request ERROR Internal Server Error: /calculatecost
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 920, in calculatecost
+    dataallpath= Neo4JController.get_shortest_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+  File "/app/sdntool/Neo4jcontroller.py", line 765, in get_shortest_path
+    response = Neo4JController.read_transaction(_get_shortest_path, hid1, hid2)
+  File "/app/sdntool/Neo4jcontroller.py", line 25, in read_transaction
+    return session.execute_read(function_reference, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 590, in execute_read
+    return self._run_transaction(
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 487, in _run_transaction
+    result = transaction_function(tx, *args, **kwargs)
+  File "/app/sdntool/Neo4jcontroller.py", line 758, in _get_shortest_path
+    result = tx.run(f"""
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 605, in data
+    return [record.data(*keys) for record in self]
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 605, in <listcomp>
+    return [record.data(*keys) for record in self]
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 251, in __iter__
+    self._connection.fetch_message()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 180, in inner
+    func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt.py", line 658, in fetch_message
+    res = self._process_message(tag, fields)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt5.py", line 317, in _process_message
+    response.on_failure(summary_metadata or {})
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 247, in on_failure
+    raise Neo4jError.hydrate(**metadata)
+neo4j.exceptions.DatabaseError: {code: Neo.DatabaseError.Statement.ExecutionFailed} {message: The shortest path algorithm does not work when the start and end nodes are the same. This can happen if you
+perform a shortestPath search after a cartesian product that might have the same start and end nodes for some
+of the rows passed to shortestPath. If you would rather not experience this exception, and can accept the
+possibility of missing results for those rows, disable this in the Neo4j configuration by setting
+`dbms.cypher.forbid_shortestpath_common_nodes` to false. If you cannot accept missing results, and really want the
+shortestPath between two common nodes, then re-write the query using a standard Cypher variable length pattern
+expression followed by ordering by path length and limiting to one result.}
+11:03:03,304 django.request WARNING Not Found: /favicon.ico
+17:59:41,925 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+17:59:41,959 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+17:59:41,959 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+17:59:41,960 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+17:59:41,960 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+17:59:41,961 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+17:59:41,962 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+17:59:41,962 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+17:59:41,963 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+17:59:41,963 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+17:59:41,964 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+18:05:41,685 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+18:05:41,685 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+18:05:41,686 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+18:05:41,686 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+18:05:41,686 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+18:05:41,686 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+18:05:41,687 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+18:05:41,687 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+18:05:41,687 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+18:05:41,688 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+18:05:41,688 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+15:45:04,156 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+15:45:04,156 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+15:45:04,156 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+15:45:04,157 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+15:45:04,157 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+15:45:04,157 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+15:45:04,157 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+15:45:04,158 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+15:45:04,158 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+15:45:04,158 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+15:45:04,159 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+16:08:55,505 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+16:08:55,506 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+16:08:55,506 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+16:08:55,506 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+16:08:55,506 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+16:08:55,507 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+16:08:55,507 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+16:08:55,507 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+16:08:55,508 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+16:08:55,508 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+16:08:55,508 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+16:21:10,78 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+16:21:10,116 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+16:21:10,117 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+16:21:10,119 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+16:21:10,120 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+16:21:10,122 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+16:21:10,123 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+16:21:10,125 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+16:21:10,126 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+16:21:10,128 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+16:21:10,130 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+16:23:18,199 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+16:23:18,218 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+16:23:18,218 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+16:23:18,218 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+16:23:18,219 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+16:23:18,219 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+16:23:18,219 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+16:23:18,219 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+16:23:18,220 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+16:23:18,220 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+16:23:18,220 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+16:31:56,199 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+16:31:56,200 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+16:31:56,200 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+16:31:56,200 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+16:31:56,201 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+16:31:56,201 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+16:31:56,201 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+16:31:56,201 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+16:31:56,202 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+16:31:56,202 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+16:31:56,202 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+16:34:31,953 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+16:34:31,953 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+16:34:31,954 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+16:34:31,954 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+16:34:31,954 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+16:34:31,954 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+16:34:31,955 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+16:34:31,955 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+16:34:31,955 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+16:34:31,956 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+16:34:31,956 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+16:46:37,417 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+16:46:37,417 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+16:46:37,417 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+16:46:37,418 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+16:46:37,418 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+16:46:37,418 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+16:46:37,419 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+16:46:37,419 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+16:46:37,419 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+16:46:37,420 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+16:46:37,420 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+16:50:34,935 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+16:50:34,935 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+16:50:34,935 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+16:50:34,936 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+16:50:34,936 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+16:50:34,936 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+16:50:34,937 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+16:50:34,937 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+16:50:34,937 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+16:50:34,937 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+16:50:34,938 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+16:53:39,676 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+16:53:39,688 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+16:53:39,688 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+16:53:39,689 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+16:53:39,689 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+16:53:39,689 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+16:53:39,690 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+16:53:39,690 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+16:53:39,690 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+16:53:39,691 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+16:53:39,691 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+14:23:14,683 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+14:23:14,698 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+14:23:14,698 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+14:23:14,698 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+14:23:14,699 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+14:23:14,699 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+14:23:14,699 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+14:23:14,700 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+14:23:14,700 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+14:23:14,701 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+14:23:14,701 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+15:44:29,433 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+15:44:29,448 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+15:44:29,449 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+15:44:29,449 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+15:44:29,450 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+15:44:29,450 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+15:44:29,451 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+15:44:29,451 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+15:44:29,452 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+15:44:29,453 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+15:44:29,453 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+16:00:48,28 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+16:00:48,28 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+16:00:48,28 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+16:00:48,29 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+16:00:48,29 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+16:00:48,29 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+16:00:48,30 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+16:00:48,30 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+16:00:48,30 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+16:00:48,31 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+16:00:48,31 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+16:25:09,950 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+16:25:09,950 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+16:25:09,951 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+16:25:09,951 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+16:25:09,951 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+16:25:09,952 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+16:25:09,952 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+16:25:09,952 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+16:25:09,952 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+16:25:09,953 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+16:25:09,953 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+16:33:37,888 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+16:33:37,889 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+16:33:37,889 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+16:33:37,889 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+16:33:37,889 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+16:33:37,890 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+16:33:37,890 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+16:33:37,890 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+16:33:37,891 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+16:33:37,891 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+16:33:37,891 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+17:49:36,266 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+17:49:36,282 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+17:49:36,283 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+17:49:36,284 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+17:49:36,285 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+17:49:36,285 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+17:49:36,286 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+17:49:36,287 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+17:49:36,287 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+17:49:36,288 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+17:49:36,289 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+11:23:42,257 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+11:23:42,279 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+11:23:42,279 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+11:23:42,279 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+11:23:42,280 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+11:23:42,280 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+11:23:42,281 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+11:23:42,281 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+11:23:42,282 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+11:23:42,282 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+11:23:42,283 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+11:30:59,607 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+11:30:59,607 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+11:30:59,607 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+11:30:59,608 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+11:30:59,608 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+11:30:59,608 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+11:30:59,608 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+11:30:59,609 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+11:30:59,609 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+11:30:59,609 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+11:30:59,610 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+11:37:55,948 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+11:37:55,948 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+11:37:55,966 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+11:37:55,967 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+11:37:55,968 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+11:37:55,969 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+11:37:55,970 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+11:37:55,971 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+11:37:55,972 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+11:37:55,973 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+11:37:55,974 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+11:39:30,508 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+11:39:30,509 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+11:39:30,510 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+11:39:30,510 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+11:39:30,510 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+11:39:30,510 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+11:39:30,511 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+11:39:30,511 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+11:39:30,511 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+11:39:30,512 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+11:39:30,512 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+11:43:15,552 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+11:43:15,552 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+11:43:15,552 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+11:43:15,553 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+11:43:15,553 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+11:43:15,553 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+11:43:15,553 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+11:43:15,554 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+11:43:15,554 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+11:43:15,554 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+11:43:15,555 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+11:45:06,176 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+11:45:06,176 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+11:45:06,176 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+11:45:06,177 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+11:45:06,177 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+11:45:06,177 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+11:45:06,177 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+11:45:06,178 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+11:45:06,178 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+11:45:06,178 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+11:45:06,179 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+12:08:07,281 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+12:08:07,374 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+12:08:07,375 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+12:08:07,375 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+12:08:07,375 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+12:08:07,376 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+12:08:07,376 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+12:08:07,376 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+12:08:07,377 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+12:08:07,377 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+12:08:07,378 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+12:11:18,447 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+12:11:18,460 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+12:11:18,460 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+12:11:18,460 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+12:11:18,461 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+12:11:18,461 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+12:11:18,461 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+12:11:18,462 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+12:11:18,462 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+12:11:18,462 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+12:11:18,463 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+12:17:42,670 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+12:17:42,671 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+12:17:42,671 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+12:17:42,671 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+12:17:42,672 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+12:17:42,672 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+12:17:42,672 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+12:17:42,673 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+12:17:42,673 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+12:17:42,673 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+12:17:42,674 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+12:31:14,767 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+12:31:14,768 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+12:31:14,768 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+12:31:14,768 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+12:31:14,769 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+12:31:14,769 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+12:31:14,769 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+12:31:14,769 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+12:31:14,770 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+12:31:14,770 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+12:31:14,770 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+12:37:24,193 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+12:37:24,193 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+12:37:24,194 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+12:37:24,194 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+12:37:24,194 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+12:37:24,194 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+12:37:24,195 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+12:37:24,195 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+12:37:24,196 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+12:37:24,196 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+12:37:24,197 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+12:49:06,787 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+12:49:06,787 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+12:49:06,787 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+12:49:06,788 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+12:49:06,788 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+12:49:06,788 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+12:49:06,788 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+12:49:06,789 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+12:49:06,789 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+12:49:06,789 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+12:49:06,790 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+14:02:10,131 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+14:02:10,193 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+14:02:10,193 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+14:02:10,194 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+14:02:10,194 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+14:02:10,195 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+14:02:10,195 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+14:02:10,196 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+14:02:10,196 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+14:02:10,197 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+14:02:10,197 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+14:04:12,28 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+14:04:12,47 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+14:04:12,47 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+14:04:12,47 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+14:04:12,47 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+14:04:12,48 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+14:04:12,48 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+14:04:12,48 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+14:04:12,49 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+14:04:12,49 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+14:04:12,49 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+14:05:52,214 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+14:05:52,215 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+14:05:52,215 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+14:05:52,215 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+14:05:52,216 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+14:05:52,216 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+14:05:52,216 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+14:05:52,216 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+14:05:52,217 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+14:05:52,217 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+14:05:52,217 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+14:12:39,773 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+14:12:39,774 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+14:12:39,774 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+14:12:39,774 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+14:12:39,774 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+14:12:39,775 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+14:12:39,775 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+14:12:39,775 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+14:12:39,776 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+14:12:39,776 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+14:12:39,776 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+14:18:03,305 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+14:18:03,367 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+14:18:03,367 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+14:18:03,368 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+14:18:03,368 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+14:18:03,368 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+14:18:03,368 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+14:18:03,369 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+14:18:03,369 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+14:18:03,369 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+14:18:03,370 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+14:28:17,165 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+14:28:17,187 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+14:28:17,187 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+14:28:17,188 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+14:28:17,188 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+14:28:17,189 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+14:28:17,190 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+14:28:17,190 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+14:28:17,191 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+14:28:17,192 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+14:28:17,193 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+14:28:30,507 django.request WARNING Not Found: /favicon.ico
+14:28:30,544 django.request WARNING Not Found: /favicon.ico
+14:28:42,895 django.request ERROR Internal Server Error: /logincontroller/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "/usr/local/lib/python3.8/site-packages/MySQLdb/cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "/usr/local/lib/python3.8/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+  File "/usr/local/lib/python3.8/site-packages/MySQLdb/connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+MySQLdb.ProgrammingError: (1146, "Table 'sdntool.usermanagement' doesn't exist")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/views.py", line 56, in logincontroller
+    user = Usermanagement.objects.get(username=username)
+  File "/usr/local/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/db/models/query.py", line 633, in get
+    num = len(clone)
+  File "/usr/local/lib/python3.8/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/usr/local/lib/python3.8/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/usr/local/lib/python3.8/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "/usr/local/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python3.8/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "/usr/local/lib/python3.8/site-packages/MySQLdb/cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "/usr/local/lib/python3.8/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+  File "/usr/local/lib/python3.8/site-packages/MySQLdb/connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+django.db.utils.ProgrammingError: (1146, "Table 'sdntool.usermanagement' doesn't exist")
+14:31:26,405 django.request ERROR Internal Server Error: /logincontroller/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "/usr/local/lib/python3.8/site-packages/MySQLdb/cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "/usr/local/lib/python3.8/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+  File "/usr/local/lib/python3.8/site-packages/MySQLdb/connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+MySQLdb.ProgrammingError: (1146, "Table 'sdntool.usermanagement' doesn't exist")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/views.py", line 56, in logincontroller
+    user = Usermanagement.objects.get(username=username)
+  File "/usr/local/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/db/models/query.py", line 633, in get
+    num = len(clone)
+  File "/usr/local/lib/python3.8/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/usr/local/lib/python3.8/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/usr/local/lib/python3.8/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "/usr/local/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python3.8/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "/usr/local/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "/usr/local/lib/python3.8/site-packages/MySQLdb/cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "/usr/local/lib/python3.8/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+  File "/usr/local/lib/python3.8/site-packages/MySQLdb/connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+django.db.utils.ProgrammingError: (1146, "Table 'sdntool.usermanagement' doesn't exist")
+14:34:51,685 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+14:34:51,686 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+14:34:51,686 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+14:34:51,686 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+14:34:51,687 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+14:34:51,687 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+14:34:51,687 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+14:34:51,687 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+14:34:51,688 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+14:34:51,688 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+14:34:51,688 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+14:41:04,933 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+14:41:04,962 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+14:41:04,963 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+14:41:04,963 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+14:41:04,963 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+14:41:04,963 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+14:41:04,964 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+14:41:04,964 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+14:41:04,964 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+14:41:04,965 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+14:41:04,965 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+15:40:42,123 django.request ERROR Internal Server Error: /calculatecost
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/app/sdntool/login_validator.py", line 10, in wrap
+    return function(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/http.py", line 43, in inner
+    return func(request, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/django/views/decorators/cache.py", line 40, in _cache_controlled
+    response = viewfunc(request, *args, **kw)
+  File "/app/sdntool/views.py", line 920, in calculatecost
+    dataallpath= Neo4JController.get_shortest_path(request.POST.get("firstcostnode"),request.POST.get("secondcostnode"))
+  File "/app/sdntool/Neo4jcontroller.py", line 765, in get_shortest_path
+    response = Neo4JController.read_transaction(_get_shortest_path, hid1, hid2)
+  File "/app/sdntool/Neo4jcontroller.py", line 25, in read_transaction
+    return session.execute_read(function_reference, *args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 661, in execute_read
+    return self._run_transaction(
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/session.py", line 552, in _run_transaction
+    result = transaction_function(tx, *args, **kwargs)
+  File "/app/sdntool/Neo4jcontroller.py", line 758, in _get_shortest_path
+    result = tx.run(f"""
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 648, in data
+    return [record.data(*keys) for record in self]
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 648, in <listcomp>
+    return [record.data(*keys) for record in self]
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/work/result.py", line 270, in __iter__
+    self._connection.fetch_message()
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 178, in inner
+    func(*args, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt.py", line 850, in fetch_message
+    res = self._process_message(tag, fields)
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_bolt5.py", line 369, in _process_message
+    response.on_failure(summary_metadata or {})
+  File "/usr/local/lib/python3.8/site-packages/neo4j/_sync/io/_common.py", line 245, in on_failure
+    raise Neo4jError.hydrate(**metadata)
+neo4j.exceptions.DatabaseError: {code: Neo.DatabaseError.Statement.ExecutionFailed} {message: The shortest path algorithm does not work when the start and end nodes are the same. This can happen if you
+perform a shortestPath search after a cartesian product that might have the same start and end nodes for some
+of the rows passed to shortestPath. If you would rather not experience this exception, and can accept the
+possibility of missing results for those rows, disable this in the Neo4j configuration by setting
+`dbms.cypher.forbid_shortestpath_common_nodes` to false. If you cannot accept missing results, and really want the
+shortestPath between two common nodes, then re-write the query using a standard Cypher variable length pattern
+expression followed by ordering by path length and limiting to one result.}
+09:42:40,822 celery.utils.functional DEBUG 
+def debug_task(self):
+    return 1
+
+09:42:40,832 celery.utils.functional DEBUG 
+def xmap(task, it):
+    return 1
+
+09:42:40,832 celery.utils.functional DEBUG 
+def startPolicyVerification(policy_verification_record_id):
+    return 1
+
+09:42:40,832 celery.utils.functional DEBUG 
+def chain(*args, **kwargs):
+    return 1
+
+09:42:40,833 celery.utils.functional DEBUG 
+def backend_cleanup():
+    return 1
+
+09:42:40,833 celery.utils.functional DEBUG 
+def xstarmap(task, it):
+    return 1
+
+09:42:40,833 celery.utils.functional DEBUG 
+def accumulate(self, *args, **kwargs):
+    return 1
+
+09:42:40,834 celery.utils.functional DEBUG 
+def chord(self, header, body, partial_args=0, interval=1, countdown=2, max_retries=3, eager=4, **kwargs):
+    return 1
+
+09:42:40,834 celery.utils.functional DEBUG 
+def chunks(task, it, n):
+    return 1
+
+09:42:40,834 celery.utils.functional DEBUG 
+def unlock_chord(self, group_id, callback, interval=0, max_retries=1, result=2, Result=3, GroupResult=4, result_from_tuple=5, **kwargs):
+    return 1
+
+09:42:40,834 celery.utils.functional DEBUG 
+def group(self, tasks, result, group_id, partial_args, add_to_parent=0):
+    return 1
+
+09:44:18,431 django.request WARNING Not Found: /favicon.ico
